@@ -75,7 +75,7 @@ void LoseScene::OnKeyDown(int keyCode) {
 }
 
 void LoseScene::WriteNametoFile(std::string& playerName){
-    const std::string filepath = "C:\\I2P\\I2P2-TowerDefense-Student-main\\score.txt";
+    const std::string filepath = "C:\\I2P\\Fireboy-and-Watergirl\\score.txt";
 	std::ofstream file(filepath, std::ios::app);
     if (!file.is_open()) {
         std::cerr << "Failed to open file for writing.\n";
