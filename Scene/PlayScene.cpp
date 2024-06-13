@@ -35,7 +35,6 @@
 bool write_score_once = false;
 bool PlayScene::DebugMode = false;
 const std::vector<Engine::Point> PlayScene::directions = { Engine::Point(-1, 0), Engine::Point(0, -1), Engine::Point(1, 0), Engine::Point(0, 1) };
-const int PlayScene::MapWidth = 20, PlayScene::MapHeight = 13;
 const int PlayScene::BlockSize = 64;
 const float PlayScene::DangerTime = 7.61;
 const Engine::Point PlayScene::SpawnGridPoint = Engine::Point(-1, 0);
@@ -371,15 +370,15 @@ void PlayScene::ReadMap() {
 		case '\n':
 		case '\r':
 			if (static_cast<int>(mapData.size()) / MapWidth != 0)
-				throw std::ios_base::failure("Map data is corrupted.");
+				throw std::ios_base::failure("Map data is corrupted.1");
 			break;
-		default: throw std::ios_base::failure("Map data is corrupted.");
+		default: throw std::ios_base::failure("Map data is corrupted.2");
 		}
 	}
 	fin.close();
 	// Validate map data.
 	if (static_cast<int>(mapData.size()) != MapWidth * MapHeight)
-		throw std::ios_base::failure("Map data is corrupted.");
+		throw std::ios_base::failure("Map data is corrupted.3");
 	// Store map in 2d array.
 	mapState = std::vector<std::vector<TileType>>(MapHeight, std::vector<TileType>(MapWidth));
 	for (int i = 0; i < MapHeight; i++) {
