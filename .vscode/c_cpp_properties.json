@@ -4,7 +4,8 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:\\allegro\\include"
+                "C:\\allegro\\include",
+                "${workspaceFolder}"
             ],
             "defines": [
                 "_DEBUG",

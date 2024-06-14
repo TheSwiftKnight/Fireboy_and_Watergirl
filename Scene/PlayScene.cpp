@@ -31,6 +31,7 @@
 #include "Turret/TurretButton.hpp"
 #include "Engine/LOG.hpp"
 #include "Engine/IObject.hpp"
+#include "Twins/Twins.hpp"
 
 bool write_score_once = false;
 bool PlayScene::DebugMode = false;
@@ -81,6 +82,12 @@ void PlayScene::Initialize() {
 	Engine::Resources::GetInstance().GetBitmap("lose/benjamin-happy.png");
 	// Start BGM.
 	bgmId = AudioHelper::PlayBGM("play.ogg");
+
+	boy = new Twins("boy.png", 32, 700, 1);
+	girl = new Twins("girl.png", 32, 800, 1);
+	AddNewObject(boy);
+	AddNewObject(girl);
+
 }
 void PlayScene::Terminate() {
 	AudioHelper::StopBGM(bgmId);

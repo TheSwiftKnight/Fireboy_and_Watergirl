@@ -10,6 +10,7 @@
 #include "Engine/Point.hpp"
 
 class Turret;
+class Twins;
 namespace Engine {
 	class Group;
 	class Image;
@@ -58,6 +59,8 @@ public:
 	Engine::Image* imgTarget;
 	Engine::Sprite* dangerIndicator;
 	Turret* preview;
+	Twins* boy;
+	Twins* girl;
 	std::vector<std::vector<TileType>> mapState;
 	std::vector<std::vector<int>> mapDistance;
 	std::list<std::pair<int, float>> enemyWaveData;
