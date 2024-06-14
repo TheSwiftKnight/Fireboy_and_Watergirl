@@ -59,6 +59,8 @@ add_executable(2024_I2P2_TowerDefense_with_answer
         Turret/Elevator.hpp
         Turret/Lever.cpp
         Turret/Lever.hpp
+        Turret/Stone.cpp
+        Turret/Stone.hpp
         Engine/LOG.cpp
         Engine/LOG.hpp
         Scene/LoseScene.cpp
@@ -104,7 +106,7 @@ add_executable(2024_I2P2_TowerDefense_with_answer
         Scene/LevelSelectScene.hpp
         # TODO: [HACKATHON-1-SCENE] (2/4) Add the new scene source files here
         Scene/StartScene.cpp
-        Scene/StartScene.h
+        Scene/StartScene.hpp
         Scene/SettingsScene.cpp
         Scene/SettingsScene.hpp
         Scene/ScoreBoardScene.cpp
