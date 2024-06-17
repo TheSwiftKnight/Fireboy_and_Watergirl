@@ -366,15 +366,25 @@ void PlayScene::EarnMoney(int money) {
 	UIScore->Text = std::string("Score ") + std::to_string(this->score);
 }
 void PlayScene::ReadMap() {
-	std::string filename = std::string("Resource/map") + std::to_string(MapId) + ".txt";
+	std::string filename = std::string("Resource/level1.txt");
 	// Read map file.
 	char c;
-	std::vector<bool> mapData;
+	std::vector<char> mapData;
 	std::ifstream fin(filename);
 	while (fin >> c) {
 		switch (c) {
-		case '0': mapData.push_back(false); break;
-		case '1': mapData.push_back(true); break;
+
+		case '#': 
+		case '-': 
+		case '[':
+		case ']':
+		case '1':
+		case '2':
+		case 'B':
+		case 'R':
+		case 'G':
+		case 'L':
+		case 'E': mapData.push_back(c); break;
 		case '\n':
 		case '\r':
 			if (static_cast<int>(mapData.size()) / MapWidth != 0)
@@ -391,12 +401,26 @@ void PlayScene::ReadMap() {
 	mapState = std::vector<std::vector<TileType>>(MapHeight, std::vector<TileType>(MapWidth));
 	for (int i = 0; i < MapHeight; i++) {
 		for (int j = 0; j < MapWidth; j++) {
-			const int num = mapData[i * MapWidth + j];
+			char num = mapData[i * MapWidth + j];
 			mapState[i][j] = num ? TILE_FLOOR : TILE_DIRT;
-			if (num)
+			if (num == '-')
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-			else
+			else if(num == '#')
 				TileMapGroup->AddNewObject(new Engine::Image("play/dirt.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+			else if(num == 'R')
+				TileMapGroup->AddNewObject(new Engine::Image("play/red_water.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+			else if(num == 'B')
+				TileMapGroup->AddNewObject(new Engine::Image("play/blue_water.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+			else if(num == 'G')
+				TileMapGroup->AddNewObject(new Engine::Image("play/green_water.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+			else if(num == 'E')
+				TileMapGroup->AddNewObject(new Engine::Image("play/elevator.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+			else if(num == 'L')
+				TileMapGroup->AddNewObject(new Engine::Image("play/lever0.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+			else if(num == '1')
+				TileMapGroup->AddNewObject(new Engine::Image("play/blue_door.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+			else if(num == '2')
+				TileMapGroup->AddNewObject(new Engine::Image("play/red_door.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 		}
 	}
 }
