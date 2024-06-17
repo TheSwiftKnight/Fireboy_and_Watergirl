@@ -29,6 +29,9 @@ public:
     Twins(std::string imgTwins, float x, float y, float radius);
     void Update(float deltaTime) override;
     void Draw() const override;
+    
+    float speed;
+    bool jump;
 	// int GetPrice() const;
 };
 #endif // TURRET_HPP
