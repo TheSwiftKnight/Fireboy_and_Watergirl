@@ -421,6 +421,10 @@ void PlayScene::ReadMap() {
 				TileMapGroup->AddNewObject(new Engine::Image("play/blue_door.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 			else if(num == '2')
 				TileMapGroup->AddNewObject(new Engine::Image("play/red_door.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+			else if(num == '[')
+				TileMapGroup->AddNewObject(new Engine::Image("play/blue_diamond.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+			else if(num == ']')
+				TileMapGroup->AddNewObject(new Engine::Image("play/red_diamond.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 		}
 	}
 }
