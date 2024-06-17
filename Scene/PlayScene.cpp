@@ -36,7 +36,8 @@
 bool write_score_once = false;
 bool PlayScene::DebugMode = false;
 const std::vector<Engine::Point> PlayScene::directions = { Engine::Point(-1, 0), Engine::Point(0, -1), Engine::Point(1, 0), Engine::Point(0, 1) };
-const int PlayScene::MapWidth = 20, PlayScene::MapHeight = 13;
+// const int PlayScene::MapWidth = 32, PlayScene::MapHeight = 24;
+const int PlayScene::MapWidth = 20, PlayScene::MapHeight = 19;
 const int PlayScene::BlockSize = 64;
 const float PlayScene::DangerTime = 7.61;
 const Engine::Point PlayScene::SpawnGridPoint = Engine::Point(-1, 0);
@@ -70,7 +71,7 @@ void PlayScene::Initialize() {
 	// Should support buttons.
 	AddNewControlObject(UIGroup = new Group());
 	ReadMap();
-	ReadEnemyWave();
+	// ReadEnemyWave();
 	mapDistance = CalculateBFSDistance();
 	ConstructUI();
 	imgTarget = new Engine::Image("play/target.png", 0, 0);
@@ -83,11 +84,10 @@ void PlayScene::Initialize() {
 	// Start BGM.
 	bgmId = AudioHelper::PlayBGM("play.ogg");
 
-	boy = new Twins("boy.png", 32, 700, 1);
-	girl = new Twins("girl.png", 32, 800, 1);
+	boy = new Twins("boy.png", 64, 700, 1);
+	girl = new Twins("girl.png", 64, 800, 1);
 	AddNewObject(boy);
 	AddNewObject(girl);
-
 }
 void PlayScene::Terminate() {
 	AudioHelper::StopBGM(bgmId);
@@ -140,61 +140,61 @@ void PlayScene::Update(float deltaTime) {
 	}
 	if (SpeedMult == 0)
 		deathCountDown = -1;
-	for (int i = 0; i < SpeedMult; i++) {
-		IScene::Update(deltaTime);
-		// Check if we should create new enemy.
-		ticks += deltaTime;
-		if (enemyWaveData.empty()) {
-			if (EnemyGroup->GetObjects().empty()) {
-				// Free resources.
-				// delete TileMapGroup;
-				// delete GroundEffectGroup;
-				// delete DebugIndicatorGroup;
-				// delete TowerGroup;
-				// delete EnemyGroup;
-				// delete BulletGroup;
-				// delete EffectGroup;
-				// delete UIGroup;
-				// delete imgTarget;
-				if(!write_score_once){
-					WriteScoretoFile(score);
-					write_score_once = true;
-				}
+	// for (int i = 0; i < SpeedMult; i++) {
+	// 	IScene::Update(deltaTime);
+	// 	// Check if we should create new enemy.
+	// 	ticks += deltaTime;
+	// 	if (enemyWaveData.empty()) {
+	// 		if (EnemyGroup->GetObjects().empty()) {
+	// 			// Free resources.
+	// 			// delete TileMapGroup;
+	// 			// delete GroundEffectGroup;
+	// 			// delete DebugIndicatorGroup;
+	// 			// delete TowerGroup;
+	// 			// delete EnemyGroup;
+	// 			// delete BulletGroup;
+	// 			// delete EffectGroup;
+	// 			// delete UIGroup;
+	// 			// delete imgTarget;
+	// 			if(!write_score_once){
+	// 				WriteScoretoFile(score);
+	// 				write_score_once = true;
+	// 			}
 				
-				Engine::GameEngine::GetInstance().ChangeScene("win");
-			}
-			continue;
-		}
-		auto current = enemyWaveData.front();
-		if (ticks < current.second)
-			continue;
-		ticks -= current.second;
-		enemyWaveData.pop_front();
-		const Engine::Point SpawnCoordinate = Engine::Point(SpawnGridPoint.x * BlockSize + BlockSize / 2, SpawnGridPoint.y * BlockSize + BlockSize / 2);
-		Enemy* enemy;
-		switch (current.first) {
-		case 1:
-			EnemyGroup->AddNewObject(enemy = new SoldierEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
-			break;
-		case 2:
-			EnemyGroup->AddNewObject(enemy = new PlaneEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
-			break;
-		case 3:
-			EnemyGroup->AddNewObject(enemy = new TankEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
-			break;
-		case 4:
-			EnemyGroup->AddNewObject(enemy = new MisteryEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
-			break;
-        // TODO: [CUSTOM-ENEMY]: You need to modify 'Resource/enemy1.txt', or 'Resource/enemy2.txt' to spawn the 4th enemy.
-        //         The format is "[EnemyId] [TimeDelay] [Repeat]".
-        // TODO: [CUSTOM-ENEMY]: Enable the creation of the enemy.
-		default:
-			continue;
-		}
-		enemy->UpdatePath(mapDistance);
-		// Compensate the time lost.
-		enemy->Update(ticks);
-	}
+	// 			Engine::GameEngine::GetInstance().ChangeScene("win");
+	// 		}
+	// 		continue;
+	// 	}
+	// 	auto current = enemyWaveData.front();
+	// 	if (ticks < current.second)
+	// 		continue;
+	// 	ticks -= current.second;
+	// 	enemyWaveData.pop_front();
+	// 	const Engine::Point SpawnCoordinate = Engine::Point(SpawnGridPoint.x * BlockSize + BlockSize / 2, SpawnGridPoint.y * BlockSize + BlockSize / 2);
+	// 	Enemy* enemy;
+	// 	switch (current.first) {
+	// 	case 1:
+	// 		EnemyGroup->AddNewObject(enemy = new SoldierEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
+	// 		break;
+	// 	case 2:
+	// 		EnemyGroup->AddNewObject(enemy = new PlaneEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
+	// 		break;
+	// 	case 3:
+	// 		EnemyGroup->AddNewObject(enemy = new TankEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
+	// 		break;
+	// 	case 4:
+	// 		EnemyGroup->AddNewObject(enemy = new MisteryEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
+	// 		break;
+    //     // TODO: [CUSTOM-ENEMY]: You need to modify 'Resource/enemy1.txt', or 'Resource/enemy2.txt' to spawn the 4th enemy.
+    //     //         The format is "[EnemyId] [TimeDelay] [Repeat]".
+    //     // TODO: [CUSTOM-ENEMY]: Enable the creation of the enemy.
+	// 	default:
+	// 		continue;
+	// 	}
+	// 	enemy->UpdatePath(mapDistance);
+	// 	// Compensate the time lost.
+	// 	enemy->Update(ticks);
+	// }
 	if (preview) {
 		preview->Position = Engine::GameEngine::GetInstance().GetMousePosition();
 		// To keep responding when paused.
@@ -302,24 +302,36 @@ void PlayScene::OnKeyDown(int keyCode) {
 	if (keyCode == ALLEGRO_KEY_TAB) {
 		DebugMode = !DebugMode;
 	}
-	else {
-		keyStrokes.push_back(keyCode);
-		if (keyStrokes.size() > code.size())
-			keyStrokes.pop_front();
-		if (keyCode == ALLEGRO_KEY_ENTER && keyStrokes.size() == code.size()) {
-			auto it = keyStrokes.begin();
-			for (int c : code) {
-				if (!((*it == c) ||
-					(c == ALLEGRO_KEYMOD_SHIFT &&
-					(*it == ALLEGRO_KEY_LSHIFT || *it == ALLEGRO_KEY_RSHIFT))))
-					return;
-				++it;
-			}
-			EffectGroup->AddNewObject(new Plane());
-			money +=10000;
-		}
+	else if(keyCode == ALLEGRO_KEY_DOWN){
+
 	}
-	if (keyCode == ALLEGRO_KEY_Q) {
+	else if(keyCode == ALLEGRO_KEY_UP){
+
+	}
+	else if(keyCode == ALLEGRO_KEY_LEFT){
+
+	}
+	else if(keyCode == ALLEGRO_KEY_RIGHT){
+		
+	}
+	// else {
+	// 	keyStrokes.push_back(keyCode);
+	// 	if (keyStrokes.size() > code.size())
+	// 		keyStrokes.pop_front();
+	// 	if (keyCode == ALLEGRO_KEY_ENTER && keyStrokes.size() == code.size()) {
+	// 		auto it = keyStrokes.begin();
+	// 		for (int c : code) {
+	// 			if (!((*it == c) ||
+	// 				(c == ALLEGRO_KEYMOD_SHIFT &&
+	// 				(*it == ALLEGRO_KEY_LSHIFT || *it == ALLEGRO_KEY_RSHIFT))))
+	// 				return;
+	// 			++it;
+	// 		}
+	// 		EffectGroup->AddNewObject(new Plane());
+	// 		money +=10000;
+	// 	}
+	// }
+	else if (keyCode == ALLEGRO_KEY_Q) {
 		// Hotkey for MachineGunTurret.
 		UIBtnClicked(0);
 	}
@@ -332,6 +344,15 @@ void PlayScene::OnKeyDown(int keyCode) {
 		UIBtnClicked(2);
 	}
 	else if (keyCode == ALLEGRO_KEY_R){
+		UIBtnClicked(3);
+	}
+	else if (keyCode == ALLEGRO_KEY_A){
+		UIBtnClicked(3);
+	}
+	else if (keyCode == ALLEGRO_KEY_S){
+		UIBtnClicked(3);
+	}
+	else if (keyCode == ALLEGRO_KEY_D){
 		UIBtnClicked(3);
 	}
 	// TODO: [CUSTOM-TURRET]: Make specific key to create the turret.
@@ -366,14 +387,13 @@ void PlayScene::EarnMoney(int money) {
 	UIScore->Text = std::string("Score ") + std::to_string(this->score);
 }
 void PlayScene::ReadMap() {
-	std::string filename = std::string("Resource/level1.txt");
+	std::string filename = std::string("Resource/level") + std::to_string(MapId) + ".txt";
 	// Read map file.
 	char c;
 	std::vector<char> mapData;
 	std::ifstream fin(filename);
 	while (fin >> c) {
 		switch (c) {
-
 		case '#': 
 		case '-': 
 		case '[':
@@ -390,7 +410,7 @@ void PlayScene::ReadMap() {
 			if (static_cast<int>(mapData.size()) / MapWidth != 0)
 				throw std::ios_base::failure("Map data is corrupted.1");
 			break;
-		default: throw std::ios_base::failure("Map data is corrupted.2");
+		default: mapData.push_back(c); break;
 		}
 	}
 	fin.close();
