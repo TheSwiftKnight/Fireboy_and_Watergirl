@@ -64,6 +64,8 @@ public:
 	Group* EnemyGroup;
 	Group* EffectGroup;
 	Group* UIGroup;
+	Group* WaterGroup;
+	Group* ButtonGroup;
 	Engine::Label* UIMoney;
 	Engine::Label* UILives;
 	Engine::Label* UIScore;
@@ -72,6 +74,7 @@ public:
 	Turret* preview;
 	Twins* boy;
 	Twins* girl;
+	Twins* water;
 	std::vector<std::vector<TileType>> mapState;
 	std::vector<std::vector<int>> mapDistance;
 	std::list<std::pair<int, float>> enemyWaveData;

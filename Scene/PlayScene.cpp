@@ -427,24 +427,38 @@ void PlayScene::ReadMap() {
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 			else if(num == '#')
 				TileMapGroup->AddNewObject(new Engine::Image("play/dirt.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-			else if(num == 'R')
-				TileMapGroup->AddNewObject(new Engine::Image("play/red_water.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-			else if(num == 'B')
-				TileMapGroup->AddNewObject(new Engine::Image("play/blue_water.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-			else if(num == 'G')
-				TileMapGroup->AddNewObject(new Engine::Image("play/green_water.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-			else if(num == 'E')
-				TileMapGroup->AddNewObject(new Engine::Image("play/elevator.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-			else if(num == 'L')
-				TileMapGroup->AddNewObject(new Engine::Image("play/lever0.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+			else if(num == 'R'){
+				TileMapGroup->AddNewObject(new Engine::Image("play/dirt.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+				AddNewObject(new Twins("play/red_water.png", j * BlockSize, i * BlockSize+32, 1));
+			}
+			else if(num == 'B'){
+				TileMapGroup->AddNewObject(new Engine::Image("play/dirt.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+				AddNewObject(new Twins("play/blue_water.png", j * BlockSize, i * BlockSize+32, 1));
+			}
+			else if(num == 'G'){
+				TileMapGroup->AddNewObject(new Engine::Image("play/dirt.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+				AddNewObject(new Twins("play/green_water.png", j * BlockSize, i * BlockSize+32, 1));
+			}
+			else if(num == 'E'){
+				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+				AddNewObject(new Twins("play/elevator.png", j * BlockSize, i * BlockSize+32, 1));
+			}
+			else if(num == 'L'){
+				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+				AddNewObject(new Twins("play/lever0.png", j * BlockSize, i * BlockSize, 1));
+			}
 			else if(num == '1')
 				TileMapGroup->AddNewObject(new Engine::Image("play/blue_door.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 			else if(num == '2')
 				TileMapGroup->AddNewObject(new Engine::Image("play/red_door.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-			else if(num == '[')
-				TileMapGroup->AddNewObject(new Engine::Image("play/blue_diamond.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-			else if(num == ']')
-				TileMapGroup->AddNewObject(new Engine::Image("play/red_diamond.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+			else if(num == '['){
+				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+				AddNewObject(new Twins("play/blue_diamond.png", j * BlockSize, i * BlockSize+32, 1));
+			}
+			else if(num == ']'){
+				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+				AddNewObject(new Twins("play/red_diamond.png", j * BlockSize, i * BlockSize+32, 1));
+			}
 		}
 	}
 }
