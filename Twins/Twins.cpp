@@ -71,5 +71,22 @@ void Twins::OnKeyDown(int keyCode){
 	}
 }
 void Twins::OnKeyUp(int keyCode){
-	dir = NO;
+	switch(keyCode){
+		case ALLEGRO_KEY_DOWN:
+		case ALLEGRO_KEY_S:
+			if(dir == DOWN)dir = NO;
+			break;
+		case ALLEGRO_KEY_UP:
+		case ALLEGRO_KEY_W:
+			if(dir == UP)dir = NO;
+			break;
+		case ALLEGRO_KEY_LEFT:
+		case ALLEGRO_KEY_A:
+			if(dir == LEFT)dir = NO;
+			break;
+		case ALLEGRO_KEY_RIGHT:
+		case ALLEGRO_KEY_D:
+			if(dir == RIGHT)dir = NO;
+			break;
+	}
 }
