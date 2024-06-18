@@ -15,11 +15,26 @@
 PlayScene* Twins::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
 }
-Twins::Twins(std::string imgTwins, float x, float y, float radius) : Sprite(imgTwins, x, y){
+Twins::Twins(std::string imgTwins, int x, int y, float radius) : Sprite(imgTwins, x, y),x(x),y(y){
+	speed = 5;
+	jump = false;
 	CollisionRadius = radius;
 }
 void Twins::Update(float deltaTime) {
-	Sprite::Update(deltaTime);
+	switch(dir){
+		case UP:
+			Position.y-=speed;
+			break;
+		case DOWN:
+			Position.y+=speed;
+			break;
+		case RIGHT:
+			Position.x+=speed;
+			break;
+		case LEFT:
+			Position.x-=speed;
+			break;
+	}
 	PlayScene* scene = getPlayScene();
 	if (!Enabled)
 		return;
@@ -29,8 +44,32 @@ void Twins::Draw() const {
 		al_draw_filled_circle(Position.x, Position.y, CollisionRadius, al_map_rgba(0, 255, 0, 50));
 	}
 	Sprite::Draw();
-	if (PlayScene::DebugMode) {
-		// Draw target radius.
-		al_draw_circle(Position.x, Position.y, CollisionRadius, al_map_rgb(0, 0, 255), 2);
+}
+
+void Twins::OnKeyDown(int keyCode){
+	switch(keyCode){
+		case ALLEGRO_KEY_DOWN:
+		case ALLEGRO_KEY_S:
+			dir = DOWN;
+			// Position.y+=speed;
+			break;
+		case ALLEGRO_KEY_UP:
+		case ALLEGRO_KEY_W:
+			dir = UP;
+			// Position.y-=speed;
+			break;
+		case ALLEGRO_KEY_LEFT:
+		case ALLEGRO_KEY_A:
+			dir = LEFT;
+			// Position.x-=speed;
+			break;
+		case ALLEGRO_KEY_RIGHT:
+		case ALLEGRO_KEY_D:
+			dir = RIGHT;
+			// Position.x+=speed;
+			break;
 	}
+}
+void Twins::OnKeyUp(int keyCode){
+	dir = NO;
 }

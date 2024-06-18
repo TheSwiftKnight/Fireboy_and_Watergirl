@@ -9,6 +9,8 @@
 class Enemy;
 class PlayScene;
 
+enum Direction{NO,UP,DOWN,LEFT,RIGHT};
+
 class Twins: public Engine::Sprite {
 protected:
     // int price;
@@ -26,12 +28,16 @@ public:
     bool Tool = false;
     bool Enabled = true;
     bool Preview = false;
-    Twins(std::string imgTwins, float x, float y, float radius);
+    Twins(std::string imgTwins, int x, int y, float radius);
     void Update(float deltaTime) override;
     void Draw() const override;
-    
-    float speed;
+    void OnKeyDown(int keyCode);
+    void OnKeyUp(int keyCode);
+    int speed;
     bool jump;
+    int x;
+    int y;
+    int dir = NO;
 	// int GetPrice() const;
 };
 #endif // TURRET_HPP

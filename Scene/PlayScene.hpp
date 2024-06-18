@@ -89,6 +89,7 @@ public:
 	void OnMouseMove(int mx, int my) override;
 	void OnMouseUp(int button, int mx, int my) override;
 	void OnKeyDown(int keyCode) override;
+	void OnKeyUp(int keyCode) override;
 	void Hit();
 	int GetMoney() const;
 	int GetScore();

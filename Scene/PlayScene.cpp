@@ -37,7 +37,7 @@ bool write_score_once = false;
 bool PlayScene::DebugMode = false;
 const std::vector<Engine::Point> PlayScene::directions = { Engine::Point(-1, 0), Engine::Point(0, -1), Engine::Point(1, 0), Engine::Point(0, 1) };
 // const int PlayScene::MapWidth = 32, PlayScene::MapHeight = 24;
-const int PlayScene::MapWidth = 20, PlayScene::MapHeight = 19;
+const int PlayScene::MapWidth = 20, PlayScene::MapHeight = 13;
 const int PlayScene::BlockSize = 64;
 const float PlayScene::DangerTime = 7.61;
 const Engine::Point PlayScene::SpawnGridPoint = Engine::Point(-1, 0);
@@ -84,8 +84,8 @@ void PlayScene::Initialize() {
 	// Start BGM.
 	bgmId = AudioHelper::PlayBGM("play.ogg");
 
-	boy = new Twins("boy.png", 64, 700, 1);
-	girl = new Twins("girl.png", 64, 800, 1);
+	boy = new Twins("boy.png", 96, 500,1);
+	girl = new Twins("girl.png", 96, 700,1);
 	AddNewObject(boy);
 	AddNewObject(girl);
 }
@@ -140,82 +140,84 @@ void PlayScene::Update(float deltaTime) {
 	}
 	if (SpeedMult == 0)
 		deathCountDown = -1;
-	// for (int i = 0; i < SpeedMult; i++) {
-	// 	IScene::Update(deltaTime);
-	// 	// Check if we should create new enemy.
-	// 	ticks += deltaTime;
-	// 	if (enemyWaveData.empty()) {
-	// 		if (EnemyGroup->GetObjects().empty()) {
-	// 			// Free resources.
-	// 			// delete TileMapGroup;
-	// 			// delete GroundEffectGroup;
-	// 			// delete DebugIndicatorGroup;
-	// 			// delete TowerGroup;
-	// 			// delete EnemyGroup;
-	// 			// delete BulletGroup;
-	// 			// delete EffectGroup;
-	// 			// delete UIGroup;
-	// 			// delete imgTarget;
-	// 			if(!write_score_once){
-	// 				WriteScoretoFile(score);
-	// 				write_score_once = true;
-	// 			}
+	for (int i = 0; i < SpeedMult; i++) {
+		IScene::Update(deltaTime);
+		// Check if we should create new enemy.
+		ticks += deltaTime;
+		// if (enemyWaveData.empty()) {
+		// 	if (EnemyGroup->GetObjects().empty()) {
+		// 		// Free resources.
+		// 		// delete TileMapGroup;
+		// 		// delete GroundEffectGroup;
+		// 		// delete DebugIndicatorGroup;
+		// 		// delete TowerGroup;
+		// 		// delete EnemyGroup;
+		// 		// delete BulletGroup;
+		// 		// delete EffectGroup;
+		// 		// delete UIGroup;
+		// 		// delete imgTarget;
+		// 		if(!write_score_once){
+		// 			WriteScoretoFile(score);
+		// 			write_score_once = true;
+		// 		}
 				
-	// 			Engine::GameEngine::GetInstance().ChangeScene("win");
-	// 		}
-	// 		continue;
-	// 	}
-	// 	auto current = enemyWaveData.front();
-	// 	if (ticks < current.second)
-	// 		continue;
-	// 	ticks -= current.second;
-	// 	enemyWaveData.pop_front();
-	// 	const Engine::Point SpawnCoordinate = Engine::Point(SpawnGridPoint.x * BlockSize + BlockSize / 2, SpawnGridPoint.y * BlockSize + BlockSize / 2);
-	// 	Enemy* enemy;
-	// 	switch (current.first) {
-	// 	case 1:
-	// 		EnemyGroup->AddNewObject(enemy = new SoldierEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
-	// 		break;
-	// 	case 2:
-	// 		EnemyGroup->AddNewObject(enemy = new PlaneEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
-	// 		break;
-	// 	case 3:
-	// 		EnemyGroup->AddNewObject(enemy = new TankEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
-	// 		break;
-	// 	case 4:
-	// 		EnemyGroup->AddNewObject(enemy = new MisteryEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
-	// 		break;
-    //     // TODO: [CUSTOM-ENEMY]: You need to modify 'Resource/enemy1.txt', or 'Resource/enemy2.txt' to spawn the 4th enemy.
-    //     //         The format is "[EnemyId] [TimeDelay] [Repeat]".
-    //     // TODO: [CUSTOM-ENEMY]: Enable the creation of the enemy.
-	// 	default:
-	// 		continue;
-	// 	}
-	// 	enemy->UpdatePath(mapDistance);
-	// 	// Compensate the time lost.
-	// 	enemy->Update(ticks);
-	// }
-	if (preview) {
-		preview->Position = Engine::GameEngine::GetInstance().GetMousePosition();
-		// To keep responding when paused.
-		preview->Update(deltaTime);
+		// 		Engine::GameEngine::GetInstance().ChangeScene("win");
+		// 	}
+		// 	continue;
+		// }
+		// auto current = enemyWaveData.front();
+		// if (ticks < current.second)
+		// 	continue;
+		// ticks -= current.second;
+		// enemyWaveData.pop_front();
+		// const Engine::Point SpawnCoordinate = Engine::Point(SpawnGridPoint.x * BlockSize + BlockSize / 2, SpawnGridPoint.y * BlockSize + BlockSize / 2);
+		// Enemy* enemy;
+		// switch (current.first) {
+		// case 1:
+		// 	EnemyGroup->AddNewObject(enemy = new SoldierEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
+		// 	break;
+		// case 2:
+		// 	EnemyGroup->AddNewObject(enemy = new PlaneEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
+		// 	break;
+		// case 3:
+		// 	EnemyGroup->AddNewObject(enemy = new TankEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
+		// 	break;
+		// case 4:
+		// 	EnemyGroup->AddNewObject(enemy = new MisteryEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
+		// 	break;
+        // // TODO: [CUSTOM-ENEMY]: You need to modify 'Resource/enemy1.txt', or 'Resource/enemy2.txt' to spawn the 4th enemy.
+        // //         The format is "[EnemyId] [TimeDelay] [Repeat]".
+        // // TODO: [CUSTOM-ENEMY]: Enable the creation of the enemy.
+		// default:
+		// 	continue;
+		// }
+		// enemy->UpdatePath(mapDistance);
+		// // Compensate the time lost.
+		// enemy->Update(ticks);
+		boy->Update(deltaTime);
+		girl->Update(deltaTime);
 	}
+	// if (preview) {
+	// 	preview->Position = Engine::GameEngine::GetInstance().GetMousePosition();
+	// 	// To keep responding when paused.
+	// 	preview->Update(deltaTime);
+	// }
 }
 void PlayScene::Draw() const {
 	IScene::Draw();
-	if (DebugMode) {
-		// Draw reverse BFS distance on all reachable blocks.
-		for (int i = 0; i < MapHeight; i++) {
-			for (int j = 0; j < MapWidth; j++) {
-				if (mapDistance[i][j] != -1) {
-					// Not elegant nor efficient, but it's quite enough for debugging.
-					Engine::Label label(std::to_string(mapDistance[i][j]), "pirulen.ttf", 32, (j + 0.5) * BlockSize, (i + 0.5) * BlockSize);
-					label.Anchor = Engine::Point(0.5, 0.5);
-					label.Draw();
-				}
-			}
-		}
-	}
+	// if (DebugMode) {
+	// 	// Draw reverse BFS distance on all reachable blocks.
+	// 	for (int i = 0; i < MapHeight; i++) {
+	// 		for (int j = 0; j < MapWidth; j++) {
+	// 			if (mapDistance[i][j] != -1) {
+	// 				// Not elegant nor efficient, but it's quite enough for debugging.
+	// 				Engine::Label label(std::to_string(mapDistance[i][j]), "pirulen.ttf", 32, (j + 0.5) * BlockSize, (i + 0.5) * BlockSize);
+	// 				label.Anchor = Engine::Point(0.5, 0.5);
+	// 				label.Draw();
+	// 			}
+	// 		}
+	// 	}
+	// }
 }
 void PlayScene::OnMouseDown(int button, int mx, int my) {
 	if ((button & 1) && !imgTarget->Visible && preview) {
@@ -297,22 +299,49 @@ void PlayScene::OnMouseUp(int button, int mx, int my) {
 		}
 	}
 }
+void PlayScene::OnKeyUp(int keyCode) {
+	IScene::OnKeyUp(keyCode);
+	if(keyCode == ALLEGRO_KEY_DOWN){
+		girl->OnKeyUp(keyCode);
+	}
+	else if(keyCode == ALLEGRO_KEY_UP){
+		girl->OnKeyUp(keyCode);
+	}
+	else if(keyCode == ALLEGRO_KEY_LEFT){
+		girl->OnKeyUp(keyCode);
+	}
+	else if(keyCode == ALLEGRO_KEY_RIGHT){
+		girl->OnKeyUp(keyCode);
+	}
+	else if (keyCode == ALLEGRO_KEY_W) {
+		boy->OnKeyUp(keyCode);
+	}
+	else if (keyCode == ALLEGRO_KEY_A){
+		boy->OnKeyUp(keyCode);
+	}
+	else if (keyCode == ALLEGRO_KEY_S){
+		boy->OnKeyUp(keyCode);
+	}
+	else if (keyCode == ALLEGRO_KEY_D){
+		boy->OnKeyUp(keyCode);
+	}
+}
 void PlayScene::OnKeyDown(int keyCode) {
 	IScene::OnKeyDown(keyCode);
 	if (keyCode == ALLEGRO_KEY_TAB) {
 		DebugMode = !DebugMode;
 	}
 	else if(keyCode == ALLEGRO_KEY_DOWN){
-
+		girl->OnKeyDown(keyCode);
 	}
 	else if(keyCode == ALLEGRO_KEY_UP){
-
+		girl->OnKeyDown(keyCode);
 	}
 	else if(keyCode == ALLEGRO_KEY_LEFT){
-
+		girl->OnKeyDown(keyCode);
 	}
 	else if(keyCode == ALLEGRO_KEY_RIGHT){
-		
+		girl->OnKeyDown(keyCode);
 	}
 	// else {
 	// 	keyStrokes.push_back(keyCode);
@@ -336,24 +365,16 @@ void PlayScene::OnKeyDown(int keyCode) {
 		UIBtnClicked(0);
 	}
 	else if (keyCode == ALLEGRO_KEY_W) {
-		// Hotkey for LaserTurret.
-		UIBtnClicked(1);
-	}
-	else if (keyCode == ALLEGRO_KEY_E) {
-		// Hotkey for MissileTurret.
-		UIBtnClicked(2);
-	}
-	else if (keyCode == ALLEGRO_KEY_R){
-		UIBtnClicked(3);
+		boy->OnKeyDown(keyCode);
 	}
 	else if (keyCode == ALLEGRO_KEY_A){
-		UIBtnClicked(3);
+		boy->OnKeyDown(keyCode);
 	}
 	else if (keyCode == ALLEGRO_KEY_S){
-		UIBtnClicked(3);
+		boy->OnKeyDown(keyCode);
 	}
 	else if (keyCode == ALLEGRO_KEY_D){
-		UIBtnClicked(3);
+		boy->OnKeyDown(keyCode);
 	}
 	// TODO: [CUSTOM-TURRET]: Make specific key to create the turret.
 	else if (keyCode >= ALLEGRO_KEY_0 && keyCode <= ALLEGRO_KEY_9) {
