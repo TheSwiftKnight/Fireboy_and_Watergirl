@@ -51,16 +51,16 @@ add_executable(2024_I2P2_TowerDefense_with_answer
         Turret/LaserTurret.hpp
         Turret/Shovel.cpp
         Turret/Shovel.hpp
-        Turret/Button.cpp
-        Turret/Button.hpp
-        Turret/Diamond.cpp
-        Turret/Diamond.hpp
-        Turret/Elevator.cpp
-        Turret/Elevator.hpp
-        Turret/Lever.cpp
-        Turret/Lever.hpp
-        Turret/Stone.cpp
-        Turret/Stone.hpp
+        machine/Button.cpp
+        machine/Button.hpp
+        machine/Diamond.cpp
+        machine/Diamond.hpp
+        machine/Elevator.cpp
+        machine/Elevator.hpp
+        machine/Lever.cpp
+        machine/Lever.hpp
+        machine/Stone.cpp
+        machine/Stone.hpp
         Engine/LOG.cpp
         Engine/LOG.hpp
         Scene/LoseScene.cpp
