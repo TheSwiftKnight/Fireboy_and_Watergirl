@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "C:\\allegro\\include",
-                "${workspaceFolder}"
+                "${workspaceFolder}",
+                "${workspaceFolder}/Scene"
             ],
             "defines": [
                 "_DEBUG",

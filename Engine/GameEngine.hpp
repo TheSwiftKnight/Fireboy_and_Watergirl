@@ -6,6 +6,7 @@
 
 
 #include "Point.hpp"
+#include "Scene/PlayScene.hpp"
 
 /// <summary>
 /// All general classes are under this namespace for clarity.
@@ -97,7 +98,7 @@ namespace Engine {
 		/// <param name="title">Window's title text.</param>
 		/// <param name="icon">Window's icon image path.</param>
 		/// <param name="freeMemoryOnSceneChanged">Determines whether to free memory between scenes.</param>
-		void Start(const std::string& firstSceneName, int fps = 60, int screenW = 800, int screenH = 600, int reserveSamples = 1000,
+		void Start(const std::string& firstSceneName, int fps = 60, int screenW = 64*PlayScene::MapWidth, int screenH = 64*PlayScene::MapHeight, int reserveSamples = 1000,
 				   const char* title = "Tower Defense (I2P(II)_2024 Mini Project 2))",
 				   const char* icon = "icon.png", bool freeMemoryOnSceneChanged = false,
 				   float deltaTimeThreshold = 0.05);

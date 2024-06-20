@@ -8,5 +8,6 @@ namespace Engine {
 		return objectIterator;
 	}
 	void IObject::Draw() const {}
+	void IObject::TDraw(int sX,int sY) const {}
 	void IObject::Update(float deltaTime) {}
 }

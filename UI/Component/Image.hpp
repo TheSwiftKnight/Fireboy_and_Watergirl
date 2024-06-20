@@ -33,6 +33,7 @@ namespace Engine {
 		/// Return bitmap width.
 		/// </summary>
 		/// <returns>Width of the original or scaled bitmap.</returns>
+		void TDraw(int sX,int sY) const override;
 		int GetBitmapWidth() const;
 		/// <summary>
 		/// Return bitmap height.

@@ -31,6 +31,11 @@ namespace Engine {
 			Position.x - Anchor.x * GetBitmapWidth(), Position.y - Anchor.y * GetBitmapHeight(),
 			Size.x, Size.y, 0);
 	}
+	void Image::TDraw(int sX,int sY) const {
+		al_draw_scaled_bitmap(bmp.get(),sX,sY*(GetBitmapWidth()/6),GetBitmapWidth()/6,
+		GetBitmapHeight()*sY,Position.x,Position.y,Size.x,Size.y,0);
+
+	}
 	int Image::GetBitmapWidth() const {
 		return al_get_bitmap_width(bmp.get());
 	}

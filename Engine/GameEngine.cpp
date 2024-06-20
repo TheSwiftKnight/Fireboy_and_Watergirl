@@ -17,6 +17,7 @@
 #include "LOG.hpp"
 #include "Point.hpp"
 #include "Resources.hpp"
+#include "Scene/PlayScene.hpp"
 
 namespace Engine {
 	void GameEngine::initAllegro5() {

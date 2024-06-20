@@ -8,6 +8,7 @@
 #include <string>
 #include <memory>
 #include <sstream>
+#include <chrono>
 
 #include "Engine/AudioHelper.hpp"
 #include "UI/Animation/DirtyEffect.hpp"
@@ -54,6 +55,7 @@ void PlayScene::Initialize() {
     // TODO: [HACKATHON-3-BUG] (2/5): It should generate a Plane, and add 10000 to the money, but it doesn't work now.
 	mapState.clear();
 	keyStrokes.clear();
+	spriteTick = 0;
 	ticks = 0;
 	deathCountDown = -1;
 	lives = 10;
@@ -86,8 +88,8 @@ void PlayScene::Initialize() {
 
 	boy = new Twins("boy.png", 96, 500,1);
 	girl = new Twins("girl.png", 96, 700,1);
-	AddNewObject(boy);
-	AddNewObject(girl);
+	// AddNewObject(boy);
+	// AddNewObject(girl);
 }
 void PlayScene::Terminate() {
 	AudioHelper::StopBGM(bgmId);
@@ -96,6 +98,9 @@ void PlayScene::Terminate() {
 	IScene::Terminate();
 }
 void PlayScene::Update(float deltaTime) {
+	spriteTick+=0.1;
+	boy->updateTime(spriteTick);
+	girl->updateTime(spriteTick);
 	// If we use deltaTime directly, then we might have Bullet-through-paper problem.
 	// Reference: Bullet-Through-Paper
 	if (SpeedMult == 0)
@@ -205,6 +210,7 @@ void PlayScene::Update(float deltaTime) {
 }
 void PlayScene::Draw() const {
 	IScene::Draw();
+	boy->MeDraw();
 	// if (DebugMode) {
 	// 	// Draw reverse BFS distance on all reachable blocks.
 	// 	for (int i = 0; i < MapHeight; i++) {
@@ -301,10 +307,7 @@ void PlayScene::OnMouseUp(int button, int mx, int my) {
 }
 void PlayScene::OnKeyUp(int keyCode) {
 	IScene::OnKeyUp(keyCode);
-	if(keyCode == ALLEGRO_KEY_DOWN){
-		girl->OnKeyUp(keyCode);
-	}
-	else if(keyCode == ALLEGRO_KEY_UP){
+	if(keyCode == ALLEGRO_KEY_UP){
 		girl->OnKeyUp(keyCode);
 	}
 	else if(keyCode == ALLEGRO_KEY_LEFT){
@@ -317,9 +320,6 @@ void PlayScene::OnKeyUp(int keyCode) {
 		boy->OnKeyUp(keyCode);
 	}
 	else if (keyCode == ALLEGRO_KEY_A){
-		boy->OnKeyUp(keyCode);
-	}
-	else if (keyCode == ALLEGRO_KEY_S){
 		boy->OnKeyUp(keyCode);
 	}
 	else if (keyCode == ALLEGRO_KEY_D){

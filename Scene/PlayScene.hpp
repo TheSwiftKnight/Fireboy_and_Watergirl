@@ -44,6 +44,7 @@ protected:
 	int SpeedMult;
 public:
 	int score;
+	float spriteTick;
 	static bool DebugMode;
 	static const std::vector<Engine::Point> directions;
 	static const int MapWidth, MapHeight;

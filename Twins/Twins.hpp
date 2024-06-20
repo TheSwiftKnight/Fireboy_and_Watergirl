@@ -26,13 +26,20 @@ protected:
 
 public:
     bool Tool = false;
+
     bool Enabled = true;
     bool Preview = false;
+    
+    bool active = false;
+    int sourceX;
+    int moveCD;
+    
     Twins(std::string imgTwins, int x, int y, float radius);
     void Update(float deltaTime) override;
-    void Draw() const override;
+    void MeDraw();
     void OnKeyDown(int keyCode);
     void OnKeyUp(int keyCode);
+    void updateTime(int deltaTime);
     int speed;
     bool jump;
     int x;
