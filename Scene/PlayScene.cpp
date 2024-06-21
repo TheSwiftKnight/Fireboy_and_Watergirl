@@ -199,8 +199,27 @@ void PlayScene::Update(float deltaTime) {
 		// enemy->UpdatePath(mapDistance);
 		// // Compensate the time lost.
 		// enemy->Update(ticks);
-		boy->Update(deltaTime);
-		girl->Update(deltaTime);
+	}
+	int Px = ((int)(boy->Position.x)%64==0) ? (boy->Position.x)/64:(boy->Position.x)/64+1;
+	int Py = ((int)(boy->Position.y)%64==0) ? (boy->Position.y)/64:(boy->Position.y)/64+1;
+	switch(boy->dir){
+		case UP:
+		Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
+			if(mapState[Py-1][Px]!=TILE_DIRT)
+				boy->MeUpdate();
+			break;
+		case RIGHT:
+			Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
+			if(mapState[Py][Px]!=TILE_DIRT)
+				boy->MeUpdate();
+			break;
+		case LEFT:
+		Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
+			if(mapState[Py][Px-1]!=TILE_DIRT)
+				boy->MeUpdate();
+			break;
+		// boy->MeUpdate();
+		// girl->MeUpdate();
 	}
 	// if (preview) {
 	// 	preview->Position = Engine::GameEngine::GetInstance().GetMousePosition();
@@ -443,37 +462,49 @@ void PlayScene::ReadMap() {
 	for (int i = 0; i < MapHeight; i++) {
 		for (int j = 0; j < MapWidth; j++) {
 			char num = mapData[i * MapWidth + j];
-			mapState[i][j] = num ? TILE_FLOOR : TILE_DIRT;
-			if (num == '-')
+			if (num == '-'){
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-			else if(num == '#')
+				mapState[i][j] = TILE_FLOOR;
+			}
+			else if(num == '#'){
 				TileMapGroup->AddNewObject(new Engine::Image("play/dirt.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+				mapState[i][j] = TILE_DIRT;
+			}		
 			else if(num == 'R'){
 				TileMapGroup->AddNewObject(new Engine::Image("play/dirt.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				AddNewObject(new Twins("play/red_water.png", j * BlockSize, i * BlockSize+32, 1));
+				mapState[i][j] = TILE_RED_WATER;
 			}
 			else if(num == 'B'){
 				TileMapGroup->AddNewObject(new Engine::Image("play/dirt.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				AddNewObject(new Twins("play/blue_water.png", j * BlockSize, i * BlockSize+32, 1));
+				mapState[i][j] = TILE_BLUE_WATER;
 			}
 			else if(num == 'G'){
 				TileMapGroup->AddNewObject(new Engine::Image("play/dirt.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				AddNewObject(new Twins("play/green_water.png", j * BlockSize, i * BlockSize+32, 1));
+				mapState[i][j] = TILE_GREEN_WATER;
 			}
 			else if(num == 'E'){
+				mapState[i][j] = TILE_ELEVATOR;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				//TileMapGroup->RemoveObject(TileMapGroup->))
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize - 64, i * BlockSize, BlockSize, BlockSize));
 				AddNewObject(new Twins("play/elevator.png", j * BlockSize, i * BlockSize+32, 1));
 			}
 			else if(num == 'L'){
+				mapState[i][j] = TILE_LEVER;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				AddNewObject(new Twins("play/lever0.png", j * BlockSize, i * BlockSize +32, 1));
 			}
-			else if(num == '1')
+			else if(num == '1'){
+				mapState[i][j] = TILE_BLUE_DOOR;
 				TileMapGroup->AddNewObject(new Engine::Image("play/blue_door.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-			else if(num == '2')
+			}
+			else if(num == '2'){
+				mapState[i][j] = TILE_RED_DOOR;
 				TileMapGroup->AddNewObject(new Engine::Image("play/red_door.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+			}
 			else if(num == '['){
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				AddNewObject(new Twins("play/blue_diamond.png", j * BlockSize, i * BlockSize+32, 1));
@@ -488,6 +519,14 @@ void PlayScene::ReadMap() {
 			}
 		}
 	}
+	// for(int i=0;i<MapHeight;i++){
+	// 	for(int j=0;j<MapWidth;j++){
+	// 		std::cout << mapState[i][j];
+	// 	}
+	// 	std::cout << "\n";
+	// }
+	// boy->getMapState(mapState,MapHeight,MapWidth);
+	// girl->getMapState(mapState,MapHeight,MapWidth);
 }
 void PlayScene::ReadEnemyWave() {
     // TODO: [HACKATHON-3-BUG] (3/5): Trace the code to know how the enemies are created.

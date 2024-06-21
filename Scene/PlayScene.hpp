@@ -20,22 +20,6 @@ namespace Engine {
 
 class PlayScene final : public Engine::IScene {
 private:
-	enum TileType {
-		TILE_DIRT,
-		TILE_FLOOR,
-		TILE_OCCUPIED,
-		TILE_BLUE_DOOR,
-		TILE_RED_DOOR,
-		TILE_BUTTON0,
-		TILE_BUTTON1,
-		TILE_LEVER0,
-		TILE_LEVER1,
-		TILE_ELEVATOR,
-		TILE_STONE,
-		TILE_RED_WATER,
-		TILE_BLUE_WATER,
-		TILE_GREEN_WATER
-	};
 	ALLEGRO_SAMPLE_ID bgmId;
 	std::shared_ptr<ALLEGRO_SAMPLE_INSTANCE> deathBGMInstance;
 protected:
@@ -43,6 +27,20 @@ protected:
 	int money;
 	int SpeedMult;
 public:
+	enum TileType {
+		TILE_DIRT,
+		TILE_FLOOR,
+		TILE_OCCUPIED,
+		TILE_BLUE_DOOR,
+		TILE_RED_DOOR,
+		TILE_BUTTON,
+		TILE_LEVER,
+		TILE_ELEVATOR,
+		TILE_STONE,
+		TILE_RED_WATER,
+		TILE_BLUE_WATER,
+		TILE_GREEN_WATER
+	};
 	int score;
 	float spriteTick;
 	static bool DebugMode;

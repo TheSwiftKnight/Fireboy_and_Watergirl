@@ -18,17 +18,28 @@ PlayScene* Twins::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
 }
 Twins::Twins(std::string imgTwins, int x, int y, float radius) : Sprite(imgTwins, x, y),x(x),y(y){
-	speed = 2;
+	speed = 3;
 	jump = false;
 	CollisionRadius = radius;
 }
-void Twins::Update(float deltaTime) {
+// void Twins::getMapState(std::vector<std::vector<PlayScene::TileType>> ms,int h,int w){
+// 	Engine::LOG(Engine::INFO) << "Function getMapState called with dimensions: " << h << "x" << w;
+// 	// mapState = std::vector<std::vector<int>>(13, std::vector<int>(20));
+
+//     // mapState.resize(h, std::vector<int>(w,0));
+// 	// Engine::LOG(Engine::INFO) << "here:)";
+
+// 	for(int i=0;i<h;i++){
+// 		for(int j=0;j<w;j++){
+// 			mapState[i][j] = static_cast<int>(ms[i][j]);
+// 			Engine::LOG(Engine::INFO) << "here:)";
+// 		}
+// 	}
+// }
+void Twins::MeUpdate() {
 	switch(dir){
 		case UP:
 			Position.y-=speed;
-			break;
-		case DOWN:
-			Position.y+=speed;
 			break;
 		case RIGHT:
 			Position.x+=speed;

@@ -5,6 +5,7 @@
 #include <string>
 
 #include "Engine/Sprite.hpp"
+#include "Scene/PlayScene.hpp"
 
 class Enemy;
 class PlayScene;
@@ -33,9 +34,11 @@ public:
     bool active = false;
     int sourceX;
     int moveCD;
-    
+
+    // std::vector<std::vector<int>> mapState;
     Twins(std::string imgTwins, int x, int y, float radius);
-    void Update(float deltaTime) override;
+    // void getMapState(std::vector<std::vector<PlayScene::TileType>> ms,int h,int w);
+    void MeUpdate();
     void MeDraw();
     void OnKeyDown(int keyCode);
     void OnKeyUp(int keyCode);
