@@ -20,37 +20,23 @@ PlayScene* Twins::getPlayScene() {
 Twins::Twins(std::string imgTwins, int x, int y, float radius) : Sprite(imgTwins, x, y),x(x),y(y){
 	speed = 3;
 	jump = false;
+	velx = vely = 0;
 	CollisionRadius = radius;
 }
-// void Twins::getMapState(std::vector<std::vector<PlayScene::TileType>> ms,int h,int w){
-// 	Engine::LOG(Engine::INFO) << "Function getMapState called with dimensions: " << h << "x" << w;
-// 	// mapState = std::vector<std::vector<int>>(13, std::vector<int>(20));
-
-//     // mapState.resize(h, std::vector<int>(w,0));
-// 	// Engine::LOG(Engine::INFO) << "here:)";
-
-// 	for(int i=0;i<h;i++){
-// 		for(int j=0;j<w;j++){
-// 			mapState[i][j] = static_cast<int>(ms[i][j]);
-// 			Engine::LOG(Engine::INFO) << "here:)";
-// 		}
-// 	}
-// }
-void Twins::MeUpdate() {
-	switch(dir){
-		case UP:
-			Position.y-=speed;
-			break;
-		case RIGHT:
-			Position.x+=speed;
-			break;
-		case LEFT:
-			Position.x-=speed;
-			break;
-	}
+void Twins::XUpdate(){
+	Position.x += velx;
 	PlayScene* scene = getPlayScene();
 	if (!Enabled)
 		return;
+}
+void Twins::YUpdate() {
+	if(!jump)vely=jumpspeed+gravity;
+	else{
+		vely = -jumpspeed;
+		sourceX = 0;
+		// jump = false;
+	}
+	Position.y += vely;
 }
 void Twins::MeDraw() {
 	if (moveCD%4 == 0 || moveCD%4 == 1) {
@@ -66,41 +52,34 @@ void Twins::updateTime(int deltaTime){
 }
 
 void Twins::OnKeyDown(int keyCode){
-	active = true;
 	switch(keyCode){
-		case ALLEGRO_KEY_UP:
-		case ALLEGRO_KEY_W:
-			sourceX = 0;
-			dir = UP;
-			// Position.y-=speed;
-			break;
 		case ALLEGRO_KEY_LEFT:
 		case ALLEGRO_KEY_A:
+			velx  = -speed;
 			sourceX = 4;
 			dir = LEFT;
-			// Position.x-=speed;
 			break;
 		case ALLEGRO_KEY_RIGHT:
 		case ALLEGRO_KEY_D:
+			velx = speed;
 			sourceX = 2;
 			dir = RIGHT;
-			// Position.x+=speed;
 			break;
-		default: active = false; break;
+		default: break;
+	}
+	switch(keyCode){
+		case ALLEGRO_KEY_UP:
+		case ALLEGRO_KEY_W:
+			jump = true;
+			break;
 	}
 }
 void Twins::OnKeyUp(int keyCode){
 	switch(keyCode){
-		case ALLEGRO_KEY_UP:
-		case ALLEGRO_KEY_W:
-			if(dir == UP){
-				dir = NO;
-				sourceX = 0;
-			}
-			break;
 		case ALLEGRO_KEY_LEFT:
 		case ALLEGRO_KEY_A:
 			if(dir == LEFT){
+				velx = 0;
 				dir = NO;
 				sourceX = 0;
 			}
@@ -108,6 +87,7 @@ void Twins::OnKeyUp(int keyCode){
 		case ALLEGRO_KEY_RIGHT:
 		case ALLEGRO_KEY_D:
 			if(dir == RIGHT){
+				velx = 0;
 				dir = NO;
 				sourceX = 0;
 			}

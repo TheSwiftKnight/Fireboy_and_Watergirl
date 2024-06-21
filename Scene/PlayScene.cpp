@@ -200,32 +200,36 @@ void PlayScene::Update(float deltaTime) {
 		// // Compensate the time lost.
 		// enemy->Update(ticks);
 	}
-	int Px = ((int)(boy->Position.x)%64==0) ? (boy->Position.x)/64:(boy->Position.x)/64+1;
-	int Py = ((int)(boy->Position.y)%64==0) ? (boy->Position.y)/64:(boy->Position.y)/64+1;
+	// int Px = ((int)(boy->Position.x)%64==0) ? (boy->Position.x)/64:(boy->Position.x)/64+1;
+	// int Py = ((int)(boy->Position.y)%64==0) ? (boy->Position.y)/64:(boy->Position.y)/64+1;
+	int Px = (boy->Position.x)/64;
+	int Py = (boy->Position.y)/64;
+	if(!boy->jump){
+		if(mapState[Py+1][Px]!=TILE_DIRT &&
+		mapState[Py+1][Px]!=TILE_RED_WATER &&
+		mapState[Py+1][Px]!=TILE_BLUE_WATER &&
+		mapState[Py+1][Px]!=TILE_GREEN_WATER)boy->YUpdate();
+	}
+	else{
+		if(mapState[Py][Px]!=TILE_DIRT &&
+		mapState[Py][Px]!=TILE_RED_WATER &&
+		mapState[Py][Px]!=TILE_BLUE_WATER &&
+		mapState[Py][Px]!=TILE_GREEN_WATER)boy->YUpdate();
+		else boy->jump = false;
+	}
+	
 	switch(boy->dir){
-		case UP:
-		Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
-			if(mapState[Py-1][Px]!=TILE_DIRT)
-				boy->MeUpdate();
-			break;
 		case RIGHT:
-			Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
-			if(mapState[Py][Px]!=TILE_DIRT)
-				boy->MeUpdate();
+			// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
+			if(mapState[Py][Px+1]!=TILE_DIRT)
+				boy->XUpdate();
 			break;
 		case LEFT:
-		Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
-			if(mapState[Py][Px-1]!=TILE_DIRT)
-				boy->MeUpdate();
+		// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
+			if(mapState[Py][Px]!=TILE_DIRT)
+				boy->XUpdate();
 			break;
-		// boy->MeUpdate();
-		// girl->MeUpdate();
 	}
-	// if (preview) {
-	// 	preview->Position = Engine::GameEngine::GetInstance().GetMousePosition();
-	// 	// To keep responding when paused.
-	// 	preview->Update(deltaTime);
-	// }
 }
 void PlayScene::Draw() const {
 	IScene::Draw();
