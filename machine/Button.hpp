@@ -1,5 +1,5 @@
-#ifndef TURRET_HPP
-#define TURRET_HPP
+#ifndef BUTTON_HPP
+#define BUTTON_HPP
 #include <allegro5/base.h>
 #include <list>
 #include <string>
@@ -15,10 +15,10 @@ protected:
 
 public:
     bool Opened = false;
-    Button(std::string imgButton, int x, int y);
+    Button(std::string imgButton, int x, int y, float radius);
     void Draw() const override;
     void CreateButton();
     int x, y;
-    
+    Sprite imgButton;
 };
 #endif // TURRET_HPP

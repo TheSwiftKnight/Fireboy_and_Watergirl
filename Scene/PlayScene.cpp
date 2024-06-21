@@ -33,6 +33,8 @@
 #include "Engine/LOG.hpp"
 #include "Engine/IObject.hpp"
 #include "Twins/Twins.hpp"
+#include "machine/Diamond.hpp"
+#include "machine/Button.hpp"
 
 bool write_score_once = false;
 bool PlayScene::DebugMode = false;
@@ -450,7 +452,8 @@ void PlayScene::ReadMap() {
 		case 'R':
 		case 'G':
 		case 'L':
-		case 'E': mapData.push_back(c); break;
+		case 'E': 
+		case 'b': mapData.push_back(c); break;
 		case '\n':
 		case '\r':
 			if (static_cast<int>(mapData.size()) / MapWidth != 0)
@@ -522,6 +525,10 @@ void PlayScene::ReadMap() {
 			else if(num == 'S'){
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				TileMapGroup->AddNewObject(new Engine::Image("play/stone.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+			}
+			else if(num == 'b'){
+				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+				ButtonGroup->AddNewObject(new Button("play/button0.png", j * BlockSize, i * BlockSize +32, BlockSize));
 			}
 		}
 	}

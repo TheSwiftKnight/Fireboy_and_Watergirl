@@ -65,6 +65,7 @@ public:
 	Group* UIGroup;
 	Group* WaterGroup;
 	Group* ButtonGroup;
+	Group* DiamondGroup;
 	Engine::Label* UIMoney;
 	Engine::Label* UILives;
 	Engine::Label* UIScore;
