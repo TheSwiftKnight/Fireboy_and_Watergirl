@@ -22,6 +22,7 @@ Twins::Twins(std::string imgTwins, int x, int y, float radius) : Sprite(imgTwins
 	jump = false;
 	velx = vely = 0;
 	CollisionRadius = radius;
+	jumpTimestamp = true;
 }
 void Twins::XUpdate(){
 	Position.x += velx;
@@ -30,11 +31,14 @@ void Twins::XUpdate(){
 		return;
 }
 void Twins::YUpdate() {
+	if(moveCD-jumpCD>=2){
+		jumpTimestamp = true;
+		jump = false;
+	}
 	if(!jump)vely=jumpspeed+gravity;
 	else{
 		vely = -jumpspeed;
 		sourceX = 0;
-		// jump = false;
 	}
 	Position.y += vely;
 }
@@ -49,6 +53,7 @@ void Twins::MeDraw() {
 
 void Twins::updateTime(int deltaTime){
 	moveCD = deltaTime;
+	if(jumpTimestamp) jumpCD = deltaTime;
 }
 
 void Twins::OnKeyDown(int keyCode){
@@ -71,6 +76,7 @@ void Twins::OnKeyDown(int keyCode){
 		case ALLEGRO_KEY_UP:
 		case ALLEGRO_KEY_W:
 			jump = true;
+			jumpTimestamp = false;
 			break;
 	}
 }

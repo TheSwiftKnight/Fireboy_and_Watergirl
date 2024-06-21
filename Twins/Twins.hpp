@@ -29,6 +29,8 @@ public:
     const float gravity = 1;
     int speed;
     bool jump;
+    bool jumpTimestamp;
+    int jumpCD;
     float jumpspeed = 5;
     int x,y;
     int velx,vely;
