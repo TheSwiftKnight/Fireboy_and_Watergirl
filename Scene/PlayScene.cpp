@@ -70,8 +70,10 @@ void PlayScene::Initialize() {
 	AddNewObject(EnemyGroup = new Group());
 	AddNewObject(BulletGroup = new Group());
 	AddNewObject(EffectGroup = new Group());
+	AddNewObject(ButtonGroup = new Group());
 	// Should support buttons.
 	AddNewControlObject(UIGroup = new Group());
+	
 	ReadMap();
 	// ReadEnemyWave();
 	mapDistance = CalculateBFSDistance();
@@ -468,7 +470,7 @@ void PlayScene::ReadMap() {
 			}
 			else if(num == 'L'){
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Twins("play/lever0.png", j * BlockSize, i * BlockSize +32, 1));
+				AddNewObject(new Twins("play/lever_right.png", j * BlockSize, i * BlockSize +32, 1));
 			}
 			else if(num == '1')
 				TileMapGroup->AddNewObject(new Engine::Image("play/blue_door.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
