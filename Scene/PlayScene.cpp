@@ -235,6 +235,8 @@ void PlayScene::Update(float deltaTime) {
 				boy->XUpdate();
 			break;
 	}
+
+	
 }
 void PlayScene::Draw() const {
 	IScene::Draw();
@@ -482,17 +484,17 @@ void PlayScene::ReadMap() {
 			}		
 			else if(num == 'R'){
 				TileMapGroup->AddNewObject(new Engine::Image("play/dirt.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Twins("play/red_water.png", j * BlockSize, i * BlockSize+32, 1));
+				AddNewObject(new Twins("play/red_water.png", j * BlockSize+32, i * BlockSize+32, 1));
 				mapState[i][j] = TILE_RED_WATER;
 			}
 			else if(num == 'B'){
 				TileMapGroup->AddNewObject(new Engine::Image("play/dirt.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Twins("play/blue_water.png", j * BlockSize, i * BlockSize+32, 1));
+				AddNewObject(new Twins("play/blue_water.png", j * BlockSize+32, i * BlockSize+32, 1));
 				mapState[i][j] = TILE_BLUE_WATER;
 			}
 			else if(num == 'G'){
 				TileMapGroup->AddNewObject(new Engine::Image("play/dirt.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Twins("play/green_water.png", j * BlockSize, i * BlockSize+32, 1));
+				AddNewObject(new Twins("play/green_water.png", j * BlockSize+32, i * BlockSize+32, 1));
 				mapState[i][j] = TILE_GREEN_WATER;
 			}
 			else if(num == 'E'){
@@ -505,31 +507,37 @@ void PlayScene::ReadMap() {
 			else if(num == 'L'){
 				mapState[i][j] = TILE_LEVER;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Twins("play/lever_right.png", j * BlockSize, i * BlockSize +32, 1));
+				AddNewObject(new Twins("play/lever_right.png", j * BlockSize+32, i * BlockSize +32, 1));
 			}
 			else if(num == '1'){
 				mapState[i][j] = TILE_BLUE_DOOR;
+				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				TileMapGroup->AddNewObject(new Engine::Image("play/blue_door.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 			}
 			else if(num == '2'){
 				mapState[i][j] = TILE_RED_DOOR;
+				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				TileMapGroup->AddNewObject(new Engine::Image("play/red_door.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 			}
 			else if(num == '['){
+				mapState[i][j] = TILE_DIAMOND;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				DiamondGroup->AddNewObject(new Diamond("play/blue_diamond.png", j * BlockSize, i * BlockSize+32, 1, "blue"));
+				DiamondGroup->AddNewObject(new Diamond("play/blue_diamond.png", j * BlockSize+32, i * BlockSize+32, 1, "blue"));
 			}
 			else if(num == ']'){
+				mapState[i][j] = TILE_DIAMOND;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				DiamondGroup->AddNewObject(new Diamond("play/red_diamond.png", j * BlockSize, i * BlockSize+32, 1, "red"));
+				DiamondGroup->AddNewObject(new Diamond("play/red_diamond.png", j * BlockSize+32, i * BlockSize+32, 1, "red"));
 			}
 			else if(num == 'S'){
+				mapState[i][j] = TILE_STONE;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				TileMapGroup->AddNewObject(new Engine::Image("play/stone.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+				TileMapGroup->AddNewObject(new Engine::Image("play/stone.png", j * BlockSize+32, i * BlockSize, BlockSize, BlockSize));
 			}
 			else if(num == 'b'){
+				mapState[i][j] = TILE_BUTTON;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				ButtonGroup->AddNewObject(new Button("play/button0.png", j * BlockSize, i * BlockSize +32, BlockSize));
+				ButtonGroup->AddNewObject(new Button("play/button0.png", j * BlockSize+32, i * BlockSize +32, BlockSize));
 			}
 		}
 	}

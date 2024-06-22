@@ -2,7 +2,7 @@
 #include <allegro5/allegro_primitives.h>
 #include <cmath>
 #include <utility>
-
+#include <iostream>
 #include "Enemy/Enemy.hpp"
 #include "Engine/GameEngine.hpp"
 #include "Engine/Group.hpp"
@@ -25,15 +25,16 @@ void Diamond::Draw() {
 	Sprite::Draw();
 }
 void Diamond::Update(float deltaTime) {
-	Sprite::Update(deltaTime);
-    if(diamond_type == red){
-        if(Engine::Collider::IsPointInRect(Engine::Point(Diamond::getPlayScene()->girl->x,Diamond::getPlayScene()->girl->y),Engine::Point(x,y),Engine::Point(64,64))){
+    if(diamond_type == blue){
+        if(Engine::Collider::IsRectOverlap(Position, Position + Size / 2 , getPlayScene()->girl->Position, getPlayScene()->boy->Position + Size / 2) ){
             eaten = 1;
             getPlayScene()->DiamondGroup->RemoveObject(GetObjectIterator());
         }
     }
-    else if(diamond_type == blue) {
-        if(Engine::Collider::IsPointInRect(Engine::Point(Diamond::getPlayScene()->boy->x,getPlayScene()->boy->y),Engine::Point(x,y),Engine::Point(64,64))){
+    else if(diamond_type == red) {
+        std::cout << "boy: " <<  Diamond::getPlayScene()->boy->Position.x << " " << getPlayScene()->boy->Position.y << " " << Diamond::getPlayScene()->boy->Position.x+32 << " " << getPlayScene()->boy->Position.y+32<< std::endl;
+        std::cout <<"R_diamond: "<< Position.x << " " << Position.y << " " << Position.x+32 << " " << Position.y+32 << std::endl;
+        if(Engine::Collider::IsRectOverlap(Position, Position + Size / 2 , getPlayScene()->boy->Position, getPlayScene()->boy->Position + Size / 2) ){
             eaten = 1;
             getPlayScene()->DiamondGroup->RemoveObject(GetObjectIterator());
         }

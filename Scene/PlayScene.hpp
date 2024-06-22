@@ -39,7 +39,8 @@ public:
 		TILE_STONE,
 		TILE_RED_WATER,
 		TILE_BLUE_WATER,
-		TILE_GREEN_WATER
+		TILE_GREEN_WATER,
+		TILE_DIAMOND
 	};
 	int score;
 	float spriteTick;

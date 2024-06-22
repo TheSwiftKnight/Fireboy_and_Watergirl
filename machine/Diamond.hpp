@@ -18,6 +18,6 @@ public:
     void Draw();
     int x, y;
     Diamond_type diamond_type;
-    void Update(float deltatime);
+    void Update(float deltatime) override;
 };
 #endif // TURRET_HPP
