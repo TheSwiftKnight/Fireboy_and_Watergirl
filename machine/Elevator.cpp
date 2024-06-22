@@ -27,19 +27,26 @@
 PlayScene* Elevator::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
 }
-Elevator::Elevator(std::string imgElevator,int x, int y, int init_x, int final_x):
-    Sprite(imgElevator, x, y), x(x), y(y), init_x(init_x), final_x(final_x){
+Elevator::Elevator(std::string imgElevator,int x, int y, int init_x, int final_x, int num):
+    Sprite(imgElevator, x, y), x(x), y(y), init_x(init_x), final_x(final_x), elevator_num(num){
 }
 void Elevator::Draw() {
 	Sprite::Draw();
 }
 void Elevator::Update(float deltaTime) {
-    if(open && x != final_x){
-        getPlayScene()->ButtonGroup->GetObjects()
+    std::list<IObject*> objects = getPlayScene()->ButtonGroup->GetObjects();
+    for(auto obj:objects){
+        Button* btn = dynamic_cast<Button*>(obj);
+        if(btn->button_num == elevator_num){
+            if(btn->started && x < final_x){
+                getPlayScene()->ElevatorGroup->RemoveObject(GetObjectIterator());
+                getPlayScene()->ElevatorGroup->AddNewObject(new Elevator("play/Elevator.png",x+1,y,init_x,final_x,elevator_num));
+            }
+            else if(!btn->started && x > init_x){
+                getPlayScene()->ElevatorGroup->RemoveObject(GetObjectIterator());
+                getPlayScene()->ElevatorGroup->AddNewObject(new Elevator("play/Elevator.png",x-1,y,init_x,final_x,elevator_num));
+            }
+        }
     }
-    getPlayScene()->ElevatorGroup->RemoveObject(GetObjectIterator());
-    getPlayScene()->ElevatorGroup->AddNewObject(new Elevator("play/Elevator.png",0,0,0,0));
-    else if(!open && x!=init_x){
-
-    }
+    
 }

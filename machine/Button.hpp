@@ -13,10 +13,11 @@ protected:
 
 public:
     bool started;
-    Button(std::string imgbutton, int x, int y, float radius);
+    Button(std::string imgbutton, int x, int y, float radius, int num);
     void Draw();
     int x, y;
     void Update(float deltatime) override;
     bool getStartedValue();
+    int button_num;
 };
 #endif // TURRET_HPP

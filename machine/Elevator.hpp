@@ -13,10 +13,11 @@ protected:
 
 public:
     bool opening;
-    Elevator(std::string imgElevator, int x, int y, int init_x, int final_x);
+    Elevator(std::string imgElevator, int x, int y, int init_x, int final_x, int num);
     void Draw();
     int x, y;
     int init_x, final_x;
+    int elevator_num;
     void Update(float deltatime) override;
 };
 #endif // TURRET_HPP
