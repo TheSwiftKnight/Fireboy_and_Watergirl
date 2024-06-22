@@ -20,6 +20,7 @@ namespace Engine {
 
 class PlayScene final : public Engine::IScene {
 private:
+	float ElapsedTime;
 	ALLEGRO_SAMPLE_ID bgmId;
 	std::shared_ptr<ALLEGRO_SAMPLE_INSTANCE> deathBGMInstance;
 protected:
@@ -65,9 +66,7 @@ public:
 	Group* UIGroup;
 	Group* WaterGroup;
 	Group* ButtonGroup;
-	Engine::Label* UIMoney;
-	Engine::Label* UILives;
-	Engine::Label* UIScore;
+	Engine::Label* UITime;
 	Engine::Image* imgTarget;
 	Engine::Sprite* dangerIndicator;
 	Turret* preview;
@@ -92,12 +91,12 @@ public:
 	void Hit();
 	int GetMoney() const;
 	int GetScore();
-	void EarnMoney(int money);
 	void ReadMap();
 	void ReadEnemyWave();
 	void ConstructUI();
 	void UIBtnClicked(int id);
 	bool CheckSpaceValid(int x, int y);
+	void UpdateTimer();
 	std::vector<std::vector<int>> CalculateBFSDistance();
 	// void ModifyReadMapTiles();
 	void WriteScoretoFile(int score);

@@ -58,10 +58,10 @@ void PlayScene::Initialize() {
 	spriteTick = 0;
 	ticks = 0;
 	deathCountDown = -1;
-	lives = 10;
 	money = 150;
 	SpeedMult = 1;
 	score = 1000;
+	ElapsedTime = 0.0f;
 	// Add groups from bottom to top.
 	AddNewObject(TileMapGroup = new Group());
 	AddNewObject(GroundEffectGroup = new Group());
@@ -99,7 +99,19 @@ void PlayScene::Terminate() {
 	deathBGMInstance = std::shared_ptr<ALLEGRO_SAMPLE_INSTANCE>();
 	IScene::Terminate();
 }
+
+void PlayScene::UpdateTimer(){
+	int minutes = static_cast<int>(ElapsedTime) / 60;
+    int seconds = static_cast<int>(ElapsedTime) % 60;
+    std::string timeStr = std::string("Time ") + 
+                          (minutes < 10 ? "0" : "") + std::to_string(minutes) + ":" + 
+                          (seconds < 10 ? "0" : "") + std::to_string(seconds);
+    UITime->Text = timeStr;
+}
+
 void PlayScene::Update(float deltaTime) {
+	ElapsedTime += deltaTime;
+	UpdateTimer();
 	spriteTick+=0.1;
 	boy->updateTime(spriteTick);
 	girl->updateTime(spriteTick);
@@ -116,37 +128,37 @@ void PlayScene::Update(float deltaTime) {
 	}
 	// Can use Heap / Priority-Queue instead. But since we won't have too many enemies, sorting is fast enough.
 	std::sort(reachEndTimes.begin(), reachEndTimes.end());
-	float newDeathCountDown = -1;
-	int danger = lives;
-	for (auto& it : reachEndTimes) {
-		if (it <= DangerTime) {
-			danger--;
-			if (danger <= 0) {
-				// Death Countdown
-				float pos = DangerTime - it;
-				if (it > deathCountDown) {
-					// Restart Death Count Down BGM.
-					AudioHelper::StopSample(deathBGMInstance);
-					if (SpeedMult != 0)
-						deathBGMInstance = AudioHelper::PlaySample("astronomia.ogg", false, AudioHelper::BGMVolume, pos);
-				}
-				float alpha = pos / DangerTime;
-				alpha = std::max(0, std::min(255, static_cast<int>(alpha * alpha * 255)));
-				dangerIndicator->Tint = al_map_rgba(255, 255, 255, alpha);
-				newDeathCountDown = it;
-				break;
-			}
-		}
-	}
-	deathCountDown = newDeathCountDown;
-	if (SpeedMult == 0)
-		AudioHelper::StopSample(deathBGMInstance);
-	if (deathCountDown == -1 && lives > 0) {
-		AudioHelper::StopSample(deathBGMInstance);
-		dangerIndicator->Tint.a = 0;
-	}
-	if (SpeedMult == 0)
-		deathCountDown = -1;
+	// float newDeathCountDown = -1;
+	// int danger = lives;
+	// for (auto& it : reachEndTimes) {
+	// 	if (it <= DangerTime) {
+	// 		danger--;
+	// 		if (danger <= 0) {
+	// 			// Death Countdown
+	// 			float pos = DangerTime - it;
+	// 			if (it > deathCountDown) {
+	// 				// Restart Death Count Down BGM.
+	// 				AudioHelper::StopSample(deathBGMInstance);
+	// 				if (SpeedMult != 0)
+	// 					deathBGMInstance = AudioHelper::PlaySample("astronomia.ogg", false, AudioHelper::BGMVolume, pos);
+	// 			}
+	// 			float alpha = pos / DangerTime;
+	// 			alpha = std::max(0, std::min(255, static_cast<int>(alpha * alpha * 255)));
+	// 			dangerIndicator->Tint = al_map_rgba(255, 255, 255, alpha);
+	// 			newDeathCountDown = it;
+	// 			break;
+	// 		}
+	// 	}
+	// }
+	// deathCountDown = newDeathCountDown;
+	// if (SpeedMult == 0)
+	// 	AudioHelper::StopSample(deathBGMInstance);
+	// if (deathCountDown == -1 && lives > 0) {
+	// 	AudioHelper::StopSample(deathBGMInstance);
+	// 	dangerIndicator->Tint.a = 0;
+	// }
+	// if (SpeedMult == 0)
+	// 	deathCountDown = -1;
 	for (int i = 0; i < SpeedMult; i++) {
 		IScene::Update(deltaTime);
 		// Check if we should create new enemy.
@@ -277,7 +289,7 @@ void PlayScene::OnMouseUp(int button, int mx, int my) {
 					mapState[y][x] = TILE_FLOOR;
 				}
 			}
-			EarnMoney(50);
+			// EarnMoney(50);
 			preview->GetObjectIterator()->first = false;
 			UIGroup->RemoveObject(preview->GetObjectIterator());
 			// To keep responding when paused.
@@ -297,7 +309,7 @@ void PlayScene::OnMouseUp(int button, int mx, int my) {
 				return;
 			}
 			// Purchase.
-			EarnMoney(-preview->GetPrice());
+			// EarnMoney(-preview->GetPrice());
 			// Remove Preview.
 			preview->GetObjectIterator()->first = false;
 			UIGroup->RemoveObject(preview->GetObjectIterator());
@@ -396,29 +408,23 @@ void PlayScene::OnKeyDown(int keyCode) {
 	}
 }
 void PlayScene::Hit() {
-	lives--;
-	score-=100;
-	UIScore->Text = std::string("Score ") + std::to_string(score);
-	UILives->Text = std::string("Life ") + std::to_string(lives);
-	if (lives <= 0) {
-		if(!write_score_once){
-			WriteScoretoFile(score);
-			write_score_once = true;
-		}
-		Engine::GameEngine::GetInstance().ChangeScene("lose");
-	}
+	// lives--;
+	// score-=100;
+	// UIScore->Text = std::string("Score ") + std::to_string(score);
+	// UILives->Text = std::string("Life ") + std::to_string(lives);
+	// if (lives <= 0) {
+	// 	if(!write_score_once){
+	// 		WriteScoretoFile(score);
+	// 		write_score_once = true;
+	// 	}
+	// 	Engine::GameEngine::GetInstance().ChangeScene("lose");
+	// }
 }
 int PlayScene::GetMoney() const {
 	return money;
 }
 int PlayScene::GetScore(){
 	return score;
-}
-void PlayScene::EarnMoney(int money) {
-	if(money>0)this->score += money;
-	this->money += money;
-	UIMoney->Text = std::string("$") + std::to_string(this->money);
-	UIScore->Text = std::string("Score ") + std::to_string(this->score);
 }
 void PlayScene::ReadMap() {
 	std::string filename = std::string("Resource/level") + std::to_string(MapId) + ".txt";
@@ -556,9 +562,7 @@ void PlayScene::ConstructUI() {
 	UIGroup->AddNewObject(new Engine::Image("play/floor.png", 1280, 0, 320, 832));
 	// Text
 	UIGroup->AddNewObject(new Engine::Label(std::string("Stage ") + std::to_string(MapId), "pirulen.ttf", 32, 1294, 0));
-	UIGroup->AddNewObject(UIMoney = new Engine::Label(std::string("$") + std::to_string(money), "pirulen.ttf", 24, 1294, 48));
-	UIGroup->AddNewObject(UILives = new Engine::Label(std::string("Life ") + std::to_string(lives), "pirulen.ttf", 24, 1294, 88));
-	UIGroup->AddNewObject(UIScore = new Engine::Label(std::string("Score ") + std::to_string(score), "pirulen.ttf", 24, 1294, 280));
+	UIGroup->AddNewObject(UITime = new Engine::Label(std::string("Time 00:00"), "pirulen.ttf", 24, 1294, 48));
 	TurretButton* btn;
 	// Button 1
 	btn = new TurretButton("play/floor.png", "play/dirt.png",
