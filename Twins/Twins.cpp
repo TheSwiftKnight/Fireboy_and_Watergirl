@@ -31,7 +31,7 @@ void Twins::XUpdate(){
 		return;
 }
 void Twins::YUpdate() {
-	if(moveCD-jumpCD>=2){
+	if(jump && moveCD-jumpCD>=5){
 		jumpTimestamp = true;
 		jump = false;
 	}

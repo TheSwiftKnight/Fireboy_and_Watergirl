@@ -154,93 +154,80 @@ void PlayScene::Update(float deltaTime) {
 		IScene::Update(deltaTime);
 		// Check if we should create new enemy.
 		ticks += deltaTime;
-		// if (enemyWaveData.empty()) {
-		// 	if (EnemyGroup->GetObjects().empty()) {
-		// 		// Free resources.
-		// 		// delete TileMapGroup;
-		// 		// delete GroundEffectGroup;
-		// 		// delete DebugIndicatorGroup;
-		// 		// delete TowerGroup;
-		// 		// delete EnemyGroup;
-		// 		// delete BulletGroup;
-		// 		// delete EffectGroup;
-		// 		// delete UIGroup;
-		// 		// delete imgTarget;
-		// 		if(!write_score_once){
-		// 			WriteScoretoFile(score);
-		// 			write_score_once = true;
-		// 		}
-				
-		// 		Engine::GameEngine::GetInstance().ChangeScene("win");
-		// 	}
-		// 	continue;
-		// }
-		// auto current = enemyWaveData.front();
-		// if (ticks < current.second)
-		// 	continue;
-		// ticks -= current.second;
-		// enemyWaveData.pop_front();
-		// const Engine::Point SpawnCoordinate = Engine::Point(SpawnGridPoint.x * BlockSize + BlockSize / 2, SpawnGridPoint.y * BlockSize + BlockSize / 2);
-		// Enemy* enemy;
-		// switch (current.first) {
-		// case 1:
-		// 	EnemyGroup->AddNewObject(enemy = new SoldierEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
-		// 	break;
-		// case 2:
-		// 	EnemyGroup->AddNewObject(enemy = new PlaneEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
-		// 	break;
-		// case 3:
-		// 	EnemyGroup->AddNewObject(enemy = new TankEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
-		// 	break;
-		// case 4:
-		// 	EnemyGroup->AddNewObject(enemy = new MisteryEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
-		// 	break;
-        // // TODO: [CUSTOM-ENEMY]: You need to modify 'Resource/enemy1.txt', or 'Resource/enemy2.txt' to spawn the 4th enemy.
-        // //         The format is "[EnemyId] [TimeDelay] [Repeat]".
-        // // TODO: [CUSTOM-ENEMY]: Enable the creation of the enemy.
-		// default:
-		// 	continue;
-		// }
-		// enemy->UpdatePath(mapDistance);
-		// // Compensate the time lost.
-		// enemy->Update(ticks);
 	}
 	// int Px = ((int)(boy->Position.x)%64==0) ? (boy->Position.x)/64:(boy->Position.x)/64+1;
 	// int Py = ((int)(boy->Position.y)%64==0) ? (boy->Position.y)/64:(boy->Position.y)/64+1;
-	int Px = (boy->Position.x)/64;
-	int Py = (boy->Position.y)/64;
+	int Px = boy->Position.x;
+	int Py = boy->Position.y;
+	// Engine::LOG(Engine::INFO) << "Pos("<<Px/64<<","<<Py/64<<")";
 	if(!boy->jump){
-		if(mapState[Py+1][Px]!=TILE_DIRT &&
-		mapState[Py+1][Px]!=TILE_RED_WATER &&
-		mapState[Py+1][Px]!=TILE_BLUE_WATER &&
-		mapState[Py+1][Px]!=TILE_GREEN_WATER)boy->YUpdate();
+		if(mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_DIRT &&
+		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_RED_WATER &&
+		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
+		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_GREEN_WATER)boy->YUpdate();
 	}
 	else{
-		if(mapState[Py][Px]!=TILE_DIRT &&
-		mapState[Py][Px]!=TILE_RED_WATER &&
-		mapState[Py][Px]!=TILE_BLUE_WATER &&
-		mapState[Py][Px]!=TILE_GREEN_WATER)boy->YUpdate();
-		else boy->jump = false;
+		if(mapState[(Py-6)/64][(Px+1)/64]!=TILE_DIRT &&
+		mapState[(Py-6)/64][(Px+1)/64]!=TILE_RED_WATER &&
+		mapState[(Py-6)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
+		mapState[(Py-6)/64][(Px+1)/64]!=TILE_GREEN_WATER)boy->YUpdate();
+		else {
+			boy->jumpTimestamp = true;
+			boy->jump = false;
+		}
 	}
 	
 	switch(boy->dir){
 		case RIGHT:
 			// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
-			if(mapState[Py][Px+1]!=TILE_DIRT)
+			if(mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT)
 				boy->XUpdate();
 			break;
 		case LEFT:
 		// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
-			if(mapState[Py][Px]!=TILE_DIRT)
+			if(mapState[Py/64][Px/64]!=TILE_DIRT)
 				boy->XUpdate();
 			break;
 	}
 
+
+	Px = girl->Position.x;
+	Py = girl->Position.y;
+
+	if(!girl->jump){
+		if(mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_DIRT &&
+		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_RED_WATER &&
+		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
+		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_GREEN_WATER)girl->YUpdate();
+	}
+	else{
+		if(mapState[(Py-6)/64][(Px+1)/64]!=TILE_DIRT &&
+		mapState[(Py-6)/64][(Px+1)/64]!=TILE_RED_WATER &&
+		mapState[(Py-6)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
+		mapState[(Py-6)/64][(Px+1)/64]!=TILE_GREEN_WATER)girl->YUpdate();
+		else {
+			girl->jumpTimestamp = true;
+			girl->jump = false;
+		}
+	}
 	
+	switch(girl->dir){
+		case RIGHT:
+			// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
+			if(mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT)
+				girl->XUpdate();
+			break;
+		case LEFT:
+		// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
+			if(mapState[Py/64][Px/64]!=TILE_DIRT)
+				girl->XUpdate();
+			break;
+	}
 }
 void PlayScene::Draw() const {
 	IScene::Draw();
 	boy->MeDraw();
+	girl->MeDraw();
 	// if (DebugMode) {
 	// 	// Draw reverse BFS distance on all reachable blocks.
 	// 	for (int i = 0; i < MapHeight; i++) {
