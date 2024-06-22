@@ -33,8 +33,6 @@ void Diamond::Update(float deltaTime) {
         }
     }
     else if(diamond_type == red) {
-        std::cout << "boy: " <<  Diamond::getPlayScene()->boy->Position.x << " " << getPlayScene()->boy->Position.y << " " << Diamond::getPlayScene()->boy->Position.x+32 << " " << getPlayScene()->boy->Position.y+32<< std::endl;
-        std::cout <<"R_diamond: "<< Position.x << " " << Position.y << " " << Position.x+32 << " " << Position.y+32 << std::endl;
         if(Engine::Collider::IsRectOverlap(Position, Position + Size / 2 , getPlayScene()->boy->Position, getPlayScene()->boy->Position + Size / 2) ){
             eaten = 1;
             getPlayScene()->DiamondGroup->RemoveObject(GetObjectIterator());

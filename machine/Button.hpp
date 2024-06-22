@@ -7,17 +7,15 @@
 #include "Engine/Sprite.hpp" 
 
 class PlayScene;
-
 class Button: public Engine::Sprite {
 protected:
     PlayScene* getPlayScene();
-    // Reference: Design Patterns - Factory Method.
 
 public:
-    bool Opened = false;
-    Button(std::string imgButton, int x, int y, float radius);
-    void Draw() const override;
+    bool started;
+    Button(std::string imgbutton, int x, int y, float radius);
+    void Draw();
     int x, y;
-    Sprite imgButton;
+    void Update(float deltatime) override;
 };
 #endif // TURRET_HPP
