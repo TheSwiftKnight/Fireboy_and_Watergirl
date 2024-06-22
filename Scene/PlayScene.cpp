@@ -186,10 +186,44 @@ void PlayScene::Update(float deltaTime) {
 				boy->XUpdate();
 			break;
 	}
+
+	Px = girl->Position.x;
+	Py = girl->Position.y;
+
+	if(!girl->jump){
+		if(mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_DIRT &&
+		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_RED_WATER &&
+		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
+		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_GREEN_WATER)girl->YUpdate();
+	}
+	else{
+		if(mapState[(Py-6)/64][(Px+1)/64]!=TILE_DIRT &&
+		mapState[(Py-6)/64][(Px+1)/64]!=TILE_RED_WATER &&
+		mapState[(Py-6)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
+		mapState[(Py-6)/64][(Px+1)/64]!=TILE_GREEN_WATER)girl->YUpdate();
+		else {
+			girl->jumpTimestamp = true;
+			girl->jump = false;
+		}
+	}
+	
+	switch(girl->dir){
+		case RIGHT:
+			// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
+			if(mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT)
+				girl->XUpdate();
+			break;
+		case LEFT:
+		// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
+			if(mapState[Py/64][Px/64]!=TILE_DIRT)
+				girl->XUpdate();
+			break;
+	}
 }
 void PlayScene::Draw() const {
 	IScene::Draw();
 	boy->MeDraw();
+	girl->MeDraw();
 	// if (DebugMode) {
 	// 	// Draw reverse BFS distance on all reachable blocks.
 	// 	for (int i = 0; i < MapHeight; i++) {
