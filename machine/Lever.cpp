@@ -43,11 +43,11 @@ void Lever::Update(float deltaTime) {
     for(auto obj:objects){
         Button* btn = dynamic_cast<Button*>(obj);
         if(btn->button_num == Lever_num){
-            if(btn->started && x < final_x){
+            if(btn->started && x < final_y){
                 getPlayScene()->LeverGroup->RemoveObject(GetObjectIterator());
                 getPlayScene()->LeverGroup->AddNewObject(new Lever("play/right_lever.png",x,y,"middle"));
             }
-            else if(!btn->started && x > init_x){
+            else if(!btn->started && x > init_y){
                 getPlayScene()->LeverGroup->RemoveObject(GetObjectIterator());
                 getPlayScene()->LeverGroup->AddNewObject(new Lever("play/Lever.png",x,y,"middle"));
             }

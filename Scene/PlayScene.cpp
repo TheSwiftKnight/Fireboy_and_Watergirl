@@ -37,6 +37,7 @@
 #include "machine/Button.hpp"
 #include "machine/Elevator.hpp"
 #include "machine/Lever.hpp"
+#include "machine/Stone.hpp"
 bool write_score_once = false;
 bool PlayScene::DebugMode = false;
 const std::vector<Engine::Point> PlayScene::directions = { Engine::Point(-1, 0), Engine::Point(0, -1), Engine::Point(1, 0), Engine::Point(0, 1) };
@@ -541,7 +542,7 @@ void PlayScene::ReadMap() {
 				mapState[i][j] = TILE_ELEVATOR;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize - 64, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Elevator("play/elevator.png", j * BlockSize, i * BlockSize+32, j * BlockSize, j * BlockSize + 128, 0, 0));
+				AddNewObject(new Elevator("play/elevator.png", j * BlockSize, i * BlockSize+75, i * BlockSize+75, i * BlockSize + 128+ 75, 0, 0));
 			}
 			else if(num == 'L'){
 				mapState[i][j] = TILE_LEVER;
@@ -571,7 +572,7 @@ void PlayScene::ReadMap() {
 			else if(num == 'S'){
 				mapState[i][j] = TILE_STONE;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				StoneGroup->AddNewObject(new Engine::Image("play/stone.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+				StoneGroup->AddNewObject(new Stone("play/stone.png", j * BlockSize+32, i * BlockSize+32, BlockSize));
 			}
 			else if(num == 'b'){
 				mapState[i][j] = TILE_BUTTON;
@@ -619,6 +620,8 @@ void PlayScene::ReadEnemyWave() {
 	fin.close();
 }
 void PlayScene::ConstructUI() {
+	//title
+	UIGroup->AddNewObject(new Engine::Image("play/game_title.png", 40, 600, 300, 78));
 	// Background
 	UIGroup->AddNewObject(new Engine::Image("play/floor.png", 1280, 0, 320, 832));
 	// Text

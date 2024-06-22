@@ -17,7 +17,7 @@ public:
     Lever(std::string imgLever,int x, int y, std::string s);
     void Draw();
     int x, y;
-    int init_x, final_x;
+    int init_y, final_y;
     int Lever_num;
     Lever_state state;
     void Update(float deltatime) override;
