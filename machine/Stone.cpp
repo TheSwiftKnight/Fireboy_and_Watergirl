@@ -26,7 +26,7 @@ void Stone::Draw() {
 }
 void Stone::Update(float deltaTime) {
     
-    if(Engine::Collider::IsRectOverlap(Position, Position + Size / 2 , getPlayScene()->girl->Position, getPlayScene()->boy->Position + Size / 2) ){
+    if(getPlayScene()->mapState[(y)/64][(x-3)/64] != getPlayScene()->TILE_DIRT &&  Engine::Collider::IsRectOverlap(Position, Position + Size / 2 , getPlayScene()->girl->Position, getPlayScene()->boy->Position + Size / 2) ){
         eaten = 1;
         getPlayScene()->StoneGroup->RemoveObject(GetObjectIterator());
         getPlayScene()->StoneGroup->AddNewObject(new Stone("play/stone.png", x-3, y, 0));
