@@ -12,10 +12,11 @@ protected:
     PlayScene* getPlayScene();
 
 public:
-    bool started;
-    Elevator(std::string imgElevator, int x, int y, float radius);
+    bool opening;
+    Elevator(std::string imgElevator, int x, int y, int init_x, int final_x);
     void Draw();
     int x, y;
+    int init_x, final_x;
     void Update(float deltatime) override;
 };
 #endif // TURRET_HPP

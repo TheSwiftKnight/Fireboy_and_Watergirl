@@ -17,5 +17,6 @@ public:
     void Draw();
     int x, y;
     void Update(float deltatime) override;
+    bool getStartedValue();
 };
 #endif // TURRET_HPP

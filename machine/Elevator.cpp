@@ -23,30 +23,23 @@
 #include "Elevator.hpp"
 #include "Engine/Collider.hpp"
 #include "Twins/Twins.hpp"
+#include "machine/Button.hpp"
 PlayScene* Elevator::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
 }
-Elevator::Elevator(std::string imgElevator,int x, int y, float started):
-    Sprite(imgElevator, x, y), x(x), y(y), started(started){
+Elevator::Elevator(std::string imgElevator,int x, int y, int init_x, int final_x):
+    Sprite(imgElevator, x, y), x(x), y(y), init_x(init_x), final_x(final_x){
 }
 void Elevator::Draw() {
 	Sprite::Draw();
 }
 void Elevator::Update(float deltaTime) {
-    bool collision = Engine::Collider::IsRectOverlap(Position, Position + Size / 2 , getPlayScene()->boy->Position, getPlayScene()->boy->Position + Size / 2) || \
-       Engine::Collider::IsRectOverlap(Position, Position + Size / 2 , getPlayScene()->girl->Position, getPlayScene()->girl->Position + Size / 2);
-    
-    if(!started && collision){
-        std::cout << started << " " << collision << "\n";
-        started = 1;
-        std::cout << "start:" << started << "\n";
-        getPlayScene()->ElevatorGroup->RemoveObject(GetObjectIterator());
-        getPlayScene()->ElevatorGroup->AddNewObject(new Elevator("play/Elevator1.png", Position.x, Position.y, 1));
+    if(open && x != final_x){
+        getPlayScene()->ButtonGroup->GetObjects()
     }
-    if(started && !collision){
-        started = 0;
-        std::cout << started << " " << collision << "\n";
-        getPlayScene()->ElevatorGroup->RemoveObject(GetObjectIterator());
-        getPlayScene()->ElevatorGroup->AddNewObject(new Elevator("play/Elevator0.png", Position.x, Position.y, 0));
+    getPlayScene()->ElevatorGroup->RemoveObject(GetObjectIterator());
+    getPlayScene()->ElevatorGroup->AddNewObject(new Elevator("play/Elevator.png",0,0,0,0));
+    else if(!open && x!=init_x){
+
     }
 }

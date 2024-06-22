@@ -40,3 +40,6 @@ void Button::Update(float deltaTime) {
         getPlayScene()->ButtonGroup->AddNewObject(new Button("play/button0.png", Position.x, Position.y, 0));
     }
 }
+bool Button::getStartedValue(){
+    return started;
+}
