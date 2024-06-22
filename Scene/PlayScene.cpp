@@ -74,6 +74,9 @@ void PlayScene::Initialize() {
 	AddNewObject(EffectGroup = new Group());
 	AddNewObject(ButtonGroup = new Group());
 	AddNewObject(DiamondGroup = new Group());
+	AddNewObject(ElevatorGroup = new Group());
+	AddNewObject(LeverGroup = new Group());
+	AddNewObject(StoneGroup = new Group());
 	// Should support buttons.
 	AddNewControlObject(UIGroup = new Group());
 	
