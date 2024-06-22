@@ -13,10 +13,10 @@ protected:
 
 public:
     bool opening;
-    Elevator(std::string imgElevator, int x, int y, int init_x, int final_x, int num);
+    Elevator(std::string imgElevator, int x, int y, int init_y, int final_y, int num, int opening);
     void Draw();
     int x, y;
-    int init_x, final_x;
+    int init_y, final_y;
     int elevator_num;
     void Update(float deltatime) override;
 };

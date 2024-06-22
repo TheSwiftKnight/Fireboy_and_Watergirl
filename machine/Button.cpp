@@ -27,9 +27,7 @@ void Button::Update(float deltaTime) {
        Engine::Collider::IsRectOverlap(Position, Position + Size / 2 , getPlayScene()->girl->Position, getPlayScene()->girl->Position + Size / 2);
     
     if(!started && collision){
-        std::cout << started << " " << collision << "\n";
         started = 1;
-        std::cout << "start:" << started << "\n";
         getPlayScene()->ButtonGroup->RemoveObject(GetObjectIterator());
         getPlayScene()->ButtonGroup->AddNewObject(new Button("play/button1.png", Position.x, Position.y, 1, button_num));
     }
