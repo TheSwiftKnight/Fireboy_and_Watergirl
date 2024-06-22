@@ -29,9 +29,6 @@ PlayScene* Elevator::getPlayScene() {
 }
 Elevator::Elevator(std::string imgElevator,int x, int y, int init_y, int final_y, int num, int opening):
     Sprite(imgElevator, x, y), x(x), y(y), init_y(init_y), final_y(final_y), elevator_num(num), opening(opening){
-        
-    getPlayScene()->mapState[(y-32)/64][x/64] = getPlayScene()->TILE_ELEVATOR;
-            
 }
 void Elevator::Draw() {
 	Sprite::Draw();
@@ -46,15 +43,18 @@ void Elevator::Update(float deltaTime) {
             break;
         }
     }
-    if(start && y < final_y){
+    if(start){
         getPlayScene()->mapState[init_y/64][x/64] = getPlayScene()->TILE_FLOOR;
-        getPlayScene()->ElevatorGroup->RemoveObject(GetObjectIterator());
-        getPlayScene()->ElevatorGroup->AddNewObject(new Elevator("play/Elevator.png",x,y+2,init_y,final_y,elevator_num,1));
+        if(y < final_y){
+            getPlayScene()->ElevatorGroup->RemoveObject(GetObjectIterator());
+            getPlayScene()->ElevatorGroup->AddNewObject(new Elevator("play/Elevator.png",x,y+2,init_y,final_y,elevator_num,1));
+        }
     }
-    else if(!start && y > init_y){
+    else if(!start){
         getPlayScene()->mapState[init_y/64][x/64] = getPlayScene()->TILE_ELEVATOR;
-        getPlayScene()->ElevatorGroup->RemoveObject(GetObjectIterator());
-        getPlayScene()->ElevatorGroup->AddNewObject(new Elevator("play/Elevator.png",x,y-2,init_y,final_y,elevator_num,0));
-        
+        if(y > init_y) {
+            getPlayScene()->ElevatorGroup->RemoveObject(GetObjectIterator());
+            getPlayScene()->ElevatorGroup->AddNewObject(new Elevator("play/Elevator.png",x,y-2,init_y,final_y,elevator_num,0));
+        }
     }
 }
