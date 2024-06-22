@@ -16,8 +16,8 @@
 PlayScene* Button::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
 }
-Button::Button(std::string imgbutton,int x, int y, float started):
-    Sprite(imgbutton, x, y), x(x), y(y), started(started){
+Button::Button(std::string imgbutton,int x, int y, float started, int num):
+    Sprite(imgbutton, x, y), x(x), y(y), started(started), button_num(num){
 }
 void Button::Draw() {
 	Sprite::Draw();
@@ -31,13 +31,13 @@ void Button::Update(float deltaTime) {
         started = 1;
         std::cout << "start:" << started << "\n";
         getPlayScene()->ButtonGroup->RemoveObject(GetObjectIterator());
-        getPlayScene()->ButtonGroup->AddNewObject(new Button("play/button1.png", Position.x, Position.y, 1));
+        getPlayScene()->ButtonGroup->AddNewObject(new Button("play/button1.png", Position.x, Position.y, 1, button_num));
     }
     if(started && !collision){
         started = 0;
         std::cout << started << " " << collision << "\n";
         getPlayScene()->ButtonGroup->RemoveObject(GetObjectIterator());
-        getPlayScene()->ButtonGroup->AddNewObject(new Button("play/button0.png", Position.x, Position.y, 0));
+        getPlayScene()->ButtonGroup->AddNewObject(new Button("play/button0.png", Position.x, Position.y, 0, button_num));
     }
 }
 bool Button::getStartedValue(){
