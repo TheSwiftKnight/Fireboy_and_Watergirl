@@ -264,7 +264,7 @@ void PlayScene::Update(float deltaTime) {
 			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_DIRT &&
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
 			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_ELEVATOR)
-				boy->XUpdate();
+				girl->XUpdate();
 			break;
 		case LEFT:
 		// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
@@ -272,7 +272,7 @@ void PlayScene::Update(float deltaTime) {
 			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_DIRT&&
 			   mapState[Py/64][(Px-2)/64]!=TILE_ELEVATOR&&
 			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_ELEVATOR)
-				boy->XUpdate();
+				girl->XUpdate();
 			break;
 	}
 }
