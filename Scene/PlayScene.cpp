@@ -94,8 +94,8 @@ void PlayScene::Initialize() {
 	// Start BGM.
 	bgmId = AudioHelper::PlayBGM("play.ogg");
 
-	boy = new Twins("boy.png", 96, 500,1);
-	girl = new Twins("girl.png", 96, 700,1);
+	boy = new Twins("boy.png", 96, 500,1,BLUE);
+	girl = new Twins("girl.png", 96, 700,1,RED);
 	// AddNewObject(boy);
 	// AddNewObject(girl);
 }
@@ -175,7 +175,7 @@ void PlayScene::Update(float deltaTime) {
 	// int Py = ((int)(boy->Position.y)%64==0) ? (boy->Position.y)/64:(boy->Position.y)/64+1;
 	int Px = boy->Position.x;
 	int Py = boy->Position.y;
-	Engine::LOG(Engine::INFO) << "Pos("<<Px/64<<","<<Py/64<<")";
+	// Engine::LOG(Engine::INFO) << "Pos("<<Px/64<<","<<Py/64<<")";
 	if(!boy->jump){
 		if(mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_DIRT &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_RED_WATER &&
@@ -452,17 +452,8 @@ void PlayScene::OnKeyDown(int keyCode) {
 	}
 }
 void PlayScene::Hit() {
-	// lives--;
-	// score-=100;
-	// UIScore->Text = std::string("Score ") + std::to_string(score);
-	// UILives->Text = std::string("Life ") + std::to_string(lives);
-	// if (lives <= 0) {
-	// 	if(!write_score_once){
-	// 		WriteScoretoFile(score);
-	// 		write_score_once = true;
-	// 	}
-	// 	Engine::GameEngine::GetInstance().ChangeScene("lose");
-	// }
+	WriteScoretoFile(score);
+	Engine::GameEngine::GetInstance().ChangeScene("lose");
 }
 
 int PlayScene::GetScore(){
@@ -515,17 +506,17 @@ void PlayScene::ReadMap() {
 			}		
 			else if(num == 'R'){
 				TileMapGroup->AddNewObject(new Engine::Image("play/dirt.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Twins("play/red_water.png", j * BlockSize+32, i * BlockSize+32, 1));
+				AddNewObject(new Twins("play/red_water.png", j * BlockSize+32, i * BlockSize+32, 1,NEITHER));
 				mapState[i][j] = TILE_RED_WATER;
 			}
 			else if(num == 'B'){
 				TileMapGroup->AddNewObject(new Engine::Image("play/dirt.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Twins("play/blue_water.png", j * BlockSize+32, i * BlockSize+32, 1));
+				AddNewObject(new Twins("play/blue_water.png", j * BlockSize+32, i * BlockSize+32, 1,NEITHER));
 				mapState[i][j] = TILE_BLUE_WATER;
 			}
 			else if(num == 'G'){
 				TileMapGroup->AddNewObject(new Engine::Image("play/dirt.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Twins("play/green_water.png", j * BlockSize+32, i * BlockSize+32, 1));
+				AddNewObject(new Twins("play/green_water.png", j * BlockSize+32, i * BlockSize+32, 1,NEITHER));
 				mapState[i][j] = TILE_GREEN_WATER;
 			}
 			else if(num == 'E'){
@@ -533,12 +524,12 @@ void PlayScene::ReadMap() {
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				//TileMapGroup->RemoveObject(TileMapGroup->))
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize - 64, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Twins("play/elevator.png", j * BlockSize, i * BlockSize+32, 1));
+				AddNewObject(new Twins("play/elevator.png", j * BlockSize, i * BlockSize+32, 1,NEITHER));
 			}
 			else if(num == 'L'){
 				mapState[i][j] = TILE_LEVER;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Twins("play/lever_right.png", j * BlockSize+32, i * BlockSize +32, 1));
+				AddNewObject(new Twins("play/lever_right.png", j * BlockSize+32, i * BlockSize +32, 1,NEITHER));
 			}
 			else if(num == '1'){
 				mapState[i][j] = TILE_BLUE_DOOR;

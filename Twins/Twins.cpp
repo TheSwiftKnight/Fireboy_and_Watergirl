@@ -8,16 +8,17 @@
 #include "Engine/Group.hpp"
 #include "Engine/IObject.hpp"
 #include "Engine/IScene.hpp"
-#include "Scene/PlayScene.hpp"
 #include "Engine/Point.hpp"
 #include "Twins.hpp"
 #include "Engine/LOG.hpp"
+#include "Engine/Collider.hpp"
+#include "Scene/PlayScene.hpp"
 
 
 PlayScene* Twins::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
 }
-Twins::Twins(std::string imgTwins, int x, int y, float radius) : Sprite(imgTwins, x, y),x(x),y(y){
+Twins::Twins(std::string imgTwins, int x, int y, float radius,ID id) : Sprite(imgTwins, x, y),x(x),y(y),id(id){
 	speed = 3;
 	jump = false;
 	velx = vely = 0;
@@ -26,9 +27,7 @@ Twins::Twins(std::string imgTwins, int x, int y, float radius) : Sprite(imgTwins
 }
 void Twins::XUpdate(){
 	Position.x += velx;
-	PlayScene* scene = getPlayScene();
-	if (!Enabled)
-		return;
+	checkHit();
 }
 void Twins::YUpdate() {
 	if(jump && moveCD-jumpCD>=5){
@@ -41,6 +40,7 @@ void Twins::YUpdate() {
 		sourceX = 0;
 	}
 	Position.y += vely;
+	checkHit();
 }
 void Twins::MeDraw() {
 	if (moveCD%4 == 0 || moveCD%4 == 1) {
@@ -98,5 +98,23 @@ void Twins::OnKeyUp(int keyCode){
 				sourceX = 0;
 			}
 			break;
+	}
+}
+
+void Twins::checkHit(){
+	PlayScene* scene = getPlayScene();
+	if(scene->mapState[(Position.y+60)/64][(Position.x)/64]==scene->TILE_GREEN_WATER ||
+	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64]==scene->TILE_GREEN_WATER){
+		scene->Hit();
+	}
+	if(id == BLUE&&
+	  (scene->mapState[(Position.y+60)/64][(Position.x)/64]==scene->TILE_BLUE_WATER ||
+	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64]==scene->TILE_BLUE_WATER)){
+		scene->Hit();
+	}
+	if(id == RED&&
+	  (scene->mapState[(Position.y+60)/64][(Position.x)/64]==scene->TILE_RED_WATER ||
+	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64]==scene->TILE_RED_WATER)){
+		scene->Hit();
 	}
 }
