@@ -182,11 +182,13 @@ void PlayScene::Update(float deltaTime) {
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_BLUE_WATER &&
 		mapState[(Py+1+45)/64][(Px+12)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_STONE &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_GREEN_WATER &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_DIRT &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_BLUE_WATER &&
 		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_STONE &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_GREEN_WATER)boy->YUpdate();
 	}
 	else{
@@ -195,11 +197,13 @@ void PlayScene::Update(float deltaTime) {
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_ELEVATOR &&
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_GREEN_WATER &&
+		mapState[(Py-2)/64][(Px+1)/64]!=TILE_STONE &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_DIRT &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_RED_WATER &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_BLUE_WATER &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_ELEVATOR &&
-		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_GREEN_WATER)boy->YUpdate();
+		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_GREEN_WATER &&
+		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_STONE)boy->YUpdate();
 		else {
 			boy->jumpTimestamp = true;
 			boy->jump = false;
@@ -212,7 +216,9 @@ void PlayScene::Update(float deltaTime) {
 			if(mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT&&
 			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_DIRT &&
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
-			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_ELEVATOR)
+			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
+			   mapState[Py/64][(Px+43+2)/64]!=TILE_STONE&&
+			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_STONE)
 				boy->XUpdate();
 			break;
 		case LEFT:
@@ -220,7 +226,9 @@ void PlayScene::Update(float deltaTime) {
 			if(mapState[Py/64][(Px-2)/64]!=TILE_DIRT&&
 			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_DIRT&&
 			   mapState[Py/64][(Px-2)/64]!=TILE_ELEVATOR&&
-			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_ELEVATOR)
+			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_ELEVATOR&&
+			   mapState[Py/64][(Px-2)/64]!=TILE_STONE&&
+			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_STONE)
 				boy->XUpdate();
 			break;
 	}
@@ -234,11 +242,13 @@ void PlayScene::Update(float deltaTime) {
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_BLUE_WATER &&
 		mapState[(Py+1+45)/64][(Px+12)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_STONE &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_GREEN_WATER &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_DIRT &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_BLUE_WATER &&
 		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_STONE &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_GREEN_WATER)girl->YUpdate();
 	}
 	else{
@@ -247,11 +257,13 @@ void PlayScene::Update(float deltaTime) {
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_ELEVATOR &&
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_GREEN_WATER &&
+		mapState[(Py-2)/64][(Px+1)/64]!=TILE_STONE &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_DIRT &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_RED_WATER &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_BLUE_WATER &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_ELEVATOR &&
-		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_GREEN_WATER)girl->YUpdate();
+		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_GREEN_WATER &&
+		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_STONE)girl->YUpdate();
 		else {
 			girl->jumpTimestamp = true;
 			girl->jump = false;
@@ -264,7 +276,9 @@ void PlayScene::Update(float deltaTime) {
 			if(mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT&&
 			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_DIRT &&
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
-			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_ELEVATOR)
+			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
+			   mapState[Py/64][(Px+43+2)/64]!=TILE_STONE&&
+			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_STONE)
 				girl->XUpdate();
 			break;
 		case LEFT:
@@ -272,7 +286,9 @@ void PlayScene::Update(float deltaTime) {
 			if(mapState[Py/64][(Px-2)/64]!=TILE_DIRT&&
 			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_DIRT&&
 			   mapState[Py/64][(Px-2)/64]!=TILE_ELEVATOR&&
-			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_ELEVATOR)
+			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_ELEVATOR&&
+			   mapState[Py/64][(Px-2)/64]!=TILE_STONE&&
+			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_STONE)
 				girl->XUpdate();
 			break;
 	}
@@ -524,9 +540,8 @@ void PlayScene::ReadMap() {
 			else if(num == 'E'){
 				mapState[i][j] = TILE_ELEVATOR;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				//TileMapGroup->RemoveObject(TileMapGroup->))
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize - 64, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Elevator("play/elevator.png", j * BlockSize, i * BlockSize+32, j * BlockSize, j * BlockSize + 128, elevator_num++));
+				AddNewObject(new Elevator("play/elevator.png", j * BlockSize, i * BlockSize+32, j * BlockSize, j * BlockSize + 128, 0, 0));
 			}
 			else if(num == 'L'){
 				mapState[i][j] = TILE_LEVER;
@@ -556,12 +571,12 @@ void PlayScene::ReadMap() {
 			else if(num == 'S'){
 				mapState[i][j] = TILE_STONE;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				TileMapGroup->AddNewObject(new Engine::Image("play/stone.png", j * BlockSize+32, i * BlockSize, BlockSize, BlockSize));
+				StoneGroup->AddNewObject(new Engine::Image("play/stone.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 			}
 			else if(num == 'b'){
 				mapState[i][j] = TILE_BUTTON;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				ButtonGroup->AddNewObject(new Button("play/button0.png", j * BlockSize+32, i * BlockSize +32, BlockSize, btn_num++));
+				ButtonGroup->AddNewObject(new Button("play/button0.png", j * BlockSize+32, i * BlockSize +32, BlockSize, 0));
 			}
 		}
 	}
