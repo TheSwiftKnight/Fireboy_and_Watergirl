@@ -40,7 +40,8 @@ public:
 		TILE_STONE,
 		TILE_RED_WATER,
 		TILE_BLUE_WATER,
-		TILE_GREEN_WATER
+		TILE_GREEN_WATER,
+		TILE_DIAMOND
 	};
 	int score;
 	float spriteTick;
@@ -67,6 +68,10 @@ public:
 	Group* WaterGroup;
 	Group* ButtonGroup;
 	Engine::Label* UITime;
+	Group* DiamondGroup;
+	Engine::Label* UIMoney;
+	Engine::Label* UILives;
+	Engine::Label* UIScore;
 	Engine::Image* imgTarget;
 	Engine::Sprite* dangerIndicator;
 	Turret* preview;
