@@ -15,14 +15,11 @@
 PlayScene* Button::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
 }
-Button::Button(std::string imgButton,int x, int y):
-    Sprite(imgButton, x, y), x(x), y(y){
-    
+Button::Button(std::string imgButton,int x, int y, float radius):
+    Sprite(imgButton, x, y), x(x), y(y), imgButton(imgButton, x, y){
+    CollisionRadius = radius;
 }
 void Button::Draw() const {
 	Sprite::Draw();
-
-}
-void Button::CreateButton(){
-    getPlayScene()->ButtonGroup->AddNewObject(new Button("play/button0.png",x ,y));
+    imgButton.Draw();
 }
