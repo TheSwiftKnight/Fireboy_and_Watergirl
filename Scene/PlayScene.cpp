@@ -582,7 +582,6 @@ void PlayScene::ConstructUI() {
 	UIGroup->AddNewObject(UITime = new Engine::Label(std::string("Time 00:00"), "pirulen.ttf", 24, 1294, 48));
 	UIGroup->AddNewObject(new Engine::Label(std::string("Level ") + std::to_string(MapId), "pirulen.ttf", 32, 1294, 0));
 	UIGroup->AddNewObject(UIMoney = new Engine::Label(std::string("$") + std::to_string(money), "pirulen.ttf", 24, 1294, 48));
-	UIGroup->AddNewObject(UILives = new Engine::Label(std::string("Life ") + std::to_string(lives), "pirulen.ttf", 24, 1294, 88));
 	UIGroup->AddNewObject(UIScore = new Engine::Label(std::string("Score ") + std::to_string(score), "pirulen.ttf", 24, 1294, 280));
 	TurretButton* btn;
 	// Button 1

@@ -24,7 +24,6 @@ private:
 	ALLEGRO_SAMPLE_ID bgmId;
 	std::shared_ptr<ALLEGRO_SAMPLE_INSTANCE> deathBGMInstance;
 protected:
-	int lives;
 	int money;
 	int SpeedMult;
 public:
@@ -70,7 +69,6 @@ public:
 	Engine::Label* UITime;
 	Group* DiamondGroup;
 	Engine::Label* UIMoney;
-	Engine::Label* UILives;
 	Engine::Label* UIScore;
 	Engine::Image* imgTarget;
 	Engine::Sprite* dangerIndicator;
