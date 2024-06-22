@@ -172,18 +172,30 @@ void PlayScene::Update(float deltaTime) {
 	// int Py = ((int)(boy->Position.y)%64==0) ? (boy->Position.y)/64:(boy->Position.y)/64+1;
 	int Px = boy->Position.x;
 	int Py = boy->Position.y;
-	// Engine::LOG(Engine::INFO) << "Pos("<<Px/64<<","<<Py/64<<")";
+	Engine::LOG(Engine::INFO) << "Pos("<<Px/64<<","<<Py/64<<")";
 	if(!boy->jump){
 		if(mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_DIRT &&
 		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
-		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_GREEN_WATER)boy->YUpdate();
+		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_GREEN_WATER &&
+		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_DIRT &&
+		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_RED_WATER &&
+		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_BLUE_WATER &&
+		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_GREEN_WATER)boy->YUpdate();
 	}
 	else{
-		if(mapState[(Py-6)/64][(Px+1)/64]!=TILE_DIRT &&
-		mapState[(Py-6)/64][(Px+1)/64]!=TILE_RED_WATER &&
-		mapState[(Py-6)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
-		mapState[(Py-6)/64][(Px+1)/64]!=TILE_GREEN_WATER)boy->YUpdate();
+		if(mapState[(Py-2)/64][(Px+1)/64]!=TILE_DIRT &&
+		mapState[(Py-2)/64][(Px+1)/64]!=TILE_RED_WATER &&
+		mapState[(Py-2)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
+		mapState[(Py-2)/64][(Px+1)/64]!=TILE_ELEVATOR &&
+		mapState[(Py-2)/64][(Px+1)/64]!=TILE_GREEN_WATER &&
+		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_DIRT &&
+		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_RED_WATER &&
+		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_BLUE_WATER &&
+		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_ELEVATOR &&
+		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_GREEN_WATER)boy->YUpdate();
 		else {
 			boy->jumpTimestamp = true;
 			boy->jump = false;
@@ -193,12 +205,14 @@ void PlayScene::Update(float deltaTime) {
 	switch(boy->dir){
 		case RIGHT:
 			// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
-			if(mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT)
+			if(mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT&&
+			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_DIRT)
 				boy->XUpdate();
 			break;
 		case LEFT:
 		// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
-			if(mapState[Py/64][Px/64]!=TILE_DIRT)
+			if(mapState[Py/64][(Px-2)/64]!=TILE_DIRT&&
+			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_DIRT)
 				boy->XUpdate();
 			break;
 	}
@@ -211,13 +225,25 @@ void PlayScene::Update(float deltaTime) {
 		if(mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_DIRT &&
 		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
-		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_GREEN_WATER)girl->YUpdate();
+		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_GREEN_WATER &&
+		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_DIRT &&
+		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_RED_WATER &&
+		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_BLUE_WATER &&
+		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_GREEN_WATER)girl->YUpdate();
 	}
 	else{
-		if(mapState[(Py-6)/64][(Px+1)/64]!=TILE_DIRT &&
-		mapState[(Py-6)/64][(Px+1)/64]!=TILE_RED_WATER &&
-		mapState[(Py-6)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
-		mapState[(Py-6)/64][(Px+1)/64]!=TILE_GREEN_WATER)girl->YUpdate();
+		if(mapState[(Py-2)/64][(Px+1)/64]!=TILE_DIRT &&
+		mapState[(Py-2)/64][(Px+1)/64]!=TILE_RED_WATER &&
+		mapState[(Py-2)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
+		mapState[(Py-2)/64][(Px+1)/64]!=TILE_ELEVATOR &&
+		mapState[(Py-2)/64][(Px+1)/64]!=TILE_GREEN_WATER &&
+		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_DIRT &&
+		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_RED_WATER &&
+		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_BLUE_WATER &&
+		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_ELEVATOR &&
+		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_GREEN_WATER)girl->YUpdate();
 		else {
 			girl->jumpTimestamp = true;
 			girl->jump = false;
@@ -227,12 +253,14 @@ void PlayScene::Update(float deltaTime) {
 	switch(girl->dir){
 		case RIGHT:
 			// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
-			if(mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT)
+			if(mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT&&
+			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_DIRT)
 				girl->XUpdate();
 			break;
 		case LEFT:
 		// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
-			if(mapState[Py/64][Px/64]!=TILE_DIRT)
+			if(mapState[Py/64][(Px-2)/64]!=TILE_DIRT&&
+			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_DIRT)
 				girl->XUpdate();
 			break;
 	}
