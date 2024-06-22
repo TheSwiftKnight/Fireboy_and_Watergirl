@@ -29,6 +29,7 @@ void Diamond::Update(float deltaTime) {
         if(Engine::Collider::IsRectOverlap(Position, Position + Size / 2 , getPlayScene()->girl->Position, getPlayScene()->boy->Position + Size / 2) ){
             eaten = 1;
             getPlayScene()->DiamondGroup->RemoveObject(GetObjectIterator());
+            getPlayScene()->score += 1000;
         }
     }
     else if(diamond_type == red) {
@@ -37,6 +38,7 @@ void Diamond::Update(float deltaTime) {
         if(Engine::Collider::IsRectOverlap(Position, Position + Size / 2 , getPlayScene()->boy->Position, getPlayScene()->boy->Position + Size / 2) ){
             eaten = 1;
             getPlayScene()->DiamondGroup->RemoveObject(GetObjectIterator());
+            getPlayScene()->score += 1000;
         }
     }
 }
