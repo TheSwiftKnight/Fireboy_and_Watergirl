@@ -24,7 +24,6 @@ private:
 	ALLEGRO_SAMPLE_ID bgmId;
 	std::shared_ptr<ALLEGRO_SAMPLE_INSTANCE> deathBGMInstance;
 protected:
-	int money;
 	int SpeedMult;
 public:
 	enum TileType {
@@ -68,7 +67,6 @@ public:
 	Group* ButtonGroup;
 	Engine::Label* UITime;
 	Group* DiamondGroup;
-	Engine::Label* UIMoney;
 	Engine::Label* UIScore;
 	Engine::Image* imgTarget;
 	Engine::Sprite* dangerIndicator;
@@ -92,7 +90,7 @@ public:
 	void OnKeyDown(int keyCode) override;
 	void OnKeyUp(int keyCode) override;
 	void Hit();
-	int GetMoney() const;
+	// int GetMoney() const;
 	int GetScore();
 	void ReadMap();
 	void ReadEnemyWave();

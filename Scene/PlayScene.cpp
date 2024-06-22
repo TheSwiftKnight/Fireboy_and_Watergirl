@@ -60,7 +60,6 @@ void PlayScene::Initialize() {
 	spriteTick = 0;
 	ticks = 0;
 	deathCountDown = -1;
-	money = 150;
 	SpeedMult = 1;
 	score = 1000;
 	ElapsedTime = 0.0f;
@@ -426,9 +425,7 @@ void PlayScene::Hit() {
 	// 	Engine::GameEngine::GetInstance().ChangeScene("lose");
 	// }
 }
-int PlayScene::GetMoney() const {
-	return money;
-}
+
 int PlayScene::GetScore(){
 	return score;
 }
@@ -579,9 +576,8 @@ void PlayScene::ConstructUI() {
 	UIGroup->AddNewObject(new Engine::Image("play/floor.png", 1280, 0, 320, 832));
 	// Text
 	UIGroup->AddNewObject(new Engine::Label(std::string("Stage ") + std::to_string(MapId), "pirulen.ttf", 32, 1294, 0));
-	UIGroup->AddNewObject(UITime = new Engine::Label(std::string("Time 00:00"), "pirulen.ttf", 24, 1294, 48));
+	UIGroup->AddNewObject(UITime = new Engine::Label(std::string("Time 00:00"), "pirulen.ttf", 32, 1294, 64));
 	UIGroup->AddNewObject(new Engine::Label(std::string("Level ") + std::to_string(MapId), "pirulen.ttf", 32, 1294, 0));
-	UIGroup->AddNewObject(UIMoney = new Engine::Label(std::string("$") + std::to_string(money), "pirulen.ttf", 24, 1294, 48));
 	UIGroup->AddNewObject(UIScore = new Engine::Label(std::string("Score ") + std::to_string(score), "pirulen.ttf", 24, 1294, 280));
 	TurretButton* btn;
 	// Button 1
@@ -633,18 +629,18 @@ void PlayScene::UIBtnClicked(int id) {
 	if (preview)
 		UIGroup->RemoveObject(preview->GetObjectIterator());
     // TODO: [CUSTOM-TURRET]: On callback, create the turret.
-	if (id == 0 && money >= MachineGunTurret::Price)
-		preview = new MachineGunTurret(0, 0);
-	else if (id == 1 && money >= LaserTurret::Price)
-		preview = new LaserTurret(0, 0);
-	else if (id == 2 && money >= MissileTurret::Price)
-		preview = new MissileTurret(0, 0);
-	else if (id == 3 && money >= MisteryTurret::Price)
-		preview = new MisteryTurret(0, 0);
-	else if (id == 4 && money >= Shovel::Price)
-		preview = new Shovel(0, 0);
-	if (!preview)
-		return;
+	// if (id == 0 && money >= MachineGunTurret::Price)
+	// 	preview = new MachineGunTurret(0, 0);
+	// else if (id == 1 && money >= LaserTurret::Price)
+	// 	preview = new LaserTurret(0, 0);
+	// else if (id == 2 && money >= MissileTurret::Price)
+	// 	preview = new MissileTurret(0, 0);
+	// else if (id == 3 && money >= MisteryTurret::Price)
+	// 	preview = new MisteryTurret(0, 0);
+	// else if (id == 4 && money >= Shovel::Price)
+	// 	preview = new Shovel(0, 0);
+	// if (!preview)
+	// 	return;
 	preview->Position = Engine::GameEngine::GetInstance().GetMousePosition();
 	preview->Tint = al_map_rgba(255, 255, 255, 200);
 	preview->Enabled = false;
