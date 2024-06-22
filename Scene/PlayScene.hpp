@@ -67,6 +67,9 @@ public:
 	Group* ButtonGroup;
 	Engine::Label* UITime;
 	Group* DiamondGroup;
+	Group* ElevatorGroup;
+	Group* LeverGroup;
+	Group* StoneGroup;
 	Engine::Label* UIScore;
 	Engine::Image* imgTarget;
 	Engine::Sprite* dangerIndicator;
