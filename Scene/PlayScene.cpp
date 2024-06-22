@@ -73,6 +73,7 @@ void PlayScene::Initialize() {
 	AddNewObject(BulletGroup = new Group());
 	AddNewObject(EffectGroup = new Group());
 	AddNewObject(ButtonGroup = new Group());
+	AddNewObject(DiamondGroup = new Group());
 	// Should support buttons.
 	AddNewControlObject(UIGroup = new Group());
 	
@@ -516,11 +517,11 @@ void PlayScene::ReadMap() {
 			}
 			else if(num == '['){
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Twins("play/blue_diamond.png", j * BlockSize, i * BlockSize+32, 1));
+				DiamondGroup->AddNewObject(new Diamond("play/blue_diamond.png", j * BlockSize, i * BlockSize+32, 1, "blue"));
 			}
 			else if(num == ']'){
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Twins("play/red_diamond.png", j * BlockSize, i * BlockSize+32, 1));
+				DiamondGroup->AddNewObject(new Diamond("play/red_diamond.png", j * BlockSize, i * BlockSize+32, 1, "red"));
 			}
 			else if(num == 'S'){
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));

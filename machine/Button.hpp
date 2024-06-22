@@ -17,7 +17,6 @@ public:
     bool Opened = false;
     Button(std::string imgButton, int x, int y, float radius);
     void Draw() const override;
-    void CreateButton();
     int x, y;
     Sprite imgButton;
 };

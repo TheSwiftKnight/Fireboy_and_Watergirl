@@ -7,17 +7,17 @@
 #include "Engine/Sprite.hpp" 
 
 class PlayScene;
-
+enum Diamond_type {blue, red};
 class Diamond: public Engine::Sprite {
 protected:
     PlayScene* getPlayScene();
 
 public:
-    bool Opened = false;
-    Diamond(std::string imgDiamond, int x, int y);
-    void Draw() const override;
-    void CreateDiamond();
+    bool eaten = false;
+    Diamond(std::string imgDiamond, int x, int y, float radius, std::string diamond_type);
+    void Draw();
     int x, y;
-    
+    Diamond_type diamond_type;
+    void Update(float deltatime);
 };
 #endif // TURRET_HPP

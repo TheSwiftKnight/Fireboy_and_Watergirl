@@ -23,6 +23,3 @@ void Button::Draw() const {
 	Sprite::Draw();
     imgButton.Draw();
 }
-void Button::CreateButton(){
-    getPlayScene()->ButtonGroup->AddNewObject(new Button("play/button0.png",x ,y, 1));
-}

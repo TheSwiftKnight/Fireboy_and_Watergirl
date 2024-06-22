@@ -11,18 +11,31 @@
 #include "Scene/PlayScene.hpp"
 #include "Engine/Point.hpp"
 #include "Diamond.hpp"
-
+#include "Engine/Collider.hpp"
+#include "Twins/Twins.hpp"
 PlayScene* Diamond::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
 }
-Diamond::Diamond(std::string imgDiamond,int x, int y):
+Diamond::Diamond(std::string imgDiamond,int x, int y, float radius, std::string type):
     Sprite(imgDiamond, x, y), x(x), y(y){
-    
+    CollisionRadius = radius;
+    diamond_type = (type == "red" ? red : blue);
 }
-void Diamond::Draw() const {
+void Diamond::Draw() {
 	Sprite::Draw();
-
 }
-void Diamond::CreateDiamond(){
-    getPlayScene()->DiamondGroup->AddNewObject(new Diamond("play/red_diamond.png",x ,y));
+void Diamond::Update(float deltaTime) {
+	Sprite::Update(deltaTime);
+    if(diamond_type == red){
+        if(Engine::Collider::IsPointInRect(Engine::Point(Diamond::getPlayScene()->girl->x,Diamond::getPlayScene()->girl->y),Engine::Point(x,y),Engine::Point(64,64))){
+            eaten = 1;
+            getPlayScene()->DiamondGroup->RemoveObject(GetObjectIterator());
+        }
+    }
+    else if(diamond_type == blue) {
+        if(Engine::Collider::IsPointInRect(Engine::Point(Diamond::getPlayScene()->boy->x,getPlayScene()->boy->y),Engine::Point(x,y),Engine::Point(64,64))){
+            eaten = 1;
+            getPlayScene()->DiamondGroup->RemoveObject(GetObjectIterator());
+        }
+    }
 }
