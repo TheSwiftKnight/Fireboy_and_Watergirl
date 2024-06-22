@@ -177,12 +177,12 @@ void PlayScene::Update(float deltaTime) {
 		if(mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_DIRT &&
 		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
-		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+45)/64][(Px+1)/64]!=TILE_ELEVATOR &&
 		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_GREEN_WATER &&
 		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_DIRT &&
 		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_BLUE_WATER &&
-		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+45)/64][(Px+43-1)/64]!=TILE_ELEVATOR &&
 		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_GREEN_WATER)boy->YUpdate();
 	}
 	else{
@@ -206,13 +206,17 @@ void PlayScene::Update(float deltaTime) {
 		case RIGHT:
 			// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
 			if(mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT&&
-			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_DIRT)
+			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_DIRT &&
+			   mapState[Py/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
+			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_ELEVATOR)
 				boy->XUpdate();
 			break;
 		case LEFT:
 		// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
 			if(mapState[Py/64][(Px-2)/64]!=TILE_DIRT&&
-			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_DIRT)
+			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_DIRT&&
+			   mapState[Py/64][(Px-2)/64]!=TILE_ELEVATOR&&
+			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_ELEVATOR)
 				boy->XUpdate();
 			break;
 	}
@@ -225,12 +229,12 @@ void PlayScene::Update(float deltaTime) {
 		if(mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_DIRT &&
 		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
-		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+45)/64][(Px+1)/64]!=TILE_ELEVATOR &&
 		mapState[(Py+1+60)/64][(Px+1)/64]!=TILE_GREEN_WATER &&
 		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_DIRT &&
 		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_BLUE_WATER &&
-		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+45)/64][(Px+43-1)/64]!=TILE_ELEVATOR &&
 		mapState[(Py+1+60)/64][(Px+43-1)/64]!=TILE_GREEN_WATER)girl->YUpdate();
 	}
 	else{
@@ -254,13 +258,17 @@ void PlayScene::Update(float deltaTime) {
 		case RIGHT:
 			// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
 			if(mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT&&
-			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_DIRT)
+			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_DIRT &&
+			   mapState[Py/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
+			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_ELEVATOR)
 				girl->XUpdate();
 			break;
 		case LEFT:
 		// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
 			if(mapState[Py/64][(Px-2)/64]!=TILE_DIRT&&
-			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_DIRT)
+			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_DIRT&&
+			   mapState[Py/64][(Px-2)/64]!=TILE_ELEVATOR&&
+			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_ELEVATOR)
 				girl->XUpdate();
 			break;
 	}
