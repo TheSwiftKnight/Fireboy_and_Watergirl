@@ -104,17 +104,29 @@ void Twins::OnKeyUp(int keyCode){
 void Twins::checkHit(){
 	PlayScene* scene = getPlayScene();
 	if(scene->mapState[(Position.y+60)/64][(Position.x)/64]==scene->TILE_GREEN_WATER ||
-	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64]==scene->TILE_GREEN_WATER){
+	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64]==scene->TILE_GREEN_WATER ||
+	   scene->mapState[(Position.y+60)/64][(Position.x)/64-1]==scene->TILE_GREEN_WATER ||
+	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64-1]==scene->TILE_GREEN_WATER||
+	   scene->mapState[(Position.y+60)/64][(Position.x)/64+1]==scene->TILE_GREEN_WATER ||
+	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64+1]==scene->TILE_GREEN_WATER){
 		scene->Hit();
 	}
 	if(id == BLUE&&
 	  (scene->mapState[(Position.y+60)/64][(Position.x)/64]==scene->TILE_BLUE_WATER ||
-	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64]==scene->TILE_BLUE_WATER)){
+	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64]==scene->TILE_BLUE_WATER ||
+	   scene->mapState[(Position.y+60)/64][(Position.x)/64-1]==scene->TILE_BLUE_WATER ||
+	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64-1]==scene->TILE_BLUE_WATER||
+	   scene->mapState[(Position.y+60)/64][(Position.x)/64+1]==scene->TILE_BLUE_WATER ||
+	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64+1]==scene->TILE_BLUE_WATER)){
 		scene->Hit();
 	}
 	if(id == RED&&
 	  (scene->mapState[(Position.y+60)/64][(Position.x)/64]==scene->TILE_RED_WATER ||
-	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64]==scene->TILE_RED_WATER)){
+	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64]==scene->TILE_RED_WATER ||
+	   scene->mapState[(Position.y+60)/64][(Position.x)/64-1]==scene->TILE_RED_WATER ||
+	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64-1]==scene->TILE_RED_WATER||
+	   scene->mapState[(Position.y+60)/64][(Position.x)/64+1]==scene->TILE_RED_WATER ||
+	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64+1]==scene->TILE_RED_WATER)){
 		scene->Hit();
 	}
 }
