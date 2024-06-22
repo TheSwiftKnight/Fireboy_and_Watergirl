@@ -35,7 +35,8 @@
 #include "Twins/Twins.hpp"
 #include "machine/Diamond.hpp"
 #include "machine/Button.hpp"
-
+#include "machine/Elevator.hpp"
+#include "machine/Lever.hpp"
 bool write_score_once = false;
 bool PlayScene::DebugMode = false;
 const std::vector<Engine::Point> PlayScene::directions = { Engine::Point(-1, 0), Engine::Point(0, -1), Engine::Point(1, 0), Engine::Point(0, 1) };
@@ -493,6 +494,7 @@ void PlayScene::ReadMap() {
 		throw std::ios_base::failure("Map data is corrupted.3");
 	// Store map in 2d array.
 	mapState = std::vector<std::vector<TileType>>(MapHeight, std::vector<TileType>(MapWidth));
+	int btn_num = 0, elevator_num = 0;
 	for (int i = 0; i < MapHeight; i++) {
 		for (int j = 0; j < MapWidth; j++) {
 			char num = mapData[i * MapWidth + j];
@@ -524,7 +526,7 @@ void PlayScene::ReadMap() {
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				//TileMapGroup->RemoveObject(TileMapGroup->))
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize - 64, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Twins("play/elevator.png", j * BlockSize, i * BlockSize+32, 1,NEITHER));
+				AddNewObject(new Elevator("play/elevator.png", j * BlockSize, i * BlockSize+32, j * BlockSize, j * BlockSize + 128, elevator_num++));
 			}
 			else if(num == 'L'){
 				mapState[i][j] = TILE_LEVER;
@@ -559,7 +561,7 @@ void PlayScene::ReadMap() {
 			else if(num == 'b'){
 				mapState[i][j] = TILE_BUTTON;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				ButtonGroup->AddNewObject(new Button("play/button0.png", j * BlockSize+32, i * BlockSize +32, BlockSize));
+				ButtonGroup->AddNewObject(new Button("play/button0.png", j * BlockSize+32, i * BlockSize +32, BlockSize, btn_num++));
 			}
 		}
 	}
