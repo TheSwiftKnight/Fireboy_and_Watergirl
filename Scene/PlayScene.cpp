@@ -260,16 +260,16 @@ void PlayScene::Update(float deltaTime) {
 			if(mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT&&
 			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_DIRT &&
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
-			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_ELEVATOR)
-				girl->XUpdate();
+			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_ELEVATOR)
+				boy->XUpdate();
 			break;
 		case LEFT:
 		// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
 			if(mapState[Py/64][(Px-2)/64]!=TILE_DIRT&&
 			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_DIRT&&
 			   mapState[Py/64][(Px-2)/64]!=TILE_ELEVATOR&&
-			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_ELEVATOR)
-				girl->XUpdate();
+			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_ELEVATOR)
+				boy->XUpdate();
 			break;
 	}
 }
