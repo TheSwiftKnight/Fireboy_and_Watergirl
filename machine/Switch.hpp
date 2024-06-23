@@ -12,11 +12,11 @@ protected:
     PlayScene* getPlayScene();
 
 public:
-    bool opening;
+    bool opened;
     Switch(std::string imgSwitch, int x, int y, int init_y, int final_y, int num, int opening);
     void Draw();
     int x, y;
-    int init_y, final_y;
+    int init_x, final_x;
     int Switch_num;
     void Update(float deltatime) override;
 };
