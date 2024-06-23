@@ -19,8 +19,6 @@ add_executable(2024_I2P2_TowerDefense_with_answer
         Engine/AudioHelper.hpp
         Engine/Collider.cpp
         Engine/Collider.hpp
-        Enemy/Enemy.cpp
-        Enemy/Enemy.hpp
         Engine/GameEngine.cpp
         Engine/GameEngine.hpp
         Engine/Group.cpp
@@ -54,8 +52,6 @@ add_executable(2024_I2P2_TowerDefense_with_answer
         Scene/LoseScene.cpp
         Scene/LoseScene.hpp
         main.cpp
-        Enemy/PlaneEnemy.cpp
-        Enemy/PlaneEnemy.hpp
         Scene/PlayScene.cpp
         Scene/PlayScene.hpp
         Engine/Point.cpp
@@ -64,16 +60,10 @@ add_executable(2024_I2P2_TowerDefense_with_answer
         Engine/Resources.hpp
         UI/Component/Slider.cpp
         UI/Component/Slider.hpp
-        Enemy/SoldierEnemy.cpp
-        Enemy/SoldierEnemy.hpp
-        Enemy/MisteryEnemy.cpp
-        Enemy/MisteryEnemy.hpp
         Engine/Sprite.cpp
         Engine/Sprite.hpp
         Scene/StageSelectScene.cpp
         Scene/StageSelectScene.hpp
-        Enemy/TankEnemy.cpp
-        Enemy/TankEnemy.hpp
         Turret/Turret.cpp
         Turret/Turret.hpp
         Turret/TurretButton.cpp

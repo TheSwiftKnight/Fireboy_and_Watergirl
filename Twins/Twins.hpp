@@ -6,7 +6,7 @@
 
 #include "Engine/Sprite.hpp"
 
-class Enemy;
+// class Enemy;
 class PlayScene;
 
 enum Direction{NO,LEFT,RIGHT};

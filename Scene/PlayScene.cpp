@@ -11,17 +11,17 @@
 #include <chrono>
 
 #include "Engine/AudioHelper.hpp"
-#include "Enemy/Enemy.hpp"
+// #include "Enemy/Enemy.hpp"
 #include "Engine/GameEngine.hpp"
 #include "Engine/Group.hpp"
 #include "UI/Component/Label.hpp"
 #include "Turret/Turret.hpp"
-#include "Enemy/PlaneEnemy.hpp"
+// #include "Enemy/PlaneEnemy.hpp"
 #include "PlayScene.hpp"
 #include "Engine/Resources.hpp"
-#include "Enemy/SoldierEnemy.hpp"
-#include "Enemy/MisteryEnemy.hpp"
-#include "Enemy/TankEnemy.hpp"
+// #include "Enemy/SoldierEnemy.hpp"
+// #include "Enemy/MisteryEnemy.hpp"
+// #include "Enemy/TankEnemy.hpp"
 #include "Turret/TurretButton.hpp"
 #include "Engine/LOG.hpp"
 #include "Engine/IObject.hpp"
@@ -57,7 +57,7 @@ void PlayScene::Initialize() {
 	AddNewObject(TileMapGroup = new Group());
 	AddNewObject(DebugIndicatorGroup = new Group());
 	// AddNewObject(TowerGroup = new Group());
-	AddNewObject(EnemyGroup = new Group());
+	// AddNewObject(EnemyGroup = new Group());
 	AddNewObject(ButtonGroup = new Group());
 	AddNewObject(DiamondGroup = new Group());
 	AddNewObject(ElevatorGroup = new Group());
@@ -113,9 +113,9 @@ void PlayScene::Update(float deltaTime) {
 	// Reference: Bullet-Through-Paper
 	// Calculate danger zone.
 	std::vector<float> reachEndTimes;
-	for (auto& it : EnemyGroup->GetObjects()) {
-		reachEndTimes.push_back(dynamic_cast<Enemy*>(it)->reachEndTime);
-	}
+	// for (auto& it : EnemyGroup->GetObjects()) {
+	// 	reachEndTimes.push_back(dynamic_cast<Enemy*>(it)->reachEndTime);
+	// }
 	// Can use Heap / Priority-Queue instead. But since we won't have too many enemies, sorting is fast enough.
 	std::sort(reachEndTimes.begin(), reachEndTimes.end());
 	for (int i = 0; i < SpeedMult; i++) {

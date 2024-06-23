@@ -52,7 +52,7 @@ public:
 	// Map tiles.
 	Group* TileMapGroup;
 	Group* DebugIndicatorGroup;
-	Group* EnemyGroup;
+	// Group* EnemyGroup;
 	Group* UIGroup;
 	Group* ButtonGroup;
 	Engine::Label* UITime;

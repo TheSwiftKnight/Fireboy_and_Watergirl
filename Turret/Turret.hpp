@@ -6,7 +6,7 @@
 
 #include "Engine/Sprite.hpp"
 
-class Enemy;
+// class Enemy;
 class PlayScene;
 
 class Turret: public Engine::Sprite {
@@ -25,7 +25,7 @@ public:
     bool Tool = false;
     bool Enabled = true;
     bool Preview = false;
-    Enemy* Target = nullptr;
+    // Enemy* Target = nullptr;
     Turret(std::string imgBase, std::string imgTurret, float x, float y, float radius, int price, float coolDown);
     void Update(float deltaTime) override;
     void Draw() const override;
