@@ -577,7 +577,7 @@ void PlayScene::ReadMap() {
 			else if(num == 'L'){
 				mapState[i][j] = TILE_LEVER;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Twins("play/lever_right.png", j * BlockSize+32, i * BlockSize +32, 1,NEITHER));
+				AddNewObject(new Lever("play/lever_left.png", j * BlockSize+32, i * BlockSize +32, 0, 0,NEITHER));
 			}
 			else if(num == '1'){
 				mapState[i][j] = TILE_BLUE_DOOR;
@@ -614,7 +614,7 @@ void PlayScene::ReadMap() {
 				mapState[i][j] = TILE_SWITCH;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize - 64, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Switch("play/switch.png", j * BlockSize, i * BlockSize+52, i * BlockSize+75, i * BlockSize + 128+ 75, 0, 0));
+				AddNewObject(new Switch("play/switch.png", j * BlockSize, i * BlockSize+52, j * BlockSize, j * BlockSize -128+1, 0, 0));
 			}
 		}
 	}

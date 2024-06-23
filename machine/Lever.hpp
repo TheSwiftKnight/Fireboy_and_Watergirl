@@ -7,19 +7,17 @@
 #include "Engine/Sprite.hpp" 
 
 class PlayScene;
-enum Lever_state {right, left, middle};
 class Lever: public Engine::Sprite {
 protected:
     PlayScene* getPlayScene();
 
 public:
-    bool opening;
-    Lever(std::string imgLever,int x, int y, std::string s);
+    bool middle_started,started;
+    Lever(std::string imgLever, int x, int y, int mid_start, int final_start, int num);
     void Draw();
     int x, y;
-    int init_y, final_y;
-    int Lever_num;
-    Lever_state state;
     void Update(float deltatime) override;
+    bool getStartedValue();
+    int Lever_num;
 };
 #endif // TURRET_HPP
