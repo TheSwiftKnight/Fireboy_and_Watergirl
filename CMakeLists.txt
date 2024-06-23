@@ -19,12 +19,8 @@ add_executable(2024_I2P2_TowerDefense_with_answer
         Engine/AudioHelper.hpp
         Engine/Collider.cpp
         Engine/Collider.hpp
-        UI/Animation/DirtyEffect.cpp
-        UI/Animation/DirtyEffect.hpp
         Enemy/Enemy.cpp
         Enemy/Enemy.hpp
-        UI/Animation/ExplosionEffect.cpp
-        UI/Animation/ExplosionEffect.hpp
         Engine/GameEngine.cpp
         Engine/GameEngine.hpp
         Engine/Group.cpp

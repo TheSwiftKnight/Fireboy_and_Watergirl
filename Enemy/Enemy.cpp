@@ -20,7 +20,7 @@ PlayScene* Enemy::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
 }
 void Enemy::OnExplode() {
-	getPlayScene()->EffectGroup->AddNewObject(new ExplosionEffect(Position.x, Position.y));
+	// getPlayScene()->EffectGroup->AddNewObject(new ExplosionEffect(Position.x, Position.y));
 	std::random_device dev;
 	std::mt19937 rng(dev());
 	std::uniform_int_distribution<std::mt19937::result_type> distId(1, 3);
