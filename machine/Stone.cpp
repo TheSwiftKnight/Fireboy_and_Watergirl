@@ -25,9 +25,9 @@ void Stone::Draw() {
 }
 void Stone::Update(float deltaTime) {
     int y2 = (y-32+15)/64 + 1, x2 = (x-32) / 64;
-    std::cout << "Stone" << x2 << " " << y2 << " " << y << std::endl;
+    // std::cout << "Stone" << x2 << " " << y2 << " " << y << std::endl;
     if(getPlayScene()->mapState[y2][x2] == (getPlayScene()->TILE_DIRT || getPlayScene()->TILE_DIAMOND)){
-        std::cout << "stone" << x2 << " " << (y-32)/64 << "\n";
+        // std::cout << "stone" << x2 << " " << (y-32)/64 << "\n";
         getPlayScene()->mapState[(y-32)/64][x2] = getPlayScene()->mapState[y2][x2];
         //getPlayScene()->mapState[y2][x2] = getPlayScene()->TILE_STONE;
         getPlayScene()->StoneGroup->RemoveObject(GetObjectIterator());

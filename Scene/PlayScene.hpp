@@ -106,5 +106,7 @@ public:
 	std::vector<std::vector<int>> CalculateBFSDistance();
 	// void ModifyReadMapTiles();
 	void WriteScoretoFile(int score);
+
+	void SwitchToFloor(int x, int y);
 };
 #endif // PLAYSCENE_HPP

@@ -139,37 +139,6 @@ void PlayScene::Update(float deltaTime) {
 	}
 	// Can use Heap / Priority-Queue instead. But since we won't have too many enemies, sorting is fast enough.
 	std::sort(reachEndTimes.begin(), reachEndTimes.end());
-	// float newDeathCountDown = -1;
-	// int danger = lives;
-	// for (auto& it : reachEndTimes) {
-	// 	if (it <= DangerTime) {
-	// 		danger--;
-	// 		if (danger <= 0) {
-	// 			// Death Countdown
-	// 			float pos = DangerTime - it;
-	// 			if (it > deathCountDown) {
-	// 				// Restart Death Count Down BGM.
-	// 				AudioHelper::StopSample(deathBGMInstance);
-	// 				if (SpeedMult != 0)
-	// 					deathBGMInstance = AudioHelper::PlaySample("astronomia.ogg", false, AudioHelper::BGMVolume, pos);
-	// 			}
-	// 			float alpha = pos / DangerTime;
-	// 			alpha = std::max(0, std::min(255, static_cast<int>(alpha * alpha * 255)));
-	// 			dangerIndicator->Tint = al_map_rgba(255, 255, 255, alpha);
-	// 			newDeathCountDown = it;
-	// 			break;
-	// 		}
-	// 	}
-	// }
-	// deathCountDown = newDeathCountDown;
-	// if (SpeedMult == 0)
-	// 	AudioHelper::StopSample(deathBGMInstance);
-	// if (deathCountDown == -1 && lives > 0) {
-	// 	AudioHelper::StopSample(deathBGMInstance);
-	// 	dangerIndicator->Tint.a = 0;
-	// }
-	// if (SpeedMult == 0)
-	// 	deathCountDown = -1;
 	for (int i = 0; i < SpeedMult; i++) {
 		IScene::Update(deltaTime);
 		// Check if we should create new enemy.
@@ -184,14 +153,14 @@ void PlayScene::Update(float deltaTime) {
 		if(mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_DIRT &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_BLUE_WATER &&
-		mapState[(Py+1+45)/64][(Px+12)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+20)/64][(Px+12)/64]!=TILE_ELEVATOR &&
 		mapState[(Py+1+45)/64][(Px+12)/64]!=TILE_SWITCH &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_STONE &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_GREEN_WATER &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_DIRT &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_BLUE_WATER &&
-		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+20)/64][(Px+30)/64]!=TILE_ELEVATOR &&
 		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_SWITCH &&
 		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_STONE &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_GREEN_WATER)boy->YUpdate();
@@ -224,7 +193,7 @@ void PlayScene::Update(float deltaTime) {
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT&&
 			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_DIRT &&
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
-			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
+			   mapState[(Py+15)/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_SWITCH&&
 			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_SWITCH&&
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_STONE&&
@@ -237,7 +206,7 @@ void PlayScene::Update(float deltaTime) {
 			   mapState[Py/64][(Px-2)/64]!=TILE_DIRT&&
 			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_DIRT&&
 			   mapState[Py/64][(Px-2)/64]!=TILE_ELEVATOR&&
-			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_ELEVATOR&&
+			   mapState[(Py+15)/64][(Px-2)/64]!=TILE_ELEVATOR&&
 			   mapState[Py/64][(Px-2)/64]!=TILE_SWITCH&&
 			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_SWITCH&&
 			   mapState[Py/64][(Px-2)/64]!=TILE_STONE&&
@@ -254,14 +223,14 @@ void PlayScene::Update(float deltaTime) {
 		if(mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_DIRT &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_BLUE_WATER &&
-		mapState[(Py+1+45)/64][(Px+12)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+20)/64][(Px+12)/64]!=TILE_ELEVATOR &&
 		mapState[(Py+1+45)/64][(Px+12)/64]!=TILE_SWITCH &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_STONE &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_GREEN_WATER &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_DIRT &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_BLUE_WATER &&
-		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+20)/64][(Px+30)/64]!=TILE_ELEVATOR &&
 		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_SWITCH &&
 		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_STONE &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_GREEN_WATER)girl->YUpdate();
@@ -294,7 +263,7 @@ void PlayScene::Update(float deltaTime) {
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT&&
 			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_DIRT &&
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
-			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
+			   mapState[(Py+15)/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_SWITCH&&
 			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_SWITCH&&
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_STONE&&
@@ -307,7 +276,7 @@ void PlayScene::Update(float deltaTime) {
 			   mapState[Py/64][(Px-2)/64]!=TILE_DIRT&&
 			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_DIRT&&
 			   mapState[Py/64][(Px-2)/64]!=TILE_ELEVATOR&&
-			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_ELEVATOR&&
+			   mapState[(Py+15)/64][(Px-2)/64]!=TILE_ELEVATOR&&
 			   mapState[Py/64][(Px-2)/64]!=TILE_SWITCH&&
 			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_SWITCH&&
 			   mapState[Py/64][(Px-2)/64]!=TILE_STONE&&
@@ -570,6 +539,7 @@ void PlayScene::ReadMap() {
 			}
 			else if(num == 'E'){
 				mapState[i][j] = TILE_ELEVATOR;
+				mapState[i][j-1] = TILE_ELEVATOR;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize - 64, i * BlockSize, BlockSize, BlockSize));
 				AddNewObject(new Elevator("play/elevator.png", j * BlockSize, i * BlockSize+75, i * BlockSize+75, i * BlockSize + 128+ 75, 0, 0));
