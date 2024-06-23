@@ -52,5 +52,5 @@ void Stone::Update(float deltaTime) {
         getPlayScene()->StoneGroup->RemoveObject(GetObjectIterator());
         getPlayScene()->StoneGroup->AddNewObject(new Stone("play/stone.png", x-4, y, 0));
     }
-    if()
+
 }
