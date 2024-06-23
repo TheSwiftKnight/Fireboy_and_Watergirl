@@ -77,7 +77,7 @@ void ScoreBoardScene::NextOnClick() {
 
 void ScoreBoardScene::LoadScores() {
     scores.clear();
-    const char* filepath = "C:\\I2P\\Fireboy-and-Watergirl\\score.txt";
+    const char* filepath = "C:\\Users\\maggie\\Fireboy_and_Watergirl\\score.txt";
     FILE* file;
     freopen_s(&file, filepath, "r", stdin);
     std::string line;

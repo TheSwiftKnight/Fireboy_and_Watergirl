@@ -17,6 +17,7 @@ void SettingsScene::Initialize() {
     int halfH = h / 2;
 
     Engine::ImageButton *btn;
+    AddNewObject(new Engine::Image("play/background.png",0, 00));
     btn = new Engine::ImageButton("stage-select/dirt.png", "stage-select/floor.png", halfW - 200, halfH * 3 / 2 - 50, 400, 100);
     btn->SetOnClickCallback(std::bind(&SettingsScene::BackOnClick, this, 1));
     AddNewControlObject(btn);
