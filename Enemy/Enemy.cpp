@@ -66,13 +66,13 @@ void Enemy::UpdatePath(const std::vector<std::vector<int>>& mapDistance) {
 	path = std::vector<Engine::Point>(num + 1);
 	while (num != 0) {
 		std::vector<Engine::Point> nextHops;
-		for (auto& dir : PlayScene::directions) {
-			int x = pos.x + dir.x;
-			int y = pos.y + dir.y;
-			if (x < 0 || x >= PlayScene::MapWidth || y < 0 || y >= PlayScene::MapHeight || mapDistance[y][x] != num - 1)
-				continue;
-			nextHops.emplace_back(x, y);
-		}
+		// for (auto& dir : PlayScene::directions) {
+		// 	int x = pos.x + dir.x;
+		// 	int y = pos.y + dir.y;
+		// 	if (x < 0 || x >= PlayScene::MapWidth || y < 0 || y >= PlayScene::MapHeight || mapDistance[y][x] != num - 1)
+		// 		continue;
+		// 	nextHops.emplace_back(x, y);
+		// }
 		// Choose arbitrary one.
 		std::random_device dev;
 		std::mt19937 rng(dev());

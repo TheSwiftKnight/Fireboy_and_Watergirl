@@ -76,8 +76,6 @@ add_executable(2024_I2P2_TowerDefense_with_answer
         Turret/MissileTurret.hpp
         Turret/MisteryTurret.cpp
         Turret/MisteryTurret.hpp
-        UI/Animation/Plane.cpp
-        UI/Animation/Plane.hpp
         Enemy/PlaneEnemy.cpp
         Enemy/PlaneEnemy.hpp
         Scene/PlayScene.cpp

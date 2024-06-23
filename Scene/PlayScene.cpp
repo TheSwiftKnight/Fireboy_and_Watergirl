@@ -22,7 +22,6 @@
 #include "Turret/MachineGunTurret.hpp"
 #include "Turret/MissileTurret.hpp"
 #include "Turret/MisteryTurret.hpp"
-#include "UI/Animation/Plane.hpp"
 #include "Enemy/PlaneEnemy.hpp"
 #include "PlayScene.hpp"
 #include "Engine/Resources.hpp"
@@ -41,13 +40,13 @@
 #include "machine/Switch.hpp"
 bool write_score_once = false;
 bool PlayScene::DebugMode = false;
-const std::vector<Engine::Point> PlayScene::directions = { Engine::Point(-1, 0), Engine::Point(0, -1), Engine::Point(1, 0), Engine::Point(0, 1) };
+// const std::vector<Engine::Point> PlayScene::directions = { Engine::Point(-1, 0), Engine::Point(0, -1), Engine::Point(1, 0), Engine::Point(0, 1) };
 // const int PlayScene::MapWidth = 32, PlayScene::MapHeight = 24;
 const int PlayScene::MapWidth = 20, PlayScene::MapHeight = 13;
 const int PlayScene::BlockSize = 64;
-Engine::Point PlayScene::GetClientSize() {
-	return Engine::Point(MapWidth * BlockSize, MapHeight * BlockSize);
-}
+// Engine::Point PlayScene::GetClientSize() {
+// 	return Engine::Point(MapWidth * BlockSize, MapHeight * BlockSize);
+// }
 void PlayScene::Initialize() {
 	// TODO: [HACKATHON-3-BUG] (1/5): There's a bug in this file, which crashes the game when you lose. Try to find it.
 	// TODO: [HACKATHON-3-BUG] (2/5): Find out the cheat code to test.
@@ -742,19 +741,19 @@ std::vector<std::vector<int>> PlayScene::CalculateBFSDistance() {
 		// TODO: [BFS PathFinding] (1/1): Implement a BFS starting from the most right-bottom block in the map.
 		//               For each step you should assign the corresponding distance to the most right-bottom block.
 		//               mapState[y][x] is TILE_DIRT if it is empty.
-		for (const Engine::Point& dir : directions) {
-            int x = p.x + dir.x;
-            int y = p.y + dir.y;
+		// for (const Engine::Point& dir : directions) {
+        //     int x = p.x + dir.x;
+        //     int y = p.y + dir.y;
 
-            // Check if neighbor is within map boundaries and is not occupied
-            if (x >= 0 && x < MapWidth && y >= 0 && y < MapHeight && mapState[y][x] == TILE_DIRT) {
-                // If neighbor is unvisited
-                if (map[y][x] == -1) {
-                    map[y][x] = map[p.y][p.x] + 1; // Set distance from bottom-right
-                    que.push(Engine::Point(x, y)); // Enqueue neighbor
-                }
-            }
-        }
+        //     // Check if neighbor is within map boundaries and is not occupied
+        //     if (x >= 0 && x < MapWidth && y >= 0 && y < MapHeight && mapState[y][x] == TILE_DIRT) {
+        //         // If neighbor is unvisited
+        //         if (map[y][x] == -1) {
+        //             map[y][x] = map[p.y][p.x] + 1; // Set distance from bottom-right
+        //             que.push(Engine::Point(x, y)); // Enqueue neighbor
+        //         }
+        //     }
+        // }
 	}
 	return map;
 }
