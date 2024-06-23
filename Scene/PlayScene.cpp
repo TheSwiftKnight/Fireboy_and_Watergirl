@@ -45,12 +45,6 @@ const std::vector<Engine::Point> PlayScene::directions = { Engine::Point(-1, 0),
 // const int PlayScene::MapWidth = 32, PlayScene::MapHeight = 24;
 const int PlayScene::MapWidth = 20, PlayScene::MapHeight = 13;
 const int PlayScene::BlockSize = 64;
-const float PlayScene::DangerTime = 7.61;
-const Engine::Point PlayScene::SpawnGridPoint = Engine::Point(-1, 0);
-const Engine::Point PlayScene::EndGridPoint = Engine::Point(MapWidth, MapHeight - 1);
-const std::vector<int> PlayScene::code = { ALLEGRO_KEY_UP, ALLEGRO_KEY_UP, ALLEGRO_KEY_DOWN, ALLEGRO_KEY_DOWN,
-									ALLEGRO_KEY_LEFT, ALLEGRO_KEY_LEFT, ALLEGRO_KEY_RIGHT, ALLEGRO_KEY_RIGHT,
-									ALLEGRO_KEY_B, ALLEGRO_KEY_A, ALLEGRO_KEYMOD_SHIFT, ALLEGRO_KEY_ENTER };
 Engine::Point PlayScene::GetClientSize() {
 	return Engine::Point(MapWidth * BlockSize, MapHeight * BlockSize);
 }
@@ -62,14 +56,12 @@ void PlayScene::Initialize() {
 	keyStrokes.clear();
 	spriteTick = 0;
 	ticks = 0;
-	deathCountDown = -1;
 	SpeedMult = 1;
 	score = 1000;
 	ElapsedTime = 0.0f;
 	score = 0;
 	// Add groups from bottom to top.
 	AddNewObject(TileMapGroup = new Group());
-	AddNewObject(GroundEffectGroup = new Group());
 	AddNewObject(DebugIndicatorGroup = new Group());
 	AddNewObject(TowerGroup = new Group());
 	AddNewObject(EnemyGroup = new Group());
@@ -127,10 +119,6 @@ void PlayScene::Update(float deltaTime) {
 	UIScore->Text = std::string("Score ") + std::to_string(this->score);
 	// If we use deltaTime directly, then we might have Bullet-through-paper problem.
 	// Reference: Bullet-Through-Paper
-	if (SpeedMult == 0)
-		deathCountDown = -1;
-	else if (deathCountDown != -1)
-		SpeedMult = 1;
 	// Calculate danger zone.
 	std::vector<float> reachEndTimes;
 	for (auto& it : EnemyGroup->GetObjects()) {
@@ -340,13 +328,6 @@ void PlayScene::OnMouseUp(int button, int mx, int my) {
 		else if (mapState[y][x] != TILE_OCCUPIED) {
 			if (!preview || preview->Tool)
 				return;
-			// Check if valid.
-			if (!CheckSpaceValid(x, y)) {
-				Engine::Sprite* sprite;
-				GroundEffectGroup->AddNewObject(sprite = new DirtyEffect("play/target-invalid.png", 1, x * BlockSize + BlockSize / 2, y * BlockSize + BlockSize / 2));
-				sprite->Rotation = 0;
-				return;
-			}
 			// Purchase.
 			// EarnMoney(-preview->GetPrice());
 			// Remove Preview.

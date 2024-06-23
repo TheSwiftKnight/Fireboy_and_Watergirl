@@ -48,16 +48,10 @@ public:
 	static const std::vector<Engine::Point> directions;
 	static const int MapWidth, MapHeight;
 	static const int BlockSize;
-	static const float DangerTime;
-	static const Engine::Point SpawnGridPoint;
-	static const Engine::Point EndGridPoint;
-	static const std::vector<int> code;
 	int MapId;
 	float ticks;
-	float deathCountDown;
 	// Map tiles.
 	Group* TileMapGroup;
-	Group* GroundEffectGroup;
 	Group* DebugIndicatorGroup;
 	Group* BulletGroup;
 	Group* TowerGroup;
