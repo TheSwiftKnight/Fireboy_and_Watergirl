@@ -295,51 +295,6 @@ void PlayScene::OnMouseUp(int button, int mx, int my) {
 		return;
 	const int x = mx / BlockSize;
 	const int y = my / BlockSize;
-	if (button & 1) {
-		if (mapState[y][x] == TILE_OCCUPIED && preview->Tool) {
-			std::list<std::pair<bool, Engine::IObject*>> pair;
-			// for(auto t:TowerGroup->GetObjects()){
-			// 	pair.emplace_back(true,t);
-			// }
-			// for(auto t:pair){
-			// 	if(((int)(t.second->Position.x/BlockSize))==x && ((int)(t.second->Position.y/BlockSize))==y){
-			// 		// TowerGroup->RemoveObject(t.second->GetObjectIterator());
-			// 		mapState[y][x] = TILE_FLOOR;
-			// 	}
-			// }
-			// EarnMoney(50);
-			preview->GetObjectIterator()->first = false;
-			UIGroup->RemoveObject(preview->GetObjectIterator());
-			// To keep responding when paused.
-			preview->Update(0);
-			// Remove Preview.
-			preview = nullptr;
-			OnMouseMove(mx, my);
-		}
-		else if (mapState[y][x] != TILE_OCCUPIED) {
-			if (!preview || preview->Tool)
-				return;
-			// Purchase.
-			// EarnMoney(-preview->GetPrice());
-			// Remove Preview.
-			preview->GetObjectIterator()->first = false;
-			UIGroup->RemoveObject(preview->GetObjectIterator());
-			// Construct real turret.
-			preview->Position.x = x * BlockSize + BlockSize / 2;
-			preview->Position.y = y * BlockSize + BlockSize / 2;
-			preview->Enabled = true;
-			preview->Preview = false;
-			preview->Tint = al_map_rgba(255, 255, 255, 255);
-			// TowerGroup->AddNewObject(preview);
-			// To keep responding when paused.
-			preview->Update(0);
-			// Remove Preview.
-			preview = nullptr;
-
-			mapState[y][x] = TILE_OCCUPIED;
-			OnMouseMove(mx, my);
-		}
-	}
 }
 void PlayScene::OnKeyUp(int keyCode) {
 	IScene::OnKeyUp(keyCode);
@@ -378,27 +333,6 @@ void PlayScene::OnKeyDown(int keyCode) {
 	}
 	else if(keyCode == ALLEGRO_KEY_RIGHT){
 		girl->OnKeyDown(keyCode);
-	}
-	// else {
-	// 	keyStrokes.push_back(keyCode);
-	// 	if (keyStrokes.size() > code.size())
-	// 		keyStrokes.pop_front();
-	// 	if (keyCode == ALLEGRO_KEY_ENTER && keyStrokes.size() == code.size()) {
-	// 		auto it = keyStrokes.begin();
-	// 		for (int c : code) {
-	// 			if (!((*it == c) ||
-	// 				(c == ALLEGRO_KEYMOD_SHIFT &&
-	// 				(*it == ALLEGRO_KEY_LSHIFT || *it == ALLEGRO_KEY_RSHIFT))))
-	// 				return;
-	// 			++it;
-	// 		}
-	// 		EffectGroup->AddNewObject(new Plane());
-	// 		money +=10000;
-	// 	}
-	// }
-	else if (keyCode == ALLEGRO_KEY_Q) {
-		// Hotkey for MachineGunTurret.
-		UIBtnClicked(0);
 	}
 	else if (keyCode == ALLEGRO_KEY_W) {
 		boy->OnKeyDown(keyCode);
@@ -556,35 +490,6 @@ void PlayScene::ReadMap() {
 	// boy->getMapState(mapState,MapHeight,MapWidth);
 	// girl->getMapState(mapState,MapHeight,MapWidth);
 }
-void PlayScene::ReadEnemyWave() {
-    // TODO: [HACKATHON-3-BUG] (3/5): Trace the code to know how the enemies are created.
-    // TODO: [HACKATHON-3-BUG] (3/5): There is a bug in these files, which let the game only spawn the first enemy, try to fix it.
-    std::string filename = std::string("Resource/enemy") + std::to_string(MapId) + ".txt";
-	// Read enemy file.
-	std::string line;
-	int type,repeat;
-	float wait;
-	// enemyWaveData.clear();
-	std::ifstream fin(filename);
-	while(std::getline(fin,line)){
-		//Engine::LOG(Engine::INFO) << line;
-		std::stringstream iss(line);
-        if (!(iss >> type >> wait >> repeat) || type<1) {
-            // Log the error if any of the inputs are incorrect.
-            Engine::LOG(Engine::ERROR) << "Error reading data from enemy wave file. Skipping bad input.";
-            fin.clear();  // Clear error state
-			continue;  // Skip the rest of the processing for this line
-        }
-
-		//Engine::LOG(Engine::INFO) << type<<' '<<wait<<' '<<repeat;
-        // If inputs are correct, use the data.
-        // for (int i = 0; i < repeat; i++) {
-        //     enemyWaveData.emplace_back(type, wait);
-        // }
-	}
-
-	fin.close();
-}
 void PlayScene::ConstructUI() {
 	//title
 	UIGroup->AddNewObject(new Engine::Image("play/game_title.png", 40, 600, 300, 78));
@@ -616,138 +521,6 @@ void PlayScene::ConstructUI() {
 	UIGroup->AddNewObject(new Engine::Image("play/girl_char.png", 1350+90, 640-64*2, 38, 64));
 	UIGroup->AddNewObject(new Engine::Image("play/boy_char.png", 1300+115, 640-64*3, 38, 64));
 
-	// Text
-	
-	// Text
-	TurretButton* btn;
-	// // Button 1
-	// btn = new TurretButton("play/floor.png", "play/dirt.png",
-	// 	Engine::Sprite("play/tower-base.png", 1294, 136, 0, 0, 0, 0),
-	// 	Engine::Sprite("play/turret-1.png", 1294, 136 - 8, 0, 0, 0, 0)
-	// 	, 1294, 136, MachineGunTurret::Price);
-	// // Reference: Class Member Function Pointer and std::bind.
-	// btn->SetOnClickCallback(std::bind(&PlayScene::UIBtnClicked, this, 0));
-	// UIGroup->AddNewControlObject(btn);
-	// // Button 2
-	// btn = new TurretButton("play/floor.png", "play/dirt.png",
-	// 	Engine::Sprite("play/tower-base.png", 1370, 136, 0, 0, 0, 0),
-	// 	Engine::Sprite("play/turret-2.png", 1370, 136 - 8, 0, 0, 0, 0)
-	// 	, 1370, 136, LaserTurret::Price);
-	// btn->SetOnClickCallback(std::bind(&PlayScene::UIBtnClicked, this, 1));
-	// UIGroup->AddNewControlObject(btn);
-	// // Button 3
-	// btn = new TurretButton("play/floor.png", "play/dirt.png",
-	// 	Engine::Sprite("play/tower-base.png", 1446, 136, 0, 0, 0, 0),
-	// 	Engine::Sprite("play/turret-3.png", 1446, 136, 0, 0, 0, 0)
-	// 	, 1446, 136, MissileTurret::Price);
-	// btn->SetOnClickCallback(std::bind(&PlayScene::UIBtnClicked, this, 2));
-	// UIGroup->AddNewControlObject(btn);
-	// // TODO: [CUSTOM-TURRET]: Create a button to support constructing the turret.
-	// btn = new TurretButton("play/floor.png", "play/dirt.png",
-	// 	Engine::Sprite("play/tower-base.png", 1522, 136, 0, 0, 0, 0),
-	// 	Engine::Sprite("play/turret-4.png", 1522, 136, 0, 0, 0, 0)
-	// 	, 1522, 136, MissileTurret::Price);
-	// btn->SetOnClickCallback(std::bind(&PlayScene::UIBtnClicked, this, 3));
-	// UIGroup->AddNewControlObject(btn);
-
-	// btn = new TurretButton("play/floor.png", "play/dirt.png",
-	// 	Engine::Sprite("play/gnome.png", 1294, 216, 0, 0, 0, 0),
-	// 	Engine::Sprite("play/gnome.png", 1294, 216, 0, 0, 0, 0)
-	// 	, 1294, 216, Shovel::Price);
-	// btn->SetOnClickCallback(std::bind(&PlayScene::UIBtnClicked, this, 4));
-	// UIGroup->AddNewControlObject(btn);
-
-	// int w = Engine::GameEngine::GetInstance().GetScreenSize().x;
-	// int h = Engine::GameEngine::GetInstance().GetScreenSize().y;
-	// int shift = 135 + 25;
-	// dangerIndicator = new Engine::Sprite("play/benjamin.png", w - shift, h - shift);
-	// dangerIndicator->Tint.a = 0;
-	// UIGroup->AddNewObject(dangerIndicator);
-}
-
-void PlayScene::UIBtnClicked(int id) {
-	if (preview)
-		UIGroup->RemoveObject(preview->GetObjectIterator());
-    // TODO: [CUSTOM-TURRET]: On callback, create the turret.
-	// if (id == 0 && money >= MachineGunTurret::Price)
-	// 	preview = new MachineGunTurret(0, 0);
-	// else if (id == 1 && money >= LaserTurret::Price)
-	// 	preview = new LaserTurret(0, 0);
-	// else if (id == 2 && money >= MissileTurret::Price)
-	// 	preview = new MissileTurret(0, 0);
-	// else if (id == 3 && money >= MisteryTurret::Price)
-	// 	preview = new MisteryTurret(0, 0);
-	// else if (id == 4 && money >= Shovel::Price)
-	// 	preview = new Shovel(0, 0);
-	// if (!preview)
-	// 	return;
-	preview->Position = Engine::GameEngine::GetInstance().GetMousePosition();
-	preview->Tint = al_map_rgba(255, 255, 255, 200);
-	preview->Enabled = false;
-	preview->Preview = true;
-	UIGroup->AddNewObject(preview);
-	
-	OnMouseMove(Engine::GameEngine::GetInstance().GetMousePosition().x, Engine::GameEngine::GetInstance().GetMousePosition().y);
-}
-
-bool PlayScene::CheckSpaceValid(int x, int y) {
-	if (x < 0 || x >= MapWidth || y < 0 || y >= MapHeight)
-		return false;
-	auto map00 = mapState[y][x];
-	mapState[y][x] = TILE_OCCUPIED;
-	std::vector<std::vector<int>> map = CalculateBFSDistance();
-	mapState[y][x] = map00;
-	if (map[0][0] == -1)
-		return false;
-	for (auto& it : EnemyGroup->GetObjects()) {
-		Engine::Point pnt;
-		pnt.x = floor(it->Position.x / BlockSize);
-		pnt.y = floor(it->Position.y / BlockSize);
-		if (pnt.x < 0) pnt.x = 0;
-		if (pnt.x >= MapWidth) pnt.x = MapWidth - 1;
-		if (pnt.y < 0) pnt.y = 0;
-		if (pnt.y >= MapHeight) pnt.y = MapHeight - 1;
-		if (map[pnt.y][pnt.x] == -1)
-			return false;
-	}
-	// All enemy have path to exit.
-	mapState[y][x] = TILE_OCCUPIED;
-	// mapDistance = map;
-	// for (auto& it : EnemyGroup->GetObjects())
-	// 	dynamic_cast<Enemy*>(it)->UpdatePath(mapDistance);
-	return true;
-}
-std::vector<std::vector<int>> PlayScene::CalculateBFSDistance() {
-	// Reverse BFS to find path.
-	std::vector<std::vector<int>> map(MapHeight, std::vector<int>(std::vector<int>(MapWidth, -1)));
-	std::queue<Engine::Point> que;
-	// Push end point.
-	// BFS from end point.
-	if (mapState[MapHeight - 1][MapWidth - 1] != TILE_DIRT)
-		return map;
-	que.push(Engine::Point(MapWidth - 1, MapHeight - 1));
-	map[MapHeight - 1][MapWidth - 1] = 0;
-	while (!que.empty()) {
-		Engine::Point p = que.front();
-		que.pop();
-		// TODO: [BFS PathFinding] (1/1): Implement a BFS starting from the most right-bottom block in the map.
-		//               For each step you should assign the corresponding distance to the most right-bottom block.
-		//               mapState[y][x] is TILE_DIRT if it is empty.
-		// for (const Engine::Point& dir : directions) {
-        //     int x = p.x + dir.x;
-        //     int y = p.y + dir.y;
-
-        //     // Check if neighbor is within map boundaries and is not occupied
-        //     if (x >= 0 && x < MapWidth && y >= 0 && y < MapHeight && mapState[y][x] == TILE_DIRT) {
-        //         // If neighbor is unvisited
-        //         if (map[y][x] == -1) {
-        //             map[y][x] = map[p.y][p.x] + 1; // Set distance from bottom-right
-        //             que.push(Engine::Point(x, y)); // Enqueue neighbor
-        //         }
-        //     }
-        // }
-	}
-	return map;
 }
 
 void PlayScene::WriteScoretoFile(int score){

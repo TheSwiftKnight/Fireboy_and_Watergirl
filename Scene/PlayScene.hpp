@@ -29,7 +29,6 @@ public:
 	enum TileType {
 		TILE_DIRT,
 		TILE_FLOOR,
-		TILE_OCCUPIED,
 		TILE_BLUE_DOOR,
 		TILE_RED_DOOR,
 		TILE_BUTTON,
@@ -87,15 +86,9 @@ public:
 	void Arrived();
 	int GetScore();
 	void ReadMap();
-	void ReadEnemyWave();
 	void ConstructUI();
-	void UIBtnClicked(int id);
-	bool CheckSpaceValid(int x, int y);
 	void UpdateTimer();
-	std::vector<std::vector<int>> CalculateBFSDistance();
-	// void ModifyReadMapTiles();
 	void WriteScoretoFile(int score);
-
 	void SwitchToFloor(int x, int y);
 };
 #endif // PLAYSCENE_HPP
