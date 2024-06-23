@@ -104,8 +104,6 @@ add_executable(2024_I2P2_TowerDefense_with_answer
         Turret/TurretButton.hpp
         Scene/WinScene.cpp
         Scene/WinScene.hpp
-        Scene/LevelSelectScene.cpp
-        Scene/LevelSelectScene.hpp
         # TODO: [HACKATHON-1-SCENE] (2/4) Add the new scene source files here
         Scene/StartScene.cpp
         Scene/StartScene.hpp
@@ -118,15 +116,6 @@ add_executable(2024_I2P2_TowerDefense_with_answer
 #        UI/Component/TextInput.cpp
 #        UI/Component/TextInput.hpp
 )
-
-# add_custom_target(update_score ALL
-#     COMMAND ${CMAKE_COMMAND} -E echo "Pushing score to GitHub..."
-#     COMMAND git add score.txt
-#     COMMAND git commit -m "[Auto]Update score"
-#     COMMAND git push origin master
-#     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-# )
-# add_dependencies(2024_I2P2_TowerDefense_with_answer update_score)
 
 if(WIN32)
     set(UPDATE_SCRIPT ${CMAKE_SOURCE_DIR}/update_score.bat)

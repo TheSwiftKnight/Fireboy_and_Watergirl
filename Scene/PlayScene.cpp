@@ -779,7 +779,8 @@ std::vector<std::vector<int>> PlayScene::CalculateBFSDistance() {
 }
 
 void PlayScene::WriteScoretoFile(int score){
-    const std::string filepath = "C:\\I2P\\Fireboy-and-Watergirl\\score.txt";
+	system("echo Current: %cd%");
+    const std::string filepath = "../score.txt";
     
     // Open the file for appending using ofstream
     std::ofstream file(filepath, std::ios::app);
