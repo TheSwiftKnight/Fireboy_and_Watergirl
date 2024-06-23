@@ -7,7 +7,7 @@
 #include <functional>
 #include <memory>
 #include <string>
-
+#include <iostream>
 
 #include "Engine/AudioHelper.hpp"
 #include "Engine/GameEngine.hpp"
@@ -22,12 +22,13 @@
 void StartScene::Initialize() {
     int w = Engine::GameEngine::GetInstance().GetScreenSize().x;
     int h = Engine::GameEngine::GetInstance().GetScreenSize().y;
+    std::cout << w << " " << h << "\n";
     int halfW = w / 2;
     int halfH = h / 2;
     Engine::ImageButton* btn;
-
-    AddNewObject(new Engine::Label("Tower Defense", "pirulen.ttf", 120, halfW, halfH / 3 + 50, 10, 255, 255, 255, 0.5, 0.5));
-
+    AddNewObject(new Engine::Image("play/background.png",0, 00));
+    //AddNewObject(new Engine::Label("Tower Defense", "pirulen.ttf", 120, halfW, halfH / 3 + 50, 10, 255, 255, 255, 0.5, 0.5));
+    AddNewObject(new Engine::Image("play/startscene_title.png",halfW-800/2, halfH / 3));
     btn = new Engine::ImageButton("stage-select/dirt.png", "stage-select/floor.png", halfW - 200, halfH / 2 + 200 , 400, 100);
     btn->SetOnClickCallback(std::bind(&StartScene::PlayOnClick, this, 1));
     AddNewControlObject(btn);
