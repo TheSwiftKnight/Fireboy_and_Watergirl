@@ -289,19 +289,6 @@ void PlayScene::Draw() const {
 	IScene::Draw();
 	boy->MeDraw();
 	girl->MeDraw();
-	// if (DebugMode) {
-	// 	// Draw reverse BFS distance on all reachable blocks.
-	// 	for (int i = 0; i < MapHeight; i++) {
-	// 		for (int j = 0; j < MapWidth; j++) {
-	// 			if (mapDistance[i][j] != -1) {
-	// 				// Not elegant nor efficient, but it's quite enough for debugging.
-	// 				Engine::Label label(std::to_string(mapDistance[i][j]), "pirulen.ttf", 32, (j + 0.5) * BlockSize, (i + 0.5) * BlockSize);
-	// 				label.Anchor = Engine::Point(0.5, 0.5);
-	// 				label.Draw();
-	// 			}
-	// 		}
-	// 	}
-	// }
 }
 void PlayScene::OnMouseDown(int button, int mx, int my) {
 	if ((button & 1) && !imgTarget->Visible && preview) {
