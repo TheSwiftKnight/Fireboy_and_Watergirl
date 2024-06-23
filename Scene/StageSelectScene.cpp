@@ -45,6 +45,15 @@ void StageSelectScene::Initialize() {
     btn->SetOnClickCallback(std::bind(&StageSelectScene::ScoreboardOnClick, this));
     AddNewControlObject(btn);
     //AddNewObject(new Engine::Label("Scoreboard", "pirulen.ttf", 36, halfW, halfH / 2 + 300, 0, 0, 0, 255, 0.5, 0.5));
+    //twins
+    for(int i=0;i<1600;i+=100){
+        AddNewObject(new Engine::Image("play/boy_char.png", i, 12*64, 38, 64));
+	    AddNewObject(new Engine::Image("play/girl_char.png", i+50, 12*64, 38, 64));
+    }
+    for(int i=0;i<1600;i+=100){
+        AddNewObject(new Engine::Image("play/boy_char.png", i, 0, 38, 64));
+	    AddNewObject(new Engine::Image("play/girl_char.png", i+50, 0, 38, 64));
+    }
 
     // Not safe if release resource while playing, however we only free while change scene, so it's fine.
 	bgmInstance = AudioHelper::PlaySample("start.ogg", true, AudioHelper::BGMVolume);
