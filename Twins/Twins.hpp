@@ -28,6 +28,7 @@ public:
     float jumpspeed = 5;
     int velx,vely;
     int dir = NO;
+    int doorPosX,doorPosY;
 
     bool arrived = false;
 

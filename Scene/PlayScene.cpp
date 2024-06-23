@@ -67,7 +67,7 @@ void PlayScene::Initialize() {
 	// Should support buttons.
 	AddNewControlObject(UIGroup = new Group());
 	
-	ReadMap();
+	
 	// mapDistance = CalculateBFSDistance();
 	ConstructUI();
 	imgTarget = new Engine::Image("play/target.png", 0, 0);
@@ -82,6 +82,7 @@ void PlayScene::Initialize() {
 
 	boy = new Twins("play/boy.png", 96, 510,1,BOY);
 	girl = new Twins("play/girl.png", 96, 700,1,GIRL);
+	ReadMap();
 	boy->MeDraw();
 	girl->MeDraw();
 }
@@ -444,11 +445,15 @@ void PlayScene::ReadMap() {
 			}
 			else if(num == '1'){
 				mapState[i][j] = TILE_BLUE_DOOR;
+				girl->doorPosX = j*BlockSize;
+				girl->doorPosY = i*BlockSize;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				TileMapGroup->AddNewObject(new Engine::Image("play/blue_door.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 			}
 			else if(num == '2'){
 				mapState[i][j] = TILE_RED_DOOR;
+				boy->doorPosX = j*BlockSize;
+				boy->doorPosY = i*BlockSize;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				TileMapGroup->AddNewObject(new Engine::Image("play/red_door.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 			}
