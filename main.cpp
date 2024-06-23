@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
 	game.AddNewScene("level-select", new StageSelectScene());
     // TODO: [HACKATHON-1-SCENE] (4/4): Change the start scene
 //	game.Start("stage-select", 60, 1600, 832);
-	game.Start("level-select", 60, 1600, 832);
+	game.Start("start", 60, 1600, 832);
 	//game.Start("start", 60, 1600, 832);
 	return 0;
 }
