@@ -24,6 +24,7 @@ void Stone::Draw() {
 	Sprite::Draw();
 }
 void Stone::Update(float deltaTime) {
+    //x=14,y=7
     //falling
     int y2 = (y+32)/64  , x2 = (x-32) / 64;
     if(getPlayScene()->mapState[y2][x2] == (getPlayScene()->TILE_DIRT || getPlayScene()->TILE_DIAMOND)){
@@ -31,23 +32,25 @@ void Stone::Update(float deltaTime) {
         getPlayScene()->StoneGroup->RemoveObject(GetObjectIterator());
         getPlayScene()->StoneGroup->AddNewObject(new Stone("play/stone.png", x, y+8, 0));
     }
-    else if((y-32) % 64 == 0){
-        getPlayScene()->mapState[y2][x2]= getPlayScene()->TILE_STONE;
-    }
+    std::cout <<  x << " " <<((x-32)%64==0) <<" "<< (x-32)/64 - ((x-32)%64==0) << " " << y2-1 << std::endl;
     //push
     bool left_collision = Engine::Collider::IsPointInRect(getPlayScene()->boy->Position, Position-Engine::Point(64,32), Size) || \
        Engine::Collider::IsPointInRect(getPlayScene()->girl->Position, Position-Engine::Point(64,32), Size) ;
     bool right_collision = Engine::Collider::IsPointInRect(getPlayScene()->boy->Position, Position+Engine::Point(0,-32), Size) || \
        Engine::Collider::IsPointInRect(getPlayScene()->girl->Position, Position+Engine::Point(0,-32), Size) ;
-    if(left_collision && !right_collision && getPlayScene()->mapState[y2-1][x2+1] != getPlayScene()->TILE_DIRT){
+    if(left_collision && !right_collision && getPlayScene()->mapState[y2-1][(x-32)/64 + ((x-32)%64==0)] != getPlayScene()->TILE_DIRT){
+        getPlayScene()->mapState[y2-1][(x-32)/64 + ((x-32)%64==0)] = getPlayScene()->TILE_FLOOR;
         std::cout << "left\n";
         getPlayScene()->StoneGroup->RemoveObject(GetObjectIterator());
         getPlayScene()->StoneGroup->AddNewObject(new Stone("play/stone.png", x+4, y, 0));
     }
-    else if(!left_collision && right_collision&& getPlayScene()->mapState[y2-1][x2-1] != getPlayScene()->TILE_DIRT){
-        std::cout << "right\n";
+    else if(!left_collision && right_collision && getPlayScene()->mapState[y2-1][(x-32)/64 - ((x-32)%64==0)] != getPlayScene()->TILE_DIRT)
+    {
+
+        getPlayScene()->mapState[y2-1][(x-32)/64]  = getPlayScene()->TILE_FLOOR;
+        std::cout << "right" << " " << (x-32)/64 << "\n" ;
         getPlayScene()->StoneGroup->RemoveObject(GetObjectIterator());
         getPlayScene()->StoneGroup->AddNewObject(new Stone("play/stone.png", x-4, y, 0));
     }
-    
+
 }
