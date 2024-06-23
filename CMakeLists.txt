@@ -119,6 +119,16 @@ add_executable(2024_I2P2_TowerDefense_with_answer
 #        UI/Component/TextInput.hpp
 )
 
+add_custom_target(update_score ALL
+    COMMAND ${CMAKE_COMMAND} -E echo "Pushing score to GitHub..."
+    COMMAND git add score.txt
+    COMMAND git commit -m "[Auto]Update score"
+    COMMAND git push origin master
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
+add_dependencies(2024_I2P2_TowerDefense_with_answer update_score)
+
+
 IF (WIN32)
     target_include_directories(2024_I2P2_TowerDefense_with_answer PUBLIC C:/allegro/include)
     target_link_directories(2024_I2P2_TowerDefense_with_answer PUBLIC C:/allegro/lib)
