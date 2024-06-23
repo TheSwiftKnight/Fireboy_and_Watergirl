@@ -26,7 +26,6 @@ public:
     bool jumpTimestamp;
     int jumpCD;
     float jumpspeed = 5;
-    int x,y;
     int velx,vely;
     int dir = NO;
 

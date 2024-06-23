@@ -85,7 +85,6 @@ void PlayScene::Initialize() {
 	AddNewControlObject(UIGroup = new Group());
 	
 	ReadMap();
-	// ReadEnemyWave();
 	mapDistance = CalculateBFSDistance();
 	ConstructUI();
 	imgTarget = new Engine::Image("play/target.png", 0, 0);
@@ -98,10 +97,10 @@ void PlayScene::Initialize() {
 	// Start BGM.
 	bgmId = AudioHelper::PlayBGM("play.ogg");
 
-	boy = new Twins("play/boy.png", 96, 500,1,BOY);
+	boy = new Twins("play/boy.png", 96, 510,1,BOY);
 	girl = new Twins("play/girl.png", 96, 700,1,GIRL);
-	// AddNewObject(boy);
-	// AddNewObject(girl);
+	boy->MeDraw();
+	girl->MeDraw();
 }
 void PlayScene::Terminate() {
 	AudioHelper::StopBGM(bgmId);

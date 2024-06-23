@@ -18,7 +18,7 @@
 PlayScene* Twins::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
 }
-Twins::Twins(std::string imgTwins, int x, int y, float radius,ID id) : Sprite(imgTwins, x, y),x(x),y(y),id(id){
+Twins::Twins(std::string imgTwins, int x, int y, float radius,ID id) : Sprite(imgTwins, x, y),id(id){
 	Position.x = x;
 	Position.y = y;
 	speed = 3;
@@ -26,6 +26,7 @@ Twins::Twins(std::string imgTwins, int x, int y, float radius,ID id) : Sprite(im
 	velx = vely = 0;
 	CollisionRadius = radius;
 	jumpTimestamp = true;
+	sourceX = 0;
 }
 void Twins::XUpdate(){
 	Position.x += velx;
