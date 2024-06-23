@@ -528,6 +528,7 @@ void PlayScene::ReadMap() {
 				mapState[i][j-1] = TILE_ELEVATOR;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize - 64, i * BlockSize, BlockSize, BlockSize));
+				int count = 0;
 				AddNewObject(new Elevator("play/elevator.png", j * BlockSize, i * BlockSize+75, i * BlockSize+75, i * BlockSize + 128+ 75, 0, 0));
 			}
 			else if(num == 'L'){
@@ -570,7 +571,7 @@ void PlayScene::ReadMap() {
 				mapState[i][j] = TILE_SWITCH;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize - 64, i * BlockSize, BlockSize, BlockSize));
-				AddNewObject(new Switch("play/switch.png", j * BlockSize, i * BlockSize+52, j * BlockSize, j * BlockSize -128+1, 0, 0));
+				AddNewObject(new Switch("play/switch.png", j * BlockSize, i * BlockSize+52-21, j * BlockSize, j * BlockSize -128+1, 0, 0));
 			}
 		}
 	}
