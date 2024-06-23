@@ -617,11 +617,36 @@ void PlayScene::ConstructUI() {
 	//title
 	UIGroup->AddNewObject(new Engine::Image("play/game_title.png", 40, 600, 300, 78));
 	// Background
-	UIGroup->AddNewObject(new Engine::Image("play/floor.png", 1280, 0, 320, 832));
+	UIGroup->AddNewObject(new Engine::Image("play/background.png", 1280, 0, 320, 832));
 	// Text
-	UIGroup->AddNewObject(UITime = new Engine::Label(std::string("Time 00:00"), "pirulen.ttf", 32, 1294, 64));
-	UIGroup->AddNewObject(new Engine::Label(std::string("Level ") + std::to_string(MapId), "pirulen.ttf", 32, 1294, 0));
-	UIGroup->AddNewObject(UIScore = new Engine::Label(std::string("Score ") + std::to_string(score), "pirulen.ttf", 24, 1294, 280));
+	UIGroup->AddNewObject(UITime = new Engine::Label(std::string("Time 00:00"), "pirulen.ttf", 32, 1294, 64, 255, 255,255));
+	UIGroup->AddNewObject(new Engine::Label(std::string("Level ") + std::to_string(MapId), "pirulen.ttf", 32, 1294, 0, 255, 255,255));
+	UIGroup->AddNewObject(UIScore = new Engine::Label(std::string("Score ") + std::to_string(score), "pirulen.ttf", 32, 1294, 128, 255, 255,255));
+	UIGroup->AddNewObject(new Engine::Image("play/boy_char.png", 1300-10, 640+64*2, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/girl_char.png", 1350-10, 640+64*2, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/boy_char.png", 1400-10, 640+64*2, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/girl_char.png", 1450-10, 640+64*2, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/boy_char.png", 1500-10, 640+64*2, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/girl_char.png", 1550-10, 640+64*2, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/boy_char.png", 1300+15, 640+64*1, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/girl_char.png", 1350+15, 640+64*1, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/boy_char.png", 1400+15, 640+64*1, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/girl_char.png", 1450+15, 640+64*1, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/boy_char.png", 1500+15, 640+64*1, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/boy_char.png", 1300+40, 640, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/girl_char.png", 1350+40, 640, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/boy_char.png", 1400+40, 640, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/girl_char.png", 1450+40, 640, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/boy_char.png", 1300+65, 640-64*1, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/girl_char.png", 1350+65, 640-64*1, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/boy_char.png", 1400+65, 640-64*1, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/boy_char.png", 1300+90, 640-64*2, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/girl_char.png", 1350+90, 640-64*2, 38, 64));
+	UIGroup->AddNewObject(new Engine::Image("play/boy_char.png", 1300+115, 640-64*3, 38, 64));
+
+	// Text
+	
+	// Text
 	TurretButton* btn;
 	// // Button 1
 	// btn = new TurretButton("play/floor.png", "play/dirt.png",
