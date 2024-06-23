@@ -15,14 +15,14 @@
 #include "Engine/GameEngine.hpp"
 #include "Engine/Group.hpp"
 #include "UI/Component/Label.hpp"
-#include "Turret/Turret.hpp"
+// #include "Turret/Turret.hpp"
 // #include "Enemy/PlaneEnemy.hpp"
 #include "PlayScene.hpp"
 #include "Engine/Resources.hpp"
 // #include "Enemy/SoldierEnemy.hpp"
 // #include "Enemy/MisteryEnemy.hpp"
 // #include "Enemy/TankEnemy.hpp"
-#include "Turret/TurretButton.hpp"
+// #include "Turret/TurretButton.hpp"
 #include "Engine/LOG.hpp"
 #include "Engine/IObject.hpp"
 #include "Twins/Twins.hpp"
@@ -272,7 +272,7 @@ void PlayScene::Draw() const {
 void PlayScene::OnMouseDown(int button, int mx, int my) {
 	if ((button & 1) && !imgTarget->Visible && preview) {
 		// Cancel turret construct.
-		UIGroup->RemoveObject(preview->GetObjectIterator());
+		// UIGroup->RemoveObject(preview->GetObjectIterator());
 		preview = nullptr;
 	}
 	
