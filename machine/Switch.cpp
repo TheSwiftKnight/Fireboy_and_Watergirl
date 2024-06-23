@@ -23,38 +23,33 @@
 #include "Switch.hpp"
 #include "Engine/Collider.hpp"
 #include "Twins/Twins.hpp"
-#include "machine/Button.hpp"
+#include "machine/Lever.hpp"
 PlayScene* Switch::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
 }
-Switch::Switch(std::string imgSwitch,int x, int y, int init_y, int final_y, int num, int opening):
-    Sprite(imgSwitch, x, y), x(x), y(y), init_y(init_y), final_y(final_y), Switch_num(num), opening(opening){
+Switch::Switch(std::string imgSwitch,int x, int y, int init_x, int final_x, int num, int opening):
+    Sprite(imgSwitch, x, y), x(x), y(y), init_x(init_x), final_x(final_x), Switch_num(num), opened(opening){
+    if(x != final_x) opened = 0;
 }
 void Switch::Draw() {
 	Sprite::Draw();
 }
 void Switch::Update(float deltaTime) {
-    std::list<IObject*> objects = getPlayScene()->ButtonGroup->GetObjects();
+    std::list<IObject*> objects = getPlayScene()->LeverGroup->GetObjects();
     bool start = 0;
     for(auto obj:objects){
-        Button* btn = dynamic_cast<Button*>(obj);
-        if(btn->started == 1){
+        Lever* lever = dynamic_cast<Lever*>(obj);
+        if(lever->started == 1){
             start = 1;
             break;
         }
     }
-    if(start){
-        getPlayScene()->mapState[init_y/64][x/64] = getPlayScene()->TILE_FLOOR;
-        if(y < final_y){
+    if(start && !opened){
+        getPlayScene()->mapState[y/64][init_x/64] = getPlayScene()->TILE_FLOOR;
+        getPlayScene()->mapState[y/64][init_x/64-1] = getPlayScene()->TILE_FLOOR;
+        if(x > final_x){
             getPlayScene()->SwitchGroup->RemoveObject(GetObjectIterator());
-            getPlayScene()->SwitchGroup->AddNewObject(new Switch("play/Switch.png",x,y+2,init_y,final_y,Switch_num,1));
+            getPlayScene()->SwitchGroup->AddNewObject(new Switch("play/Switch.png",x-3,y,init_x,final_x,Switch_num,1));
         }
-    }
-    else if(!start){
-        // getPlayScene()->mapState[init_y/64][x/64] = getPlayScene()->TILE_SWITCH;
-        // if(y > init_y) {
-        //     getPlayScene()->SwitchGroup->RemoveObject(GetObjectIterator());
-        //     getPlayScene()->SwitchGroup->AddNewObject(new Switch("play/Switch.png",x,y-2,init_y,final_y,Switch_num,0));
-        // }
     }
 }
