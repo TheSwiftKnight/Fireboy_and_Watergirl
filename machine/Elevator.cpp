@@ -28,7 +28,7 @@ PlayScene* Elevator::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
 }
 Elevator::Elevator(std::string imgElevator,int x, int y, int init_y, int final_y, int num, int opening):
-    Sprite(imgElevator, x, y), x(x), y(y), init_y(init_y), final_y(final_y), elevator_num(num), opening(opening){
+    Sprite(imgElevator, x, y), x(x), y(y), init_y(init_y),final_y(final_y), elevator_num(num), opening(opening){
 }
 void Elevator::Draw() {
 	Sprite::Draw();
@@ -43,7 +43,6 @@ void Elevator::Update(float deltaTime) {
             break;
         }
     }
-    std::cout<<"y = "<<y<<std::endl;
     PlayScene* s = getPlayScene();
     int Px0 = s->boy->Position.x;
 	int Py0 = s->boy->Position.y;
