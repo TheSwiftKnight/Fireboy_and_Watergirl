@@ -119,11 +119,24 @@ add_executable(2024_I2P2_TowerDefense_with_answer
 #        UI/Component/TextInput.hpp
 )
 
+# add_custom_target(update_score ALL
+#     COMMAND ${CMAKE_COMMAND} -E echo "Pushing score to GitHub..."
+#     COMMAND git add score.txt
+#     COMMAND git commit -m "[Auto]Update score"
+#     COMMAND git push origin master
+#     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+# )
+# add_dependencies(2024_I2P2_TowerDefense_with_answer update_score)
+
+if(WIN32)
+    set(UPDATE_SCRIPT ${CMAKE_SOURCE_DIR}/update_score.bat)
+else()
+    set(UPDATE_SCRIPT ${CMAKE_SOURCE_DIR}/update_score.sh)
+endif()
+
+# Create a custom target for updating the score
 add_custom_target(update_score ALL
-    COMMAND ${CMAKE_COMMAND} -E echo "Pushing score to GitHub..."
-    COMMAND git add score.txt
-    COMMAND git commit -m "[Auto]Update score"
-    COMMAND git push origin master
+    COMMAND ${UPDATE_SCRIPT}
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
 add_dependencies(2024_I2P2_TowerDefense_with_answer update_score)
