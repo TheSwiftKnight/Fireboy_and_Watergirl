@@ -9,8 +9,10 @@ Group 4 -- Fire and Freeze
 ### Water
 1. Fireboy can pass Red Water, while Watergirl can pass Blue Water.
 2. **Neither** of them can pass Green Water.
+3. If obeyed, the player loses.
 ### Diamond
 1. Eat related color of diamond to get extra +1000 points.
+
 
 # Work Assignment
 ## What are done together:
