@@ -24,23 +24,30 @@ void Stone::Draw() {
 	Sprite::Draw();
 }
 void Stone::Update(float deltaTime) {
-    int y2 = (y-32+15)/64 + 1, x2 = (x-32) / 64;
-    // std::cout << "Stone" << x2 << " " << y2 << " " << y << std::endl;
+    //falling
+    int y2 = (y+32)/64  , x2 = (x-32) / 64;
     if(getPlayScene()->mapState[y2][x2] == (getPlayScene()->TILE_DIRT || getPlayScene()->TILE_DIAMOND)){
-        // std::cout << "stone" << x2 << " " << (y-32)/64 << "\n";
-        getPlayScene()->mapState[(y-32)/64][x2] = getPlayScene()->mapState[y2][x2];
-        //getPlayScene()->mapState[y2][x2] = getPlayScene()->TILE_STONE;
+        getPlayScene()->mapState[(y-32)/64][x2] = getPlayScene()->TILE_DIRT;
         getPlayScene()->StoneGroup->RemoveObject(GetObjectIterator());
-        getPlayScene()->StoneGroup->AddNewObject(new Stone("play/stone.png", x, y+15, 0));
+        getPlayScene()->StoneGroup->AddNewObject(new Stone("play/stone.png", x, y+8, 0));
     }
-    else{
-        getPlayScene()->mapState[y2][x2] = getPlayScene()->TILE_STONE;
+    else if((y-32) % 64 == 0){
+        getPlayScene()->mapState[y2][x2]= getPlayScene()->TILE_STONE;
     }
-    if(getPlayScene()->mapState[(y+32)/64][(x-3)/64] != getPlayScene()->TILE_DIRT &&  Engine::Collider::IsRectOverlap(Position, Position + Size / 2 , getPlayScene()->girl->Position, getPlayScene()->boy->Position + Size / 2) ){
-        eaten = 1;
+    //push
+    bool left_collision = Engine::Collider::IsPointInRect(getPlayScene()->boy->Position, Position-Engine::Point(64,32), Size) || \
+       Engine::Collider::IsPointInRect(getPlayScene()->girl->Position, Position-Engine::Point(64,32), Size) ;
+    bool right_collision = Engine::Collider::IsPointInRect(getPlayScene()->boy->Position, Position+Engine::Point(0,-32), Size) || \
+       Engine::Collider::IsPointInRect(getPlayScene()->girl->Position, Position+Engine::Point(0,-32), Size) ;
+    if(left_collision && !right_collision && getPlayScene()->mapState[y2-1][x2+1] != getPlayScene()->TILE_DIRT){
+        std::cout << "left\n";
         getPlayScene()->StoneGroup->RemoveObject(GetObjectIterator());
-        getPlayScene()->StoneGroup->AddNewObject(new Stone("play/stone.png", x-3, y, 0));
+        getPlayScene()->StoneGroup->AddNewObject(new Stone("play/stone.png", x+4, y, 0));
     }
-    
+    else if(!left_collision && right_collision&& getPlayScene()->mapState[y2-1][x2-1] != getPlayScene()->TILE_DIRT){
+        std::cout << "right\n";
+        getPlayScene()->StoneGroup->RemoveObject(GetObjectIterator());
+        getPlayScene()->StoneGroup->AddNewObject(new Stone("play/stone.png", x-4, y, 0));
+    }
     
 }
