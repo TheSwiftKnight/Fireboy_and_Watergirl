@@ -93,7 +93,7 @@ void PlayScene::Initialize() {
 	preview = nullptr;
 	UIGroup->AddNewObject(imgTarget);
 	// Preload Lose Scene
-	deathBGMInstance = Engine::Resources::GetInstance().GetSampleInstance("astronomia.ogg");
+	deathBGMInstance = Engine::Resources::GetInstance().GetSampleInstance("lose.ogg");
 	Engine::Resources::GetInstance().GetBitmap("lose/benjamin-happy.png");
 	// Start BGM.
 	bgmId = AudioHelper::PlayBGM("play.ogg");

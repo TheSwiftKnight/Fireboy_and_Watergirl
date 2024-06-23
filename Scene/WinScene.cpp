@@ -29,7 +29,7 @@ void WinScene::Initialize() {
 	AddNewObject(new Engine::Image("win/benjamin-sad.png", halfW, halfH +50, 0, 0, 0.5, 0.5));
 	AddNewObject(new Engine::Label("You Win!", "pirulen.ttf", 48, halfW, halfH / 4 -10, 255, 255, 255, 255, 0.5, 0.5));
 	Engine::ImageButton* btn;
-	bgmId = AudioHelper::PlayAudio("win.wav");
+	bgmId = AudioHelper::PlayAudio("win.ogg");
 
 	//name input
 	playerName = "";
@@ -48,11 +48,11 @@ void WinScene::Terminate() {
 }
 void WinScene::Update(float deltaTime) {
 	ticks += deltaTime;
-	if (ticks > 4 && ticks < 100 &&
-		dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetScene("play"))->MapId == 2) {
-		ticks = 100;
-		bgmId = AudioHelper::PlayBGM("happy.ogg");
-	}
+	// if (ticks > 4 && ticks < 100 &&
+	// 	dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetScene("play"))->MapId == 2) {
+	// 	ticks = 100;
+	// 	bgmId = AudioHelper::PlayBGM("happy.ogg");
+	// }
 }
 void WinScene::BackOnClick(int stage) {
 	// Change to select scene.
