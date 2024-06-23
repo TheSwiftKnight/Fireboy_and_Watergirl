@@ -53,12 +53,8 @@ public:
 	// Map tiles.
 	Group* TileMapGroup;
 	Group* DebugIndicatorGroup;
-	Group* BulletGroup;
-	Group* TowerGroup;
 	Group* EnemyGroup;
-	Group* EffectGroup;
 	Group* UIGroup;
-	Group* WaterGroup;
 	Group* ButtonGroup;
 	Engine::Label* UITime;
 	Group* DiamondGroup;
@@ -72,10 +68,9 @@ public:
 	Turret* preview;
 	Twins* boy;
 	Twins* girl;
-	Twins* water;
 	std::vector<std::vector<TileType>> mapState;
-	std::vector<std::vector<int>> mapDistance;
-	std::list<std::pair<int, float>> enemyWaveData;
+	// std::vector<std::vector<int>> mapDistance;
+	// std::list<std::pair<int, float>> enemyWaveData;
 	std::list<int> keyStrokes;
 	// static Engine::Point GetClientSize();
 	explicit PlayScene() = default;

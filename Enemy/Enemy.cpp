@@ -6,9 +6,7 @@
 #include <vector>
 
 #include "Engine/AudioHelper.hpp"
-#include "UI/Animation/DirtyEffect.hpp"
 #include "Enemy.hpp"
-#include "UI/Animation/ExplosionEffect.hpp"
 #include "Engine/GameEngine.hpp"
 #include "Engine/Group.hpp"
 #include "Engine/IScene.hpp"

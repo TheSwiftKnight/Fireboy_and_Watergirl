@@ -11,7 +11,6 @@
 #include <chrono>
 
 #include "Engine/AudioHelper.hpp"
-#include "UI/Animation/DirtyEffect.hpp"
 #include "Enemy/Enemy.hpp"
 #include "Engine/GameEngine.hpp"
 #include "Engine/Group.hpp"
@@ -57,10 +56,8 @@ void PlayScene::Initialize() {
 	// Add groups from bottom to top.
 	AddNewObject(TileMapGroup = new Group());
 	AddNewObject(DebugIndicatorGroup = new Group());
-	AddNewObject(TowerGroup = new Group());
+	// AddNewObject(TowerGroup = new Group());
 	AddNewObject(EnemyGroup = new Group());
-	AddNewObject(BulletGroup = new Group());
-	AddNewObject(EffectGroup = new Group());
 	AddNewObject(ButtonGroup = new Group());
 	AddNewObject(DiamondGroup = new Group());
 	AddNewObject(ElevatorGroup = new Group());
@@ -71,7 +68,7 @@ void PlayScene::Initialize() {
 	AddNewControlObject(UIGroup = new Group());
 	
 	ReadMap();
-	mapDistance = CalculateBFSDistance();
+	// mapDistance = CalculateBFSDistance();
 	ConstructUI();
 	imgTarget = new Engine::Image("play/target.png", 0, 0);
 	imgTarget->Visible = false;
@@ -301,15 +298,15 @@ void PlayScene::OnMouseUp(int button, int mx, int my) {
 	if (button & 1) {
 		if (mapState[y][x] == TILE_OCCUPIED && preview->Tool) {
 			std::list<std::pair<bool, Engine::IObject*>> pair;
-			for(auto t:TowerGroup->GetObjects()){
-				pair.emplace_back(true,t);
-			}
-			for(auto t:pair){
-				if(((int)(t.second->Position.x/BlockSize))==x && ((int)(t.second->Position.y/BlockSize))==y){
-					TowerGroup->RemoveObject(t.second->GetObjectIterator());
-					mapState[y][x] = TILE_FLOOR;
-				}
-			}
+			// for(auto t:TowerGroup->GetObjects()){
+			// 	pair.emplace_back(true,t);
+			// }
+			// for(auto t:pair){
+			// 	if(((int)(t.second->Position.x/BlockSize))==x && ((int)(t.second->Position.y/BlockSize))==y){
+			// 		// TowerGroup->RemoveObject(t.second->GetObjectIterator());
+			// 		mapState[y][x] = TILE_FLOOR;
+			// 	}
+			// }
 			// EarnMoney(50);
 			preview->GetObjectIterator()->first = false;
 			UIGroup->RemoveObject(preview->GetObjectIterator());
@@ -333,7 +330,7 @@ void PlayScene::OnMouseUp(int button, int mx, int my) {
 			preview->Enabled = true;
 			preview->Preview = false;
 			preview->Tint = al_map_rgba(255, 255, 255, 255);
-			TowerGroup->AddNewObject(preview);
+			// TowerGroup->AddNewObject(preview);
 			// To keep responding when paused.
 			preview->Update(0);
 			// Remove Preview.
@@ -567,7 +564,7 @@ void PlayScene::ReadEnemyWave() {
 	std::string line;
 	int type,repeat;
 	float wait;
-	enemyWaveData.clear();
+	// enemyWaveData.clear();
 	std::ifstream fin(filename);
 	while(std::getline(fin,line)){
 		//Engine::LOG(Engine::INFO) << line;
@@ -581,9 +578,9 @@ void PlayScene::ReadEnemyWave() {
 
 		//Engine::LOG(Engine::INFO) << type<<' '<<wait<<' '<<repeat;
         // If inputs are correct, use the data.
-        for (int i = 0; i < repeat; i++) {
-            enemyWaveData.emplace_back(type, wait);
-        }
+        // for (int i = 0; i < repeat; i++) {
+        //     enemyWaveData.emplace_back(type, wait);
+        // }
 	}
 
 	fin.close();
@@ -715,9 +712,9 @@ bool PlayScene::CheckSpaceValid(int x, int y) {
 	}
 	// All enemy have path to exit.
 	mapState[y][x] = TILE_OCCUPIED;
-	mapDistance = map;
-	for (auto& it : EnemyGroup->GetObjects())
-		dynamic_cast<Enemy*>(it)->UpdatePath(mapDistance);
+	// mapDistance = map;
+	// for (auto& it : EnemyGroup->GetObjects())
+	// 	dynamic_cast<Enemy*>(it)->UpdatePath(mapDistance);
 	return true;
 }
 std::vector<std::vector<int>> PlayScene::CalculateBFSDistance() {
