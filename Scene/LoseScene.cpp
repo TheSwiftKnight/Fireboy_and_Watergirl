@@ -27,15 +27,15 @@ void LoseScene::Initialize() {
 	int h = Engine::GameEngine::GetInstance().GetScreenSize().y;
 	int halfW = w / 2;
 	int halfH = h / 2;
-	AddNewObject(new Engine::Image("lose/benjamin-happy.png", halfW, halfH+50, 0, 0, 0.5, 0.5));
+	AddNewObject(new Engine::Image("lose/rick_lose.png", halfW, halfH+25, 0, 0, 0.5, 0.5));
 	AddNewObject(new Engine::Label("You Lose :(", "pirulen.ttf", 48, halfW, halfH / 4 + 10, 255, 255, 255, 255, 0.5, 0.5));
 	Engine::ImageButton* btn;
 	btn = new Engine::ImageButton("win/dirt.png", "win/floor.png", halfW - 200, halfH * 7 / 4 - 50, 400, 100);
 	btn->SetOnClickCallback(std::bind(&LoseScene::BackOnClick, this, 2));
 	AddNewControlObject(btn);
 	AddNewObject(new Engine::Label("Back", "pirulen.ttf", 48, halfW, halfH * 7 / 4, 0, 0, 0, 255, 0.5, 0.5));
-    bgmInstance = AudioHelper::PlaySample("astronomia.ogg", false, AudioHelper::BGMVolume, PlayScene::DangerTime);
-
+    // bgmInstance = AudioHelper::PlaySample("lose.ogg", false, AudioHelper::BGMVolume, PlayScene::DangerTime);
+	bgmId = AudioHelper::PlayAudio("lose.ogg");
 //name input
 	playerName = "";
 	playerNameLabel = new Engine::Label("Name: "+ playerName, "pirulen.ttf", 48, halfW, halfH / 4 +50, 255, 255, 255, 255, 0.5, 0.5);
@@ -44,8 +44,8 @@ void LoseScene::Initialize() {
 
 }
 void LoseScene::Terminate() {
-	AudioHelper::StopSample(bgmInstance);
-	bgmInstance = std::shared_ptr<ALLEGRO_SAMPLE_INSTANCE>();
+	AudioHelper::StopBGM(bgmId);
+	// bgmInstance = std::shared_ptr<ALLEGRO_SAMPLE_INSTANCE>();
 	IScene::Terminate();
 }
 void LoseScene::BackOnClick(int stage) {

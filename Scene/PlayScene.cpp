@@ -93,13 +93,13 @@ void PlayScene::Initialize() {
 	preview = nullptr;
 	UIGroup->AddNewObject(imgTarget);
 	// Preload Lose Scene
-	deathBGMInstance = Engine::Resources::GetInstance().GetSampleInstance("astronomia.ogg");
+	deathBGMInstance = Engine::Resources::GetInstance().GetSampleInstance("lose.ogg");
 	Engine::Resources::GetInstance().GetBitmap("lose/benjamin-happy.png");
 	// Start BGM.
 	bgmId = AudioHelper::PlayBGM("play.ogg");
 
-	boy = new Twins("boy.png", 96, 500,1,BOY);
-	girl = new Twins("girl.png", 96, 700,1,GIRL);
+	boy = new Twins("play/boy.png", 96, 500,1,BOY);
+	girl = new Twins("play/girl.png", 96, 700,1,GIRL);
 	// AddNewObject(boy);
 	// AddNewObject(girl);
 }
@@ -289,19 +289,6 @@ void PlayScene::Draw() const {
 	IScene::Draw();
 	boy->MeDraw();
 	girl->MeDraw();
-	// if (DebugMode) {
-	// 	// Draw reverse BFS distance on all reachable blocks.
-	// 	for (int i = 0; i < MapHeight; i++) {
-	// 		for (int j = 0; j < MapWidth; j++) {
-	// 			if (mapDistance[i][j] != -1) {
-	// 				// Not elegant nor efficient, but it's quite enough for debugging.
-	// 				Engine::Label label(std::to_string(mapDistance[i][j]), "pirulen.ttf", 32, (j + 0.5) * BlockSize, (i + 0.5) * BlockSize);
-	// 				label.Anchor = Engine::Point(0.5, 0.5);
-	// 				label.Draw();
-	// 			}
-	// 		}
-	// 	}
-	// }
 }
 void PlayScene::OnMouseDown(int button, int mx, int my) {
 	if ((button & 1) && !imgTarget->Visible && preview) {

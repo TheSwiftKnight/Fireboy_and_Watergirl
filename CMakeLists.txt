@@ -113,10 +113,6 @@ add_executable(2024_I2P2_TowerDefense_with_answer
         Scene/SettingsScene.hpp
         Scene/ScoreBoardScene.cpp
         Scene/ScoreBoardScene.hpp
-        Twins/Fireboy.cpp
-        Twins/Fireboy.hpp
-        Twins/Watergirl.cpp
-        Twins/Watergirl.hpp
         Twins/Twins.cpp
         Twins/Twins.hpp
 #        UI/Component/TextInput.cpp
