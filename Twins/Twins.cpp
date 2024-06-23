@@ -112,6 +112,8 @@ void Twins::checkHit(){
 	   scene->mapState[(Position.y)/64][(Position.x)/64]==scene->TILE_BLUE_DOOR ||
 	   scene->mapState[(Position.y)/64][(Position.x+43)/64]==scene->TILE_BLUE_DOOR)){
 		arrived = true;
+		Position.x = doorPosX;
+		Position.y = doorPosY;
 		scene->Arrived();
 	}
 	else if(id == BOY&&
@@ -120,6 +122,8 @@ void Twins::checkHit(){
 	   scene->mapState[(Position.y)/64][(Position.x)/64]==scene->TILE_RED_DOOR ||
 	   scene->mapState[(Position.y)/64][(Position.x+43)/64]==scene->TILE_RED_DOOR)){
 		arrived = true;
+		Position.x = doorPosX;
+		Position.y = doorPosY;
 		scene->Arrived();
 	}
 	if(scene->mapState[(Position.y+60)/64][(Position.x)/64]==scene->TILE_GREEN_WATER ||

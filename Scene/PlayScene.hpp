@@ -29,7 +29,6 @@ public:
 	enum TileType {
 		TILE_DIRT,
 		TILE_FLOOR,
-		TILE_OCCUPIED,
 		TILE_BLUE_DOOR,
 		TILE_RED_DOOR,
 		TILE_BUTTON,
@@ -45,26 +44,16 @@ public:
 	int score;
 	float spriteTick;
 	static bool DebugMode;
-	static const std::vector<Engine::Point> directions;
+	// static const std::vector<Engine::Point> directions;
 	static const int MapWidth, MapHeight;
 	static const int BlockSize;
-	static const float DangerTime;
-	static const Engine::Point SpawnGridPoint;
-	static const Engine::Point EndGridPoint;
-	static const std::vector<int> code;
 	int MapId;
 	float ticks;
-	float deathCountDown;
 	// Map tiles.
 	Group* TileMapGroup;
-	Group* GroundEffectGroup;
 	Group* DebugIndicatorGroup;
-	Group* BulletGroup;
-	Group* TowerGroup;
 	Group* EnemyGroup;
-	Group* EffectGroup;
 	Group* UIGroup;
-	Group* WaterGroup;
 	Group* ButtonGroup;
 	Engine::Label* UITime;
 	Group* DiamondGroup;
@@ -78,12 +67,11 @@ public:
 	Turret* preview;
 	Twins* boy;
 	Twins* girl;
-	Twins* water;
 	std::vector<std::vector<TileType>> mapState;
-	std::vector<std::vector<int>> mapDistance;
-	std::list<std::pair<int, float>> enemyWaveData;
+	// std::vector<std::vector<int>> mapDistance;
+	// std::list<std::pair<int, float>> enemyWaveData;
 	std::list<int> keyStrokes;
-	static Engine::Point GetClientSize();
+	// static Engine::Point GetClientSize();
 	explicit PlayScene() = default;
 	void Initialize() override;
 	void Terminate() override;
@@ -98,15 +86,9 @@ public:
 	void Arrived();
 	int GetScore();
 	void ReadMap();
-	void ReadEnemyWave();
 	void ConstructUI();
-	void UIBtnClicked(int id);
-	bool CheckSpaceValid(int x, int y);
 	void UpdateTimer();
-	std::vector<std::vector<int>> CalculateBFSDistance();
-	// void ModifyReadMapTiles();
 	void WriteScoretoFile(int score);
-
 	void SwitchToFloor(int x, int y);
 };
 #endif // PLAYSCENE_HPP
