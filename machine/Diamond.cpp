@@ -26,7 +26,7 @@ void Diamond::Draw() {
 }
 void Diamond::Update(float deltaTime) {
     if(diamond_type == blue){
-        if(Engine::Collider::IsRectOverlap(Position, Position + Size / 2 , getPlayScene()->girl->Position, getPlayScene()->boy->Position + Size / 2) ){
+        if(Engine::Collider::IsRectOverlap(Position, Position+Size/2 , getPlayScene()->girl->Position, getPlayScene()->girl->Position + Size / 2) ){
             eaten = 1;
             getPlayScene()->DiamondGroup->RemoveObject(GetObjectIterator());
             getPlayScene()->score += 1000;
