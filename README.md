@@ -29,7 +29,8 @@
 3. Scene/PlayScene (Boy and girl related functions)
 4. Scene/PlayScene: Timer
 5. machine/Elevator (Update())
-6. Scoreboard
+6. online Scoreboard
+7. LoseScene/Winscene images
    
 ### 112062103 陳明琦 is in charge of:
 1. Resource:
@@ -37,5 +38,7 @@
    2. game title/startScene background
    3. Red/Blue/Green Water
 2. machine: Lever/Button/Switch mechanics
-3. StartScene: ALL
-4. PlayScene: piled twins (right bottom of the screen)
+3. StartScene/StageSelectScene/SettingScene: ALL
+4. LoseScene/Winscene/ScoreboardScene: backgroud && button
+5. PlayScene: piled twins (right bottom of the screen)
+
