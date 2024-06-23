@@ -3,7 +3,7 @@
 #include <cmath>
 #include <utility>
 
-#include "Enemy/Enemy.hpp"
+// #include "Enemy/Enemy.hpp"
 #include "Engine/GameEngine.hpp"
 #include "Engine/Group.hpp"
 #include "Engine/IObject.hpp"
