@@ -1,5 +1,5 @@
-Group 4 -- Fire and Freeze
-# How to play the game
+# Group 4 -- Fire and Freeze
+## How to play the game
 ### Use Keyboard to Control Fireboy and Watergirl
 1. use W/A/S/D to control Fireboy
 2. use ↑/↓/←/→ to control Watergirl
@@ -14,12 +14,12 @@ Group 4 -- Fire and Freeze
 1. Eat related color of diamond to get extra +1000 points.
 
 
-# Work Assignment
-## What are done together:
+## Work Assignment
+### What are done together:
 1. Game Proposal && Gameplay design
 2. Map design
 
-## 112062112 曹楷萱 is in charge of:
+### 112062112 曹楷萱 is in charge of:
 
 1. Resource:
     1. Audios
@@ -31,7 +31,7 @@ Group 4 -- Fire and Freeze
 5. machine/Elevator (Update())
 6. Scoreboard
    
-## 112062103 陳明琦 is in charge of:
+### 112062103 陳明琦 is in charge of:
 1. Resource:
    1. Lever/Button/Elevator/Switch
    2. game title/startScene background
