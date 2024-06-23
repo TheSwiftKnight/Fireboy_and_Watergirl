@@ -18,10 +18,11 @@ void SettingsScene::Initialize() {
 
     Engine::ImageButton *btn;
     AddNewObject(new Engine::Image("play/background.png",0, 00));
-    btn = new Engine::ImageButton("stage-select/dirt.png", "stage-select/floor.png", halfW - 200, halfH * 3 / 2 - 50, 400, 100);
+    AddNewObject(new Engine::Image("play/menu_bg.png",238.5, 94.5));
+    btn = new Engine::ImageButton("stage-select/back_1.png", "stage-select/back_2.png", halfW - 200, 64*11+20, 400, 100);
     btn->SetOnClickCallback(std::bind(&SettingsScene::BackOnClick, this, 1));
     AddNewControlObject(btn);
-    AddNewObject(new Engine::Label("Back", "pirulen.ttf", 48, halfW, halfH * 3 / 2, 0, 0, 0, 255, 0.5, 0.5));
+    //AddNewObject(new Engine::Label("Back", "pirulen.ttf", 48, halfW, halfH * 3 / 2, 0, 0, 0, 255, 0.5, 0.5));
     // btn = new Engine::ImageButton("stage-select/dirt.png", "stage-select/floor.png", halfW - 200, halfH / 2 - 50, 400,
     //                               100);
     // btn->SetOnClickCallback(std::bind(&SettingsScene::PlayOnClick, this, 1));
@@ -55,6 +56,16 @@ void SettingsScene::Initialize() {
     bgmInstance = AudioHelper::PlaySample("start.ogg", true, AudioHelper::BGMVolume);
     sliderBGM->SetValue(AudioHelper::BGMVolume);
     sliderSFX->SetValue(AudioHelper::SFXVolume);
+
+    //twins
+    for(int i=0;i<1600;i+=128){
+        AddNewObject(new Engine::Image("play/boy_char.png", 0, i, 38, 64));
+	    AddNewObject(new Engine::Image("play/girl_char.png", 0, i+64, 38, 64));
+    }
+    for(int i=0;i<1600;i+=128){
+        AddNewObject(new Engine::Image("play/girl_char.png", 1600-38, i, 38, 64));
+	    AddNewObject(new Engine::Image("play/boy_char.png", 1600-38, i+64, 38, 64));
+    }
 }
 
 void SettingsScene::Terminate() {

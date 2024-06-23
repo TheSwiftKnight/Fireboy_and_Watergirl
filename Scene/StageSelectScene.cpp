@@ -51,8 +51,8 @@ void StageSelectScene::Initialize() {
 	    AddNewObject(new Engine::Image("play/girl_char.png", i+50, 12*64, 38, 64));
     }
     for(int i=0;i<1600;i+=100){
-        AddNewObject(new Engine::Image("play/boy_char.png", i, 0, 38, 64));
-	    AddNewObject(new Engine::Image("play/girl_char.png", i+50, 0, 38, 64));
+        AddNewObject(new Engine::Image("play/girl_char.png", i, 0, 38, 64));
+	    AddNewObject(new Engine::Image("play/boy_char.png", i+50, 0, 38, 64));
     }
 
     // Not safe if release resource while playing, however we only free while change scene, so it's fine.

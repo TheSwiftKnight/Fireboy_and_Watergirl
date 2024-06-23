@@ -22,12 +22,12 @@ void ScoreBoardScene::Initialize() {
     page = 0;
     scores.clear();
     displayedScores.clear();
-
+    AddNewObject(new Engine::Image("play/background.png",0, 00));
     Engine::ImageButton *btn;
-    btn = new Engine::ImageButton("stage-select/dirt.png", "stage-select/floor.png", halfW - 200, halfH * 7 / 4 - 50, 400, 100);
+    //back
+    btn = new Engine::ImageButton("stage-select/back_1.png", "stage-select/back_2.png", halfW - 200,halfH * 7 / 4 - 50, 400, 100);
     btn->SetOnClickCallback(std::bind(&ScoreBoardScene::BackOnClick, this, 1));
     AddNewControlObject(btn);
-    AddNewObject(new Engine::Label("Back", "pirulen.ttf", 48, halfW, halfH * 7 / 4, 0, 0, 0, 255, 0.5, 0.5));
     
     btn = new Engine::ImageButton("stage-select/dirt.png", "stage-select/floor.png", halfW - 800, halfH * 7 / 4 - 50, 400,
                                   100);
@@ -40,10 +40,7 @@ void ScoreBoardScene::Initialize() {
     btn->SetOnClickCallback(std::bind(&ScoreBoardScene::NextOnClick, this));
     AddNewControlObject(btn);
     AddNewObject(new Engine::Label("Next", "pirulen.ttf", 48, halfW + 600, halfH * 7 / 4, 0, 0, 0, 255, 0.5, 0.5));
-    
-    AddNewObject(
-        new Engine::Label("SCOREBOARD", "pirulen.ttf", 60, halfW, halfH / 6, 0, 202, 0, 255,
-                          0.5, 0.5));
+    AddNewObject(new Engine::Image("stage-select/scoreboard_1.png",halfW-160,halfH / 6-30));
 
     // Not safe if release resource while playing, however we only free while change scene, so it's fine.
     bgmInstance = AudioHelper::PlaySample("start.ogg", true, AudioHelper::BGMVolume);
@@ -111,7 +108,7 @@ void ScoreBoardScene::DisplayScores(){
     }
     displayedScores.clear();
 
-    int startY = 150; // Start Y position for the first score
+    int startY = 170; // Start Y position for the first score
     int stepY = 50; // Vertical space between scores
     for (const auto& score : scores) {
         Engine::Label* scoreLabel = new Engine::Label(score, "pirulen.ttf", 24, halfW, startY, 255,255,255, 255, 0.5, 0.5);
