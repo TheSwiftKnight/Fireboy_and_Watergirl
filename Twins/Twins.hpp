@@ -10,7 +10,7 @@ class Enemy;
 class PlayScene;
 
 enum Direction{NO,LEFT,RIGHT};
-enum ID{NEITHER,BLUE,RED};
+enum ID{NEITHER,BOY,GIRL};
 
 class Twins: public Engine::Sprite {
 protected:
@@ -29,6 +29,8 @@ public:
     int x,y;
     int velx,vely;
     int dir = NO;
+
+    bool arrived = false;
 
     ID id;
     Twins(std::string imgTwins, int x, int y, float radius,ID id);

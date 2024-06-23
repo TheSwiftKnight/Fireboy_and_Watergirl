@@ -96,8 +96,8 @@ void PlayScene::Initialize() {
 	// Start BGM.
 	bgmId = AudioHelper::PlayBGM("play.ogg");
 
-	boy = new Twins("boy.png", 96, 500,1,BLUE);
-	girl = new Twins("girl.png", 96, 700,1,RED);
+	boy = new Twins("boy.png", 96, 500,1,BOY);
+	girl = new Twins("girl.png", 96, 700,1,GIRL);
 	// AddNewObject(boy);
 	// AddNewObject(girl);
 }
@@ -178,7 +178,7 @@ void PlayScene::Update(float deltaTime) {
 	int Px = boy->Position.x;
 	int Py = boy->Position.y;
 	// Engine::LOG(Engine::INFO) << "Pos("<<Px/64<<","<<Py/64<<")";
-	if(!boy->jump){
+	if(!boy->jump && !boy->arrived){
 		if(mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_DIRT &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_BLUE_WATER &&
@@ -192,7 +192,7 @@ void PlayScene::Update(float deltaTime) {
 		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_STONE &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_GREEN_WATER)boy->YUpdate();
 	}
-	else{
+	else if(!boy->arrived){
 		if(mapState[(Py-2)/64][(Px+1)/64]!=TILE_DIRT &&
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_RED_WATER &&
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
@@ -214,7 +214,8 @@ void PlayScene::Update(float deltaTime) {
 	switch(boy->dir){
 		case RIGHT:
 			// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
-			if(mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT&&
+			if(!boy->arrived&&
+			   mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT&&
 			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_DIRT &&
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
 			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
@@ -224,7 +225,8 @@ void PlayScene::Update(float deltaTime) {
 			break;
 		case LEFT:
 		// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
-			if(mapState[Py/64][(Px-2)/64]!=TILE_DIRT&&
+			if(!boy->arrived&&
+			   mapState[Py/64][(Px-2)/64]!=TILE_DIRT&&
 			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_DIRT&&
 			   mapState[Py/64][(Px-2)/64]!=TILE_ELEVATOR&&
 			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_ELEVATOR&&
@@ -238,7 +240,7 @@ void PlayScene::Update(float deltaTime) {
 	Px = girl->Position.x;
 	Py = girl->Position.y;
 
-	if(!girl->jump){
+	if(!girl->jump && !girl->arrived){
 		if(mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_DIRT &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_BLUE_WATER &&
@@ -252,7 +254,7 @@ void PlayScene::Update(float deltaTime) {
 		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_STONE &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_GREEN_WATER)girl->YUpdate();
 	}
-	else{
+	else if(!girl->arrived){
 		if(mapState[(Py-2)/64][(Px+1)/64]!=TILE_DIRT &&
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_RED_WATER &&
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
@@ -274,7 +276,8 @@ void PlayScene::Update(float deltaTime) {
 	switch(girl->dir){
 		case RIGHT:
 			// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
-			if(mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT&&
+			if(!girl->arrived&&
+			   mapState[Py/64][(Px+43+2)/64]!=TILE_DIRT&&
 			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_DIRT &&
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
 			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
@@ -284,7 +287,8 @@ void PlayScene::Update(float deltaTime) {
 			break;
 		case LEFT:
 		// Engine::LOG(Engine::INFO) << "Pos"<<Px<<","<<Py;
-			if(mapState[Py/64][(Px-2)/64]!=TILE_DIRT&&
+			if(!girl->arrived&&
+			   mapState[Py/64][(Px-2)/64]!=TILE_DIRT&&
 			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_DIRT&&
 			   mapState[Py/64][(Px-2)/64]!=TILE_ELEVATOR&&
 			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_ELEVATOR&&
@@ -472,6 +476,14 @@ void PlayScene::OnKeyDown(int keyCode) {
 void PlayScene::Hit() {
 	WriteScoretoFile(score);
 	Engine::GameEngine::GetInstance().ChangeScene("lose");
+}
+
+void PlayScene::Arrived() {
+	if(boy->arrived && girl->arrived){
+		WriteScoretoFile(score);
+		Engine::GameEngine::GetInstance().ChangeScene("win");
+	}
+	else return;
 }
 
 int PlayScene::GetScore(){

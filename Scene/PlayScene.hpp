@@ -93,7 +93,7 @@ public:
 	void OnKeyDown(int keyCode) override;
 	void OnKeyUp(int keyCode) override;
 	void Hit();
-	// int GetMoney() const;
+	void Arrived();
 	int GetScore();
 	void ReadMap();
 	void ReadEnemyWave();

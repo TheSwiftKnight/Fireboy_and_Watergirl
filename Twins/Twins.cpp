@@ -103,6 +103,22 @@ void Twins::OnKeyUp(int keyCode){
 
 void Twins::checkHit(){
 	PlayScene* scene = getPlayScene();
+	if(id == GIRL&&
+	  (scene->mapState[(Position.y+60)/64][(Position.x)/64]==scene->TILE_BLUE_DOOR ||
+	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64]==scene->TILE_BLUE_DOOR ||
+	   scene->mapState[(Position.y)/64][(Position.x)/64]==scene->TILE_BLUE_DOOR ||
+	   scene->mapState[(Position.y)/64][(Position.x+43)/64]==scene->TILE_BLUE_DOOR)){
+		arrived = true;
+		scene->Arrived();
+	}
+	else if(id == BOY&&
+	  (scene->mapState[(Position.y+60)/64][(Position.x)/64]==scene->TILE_RED_DOOR ||
+	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64]==scene->TILE_RED_DOOR ||
+	   scene->mapState[(Position.y)/64][(Position.x)/64]==scene->TILE_RED_DOOR ||
+	   scene->mapState[(Position.y)/64][(Position.x+43)/64]==scene->TILE_RED_DOOR)){
+		arrived = true;
+		scene->Arrived();
+	}
 	if(scene->mapState[(Position.y+60)/64][(Position.x)/64]==scene->TILE_GREEN_WATER ||
 	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64]==scene->TILE_GREEN_WATER ||
 	   scene->mapState[(Position.y+60)/64][(Position.x)/64-1]==scene->TILE_GREEN_WATER ||
@@ -110,8 +126,9 @@ void Twins::checkHit(){
 	   scene->mapState[(Position.y+60)/64][(Position.x)/64+1]==scene->TILE_GREEN_WATER ||
 	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64+1]==scene->TILE_GREEN_WATER){
 		scene->Hit();
+		return;
 	}
-	if(id == BLUE&&
+	if(id == BOY&&
 	  (scene->mapState[(Position.y+60)/64][(Position.x)/64]==scene->TILE_BLUE_WATER ||
 	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64]==scene->TILE_BLUE_WATER ||
 	   scene->mapState[(Position.y+60)/64][(Position.x)/64-1]==scene->TILE_BLUE_WATER ||
@@ -119,8 +136,9 @@ void Twins::checkHit(){
 	   scene->mapState[(Position.y+60)/64][(Position.x)/64+1]==scene->TILE_BLUE_WATER ||
 	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64+1]==scene->TILE_BLUE_WATER)){
 		scene->Hit();
+		return;
 	}
-	if(id == RED&&
+	if(id == GIRL&&
 	  (scene->mapState[(Position.y+60)/64][(Position.x)/64]==scene->TILE_RED_WATER ||
 	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64]==scene->TILE_RED_WATER ||
 	   scene->mapState[(Position.y+60)/64][(Position.x)/64-1]==scene->TILE_RED_WATER ||
@@ -128,5 +146,6 @@ void Twins::checkHit(){
 	   scene->mapState[(Position.y+60)/64][(Position.x)/64+1]==scene->TILE_RED_WATER ||
 	   scene->mapState[(Position.y+60)/64][(Position.x+43)/64+1]==scene->TILE_RED_WATER)){
 		scene->Hit();
+		return;
 	}
 }
