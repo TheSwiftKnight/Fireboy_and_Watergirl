@@ -17,8 +17,6 @@ add_executable(2024_I2P2_TowerDefense_with_answer
         Engine/Allegro5Exception.hpp
         Engine/AudioHelper.cpp
         Engine/AudioHelper.hpp
-        Bullet/Bullet.cpp
-        Bullet/Bullet.hpp
         Engine/Collider.cpp
         Engine/Collider.hpp
         UI/Animation/DirtyEffect.cpp
@@ -27,8 +25,6 @@ add_executable(2024_I2P2_TowerDefense_with_answer
         Enemy/Enemy.hpp
         UI/Animation/ExplosionEffect.cpp
         UI/Animation/ExplosionEffect.hpp
-        Bullet/FireBullet.cpp
-        Bullet/FireBullet.hpp
         Engine/GameEngine.cpp
         Engine/GameEngine.hpp
         Engine/Group.cpp
@@ -45,12 +41,8 @@ add_executable(2024_I2P2_TowerDefense_with_answer
         Engine/IScene.hpp
         UI/Component/Label.cpp
         UI/Component/Label.hpp
-        Bullet/LaserBullet.cpp
-        Bullet/LaserBullet.hpp
         Turret/LaserTurret.cpp
         Turret/LaserTurret.hpp
-        Turret/Shovel.cpp
-        Turret/Shovel.hpp
         machine/Button.cpp
         machine/Button.hpp
         machine/Diamond.cpp
@@ -70,8 +62,6 @@ add_executable(2024_I2P2_TowerDefense_with_answer
         Turret/MachineGunTurret.cpp
         Turret/MachineGunTurret.hpp
         main.cpp
-        Bullet/MissileBullet.cpp
-        Bullet/MissileBullet.hpp
         Turret/MissileTurret.cpp
         Turret/MissileTurret.hpp
         Turret/MisteryTurret.cpp

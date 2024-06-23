@@ -4,7 +4,6 @@
 
 #include "Engine/AudioHelper.hpp"
 #include "Engine/Group.hpp"
-#include "Bullet/LaserBullet.hpp"
 #include "LaserTurret.hpp"
 #include "Scene/PlayScene.hpp"
 #include "Engine/Point.hpp"
@@ -21,7 +20,7 @@ void LaserTurret::CreateBullet() {
 	Engine::Point normalized = diff.Normalize();
 	Engine::Point normal = Engine::Point(-normalized.y, normalized.x);
 	// Change bullet position to the front of the gun barrel.
-	getPlayScene()->BulletGroup->AddNewObject(new LaserBullet(Position + normalized * 36 - normal * 6, diff, rotation, this));
-	getPlayScene()->BulletGroup->AddNewObject(new LaserBullet(Position + normalized * 36 + normal * 6, diff, rotation, this));
+	// getPlayScene()->BulletGroup->AddNewObject(new LaserBullet(Position + normalized * 36 - normal * 6, diff, rotation, this));
+	// getPlayScene()->BulletGroup->AddNewObject(new LaserBullet(Position + normalized * 36 + normal * 6, diff, rotation, this));
 	AudioHelper::PlayAudio("laser.wav");
 }

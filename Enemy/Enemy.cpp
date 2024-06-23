@@ -6,7 +6,6 @@
 #include <vector>
 
 #include "Engine/AudioHelper.hpp"
-#include "Bullet/Bullet.hpp"
 #include "UI/Animation/DirtyEffect.hpp"
 #include "Enemy.hpp"
 #include "UI/Animation/ExplosionEffect.hpp"
@@ -43,8 +42,8 @@ void Enemy::Hit(float damage) {
 		// Remove all turret's reference to target.
 		for (auto& it: lockedTurrets)
 			it->Target = nullptr;
-		for (auto& it: lockedBullets)
-			it->Target = nullptr;
+		// for (auto& it: lockedBullets)
+		// 	it->Target = nullptr;
 		// getPlayScene()->EarnMoney(money);
 		getPlayScene()->EnemyGroup->RemoveObject(objectIterator);
 		AudioHelper::PlayAudio("explosion.wav");

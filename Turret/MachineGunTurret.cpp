@@ -3,7 +3,6 @@
 #include <string>
 
 #include "Engine/AudioHelper.hpp"
-#include "Bullet/FireBullet.hpp"
 #include "Engine/Group.hpp"
 #include "MachineGunTurret.hpp"
 #include "Scene/PlayScene.hpp"
@@ -21,6 +20,6 @@ void MachineGunTurret::CreateBullet() {
 	float rotation = atan2(diff.y, diff.x);
 	Engine::Point normalized = diff.Normalize();
 	// Change bullet position to the front of the gun barrel.
-	getPlayScene()->BulletGroup->AddNewObject(new FireBullet(Position + normalized * 36, diff, rotation, this));
+	// getPlayScene()->BulletGroup->AddNewObject(new FireBullet(Position + normalized * 36, diff, rotation, this));
 	AudioHelper::PlayAudio("gun.wav");
 }

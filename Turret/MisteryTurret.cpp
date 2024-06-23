@@ -3,7 +3,6 @@
 #include <string>
 
 #include "Engine/AudioHelper.hpp"
-#include "Bullet/MissileBullet.hpp"
 #include "Engine/Group.hpp"
 #include "MisteryTurret.hpp"
 #include "Scene/PlayScene.hpp"
@@ -21,6 +20,6 @@ void MisteryTurret::CreateBullet() {
 	Engine::Point normalized = diff.Normalize();
 	Engine::Point normal = Engine::Point(-normalized.y, normalized.x);
 	// Change bullet position to the front of the gun barrel.
-	getPlayScene()->BulletGroup->AddNewObject(new MissileBullet(Position + normalized * 10 - normal * 6, diff, rotation, this));
+	// getPlayScene()->BulletGroup->AddNewObject(new MissileBullet(Position + normalized * 10 - normal * 6, diff, rotation, this));
 	AudioHelper::PlayAudio("missile.wav");
 }
