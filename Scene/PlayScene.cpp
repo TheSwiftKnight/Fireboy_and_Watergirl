@@ -38,6 +38,7 @@
 #include "machine/Elevator.hpp"
 #include "machine/Lever.hpp"
 #include "machine/Stone.hpp"
+#include "machine/Switch.hpp"
 bool write_score_once = false;
 bool PlayScene::DebugMode = false;
 const std::vector<Engine::Point> PlayScene::directions = { Engine::Point(-1, 0), Engine::Point(0, -1), Engine::Point(1, 0), Engine::Point(0, 1) };
@@ -77,6 +78,7 @@ void PlayScene::Initialize() {
 	AddNewObject(ButtonGroup = new Group());
 	AddNewObject(DiamondGroup = new Group());
 	AddNewObject(ElevatorGroup = new Group());
+	AddNewObject(SwitchGroup = new Group());
 	AddNewObject(LeverGroup = new Group());
 	AddNewObject(StoneGroup = new Group());
 	// Should support buttons.
@@ -183,12 +185,14 @@ void PlayScene::Update(float deltaTime) {
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_BLUE_WATER &&
 		mapState[(Py+1+45)/64][(Px+12)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+45)/64][(Px+12)/64]!=TILE_SWITCH &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_STONE &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_GREEN_WATER &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_DIRT &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_BLUE_WATER &&
 		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_SWITCH &&
 		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_STONE &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_GREEN_WATER)boy->YUpdate();
 	}
@@ -197,12 +201,14 @@ void PlayScene::Update(float deltaTime) {
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_RED_WATER &&
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_ELEVATOR &&
+		mapState[(Py-2)/64][(Px+1)/64]!=TILE_SWITCH &&
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_GREEN_WATER &&
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_STONE &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_DIRT &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_RED_WATER &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_BLUE_WATER &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_ELEVATOR &&
+		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_SWITCH &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_GREEN_WATER &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_STONE)boy->YUpdate();
 		else {
@@ -219,6 +225,8 @@ void PlayScene::Update(float deltaTime) {
 			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_DIRT &&
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
 			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
+			   mapState[Py/64][(Px+43+2)/64]!=TILE_SWITCH&&
+			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_SWITCH&&
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_STONE&&
 			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_STONE)
 				boy->XUpdate();
@@ -230,6 +238,8 @@ void PlayScene::Update(float deltaTime) {
 			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_DIRT&&
 			   mapState[Py/64][(Px-2)/64]!=TILE_ELEVATOR&&
 			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_ELEVATOR&&
+			   mapState[Py/64][(Px-2)/64]!=TILE_SWITCH&&
+			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_SWITCH&&
 			   mapState[Py/64][(Px-2)/64]!=TILE_STONE&&
 			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_STONE)
 				boy->XUpdate();
@@ -245,12 +255,14 @@ void PlayScene::Update(float deltaTime) {
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_BLUE_WATER &&
 		mapState[(Py+1+45)/64][(Px+12)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+45)/64][(Px+12)/64]!=TILE_SWITCH &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_STONE &&
 		mapState[(Py+1+60)/64][(Px+12)/64]!=TILE_GREEN_WATER &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_DIRT &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_RED_WATER &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_BLUE_WATER &&
 		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_ELEVATOR &&
+		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_SWITCH &&
 		mapState[(Py+1+45)/64][(Px+30)/64]!=TILE_STONE &&
 		mapState[(Py+1+60)/64][(Px+30)/64]!=TILE_GREEN_WATER)girl->YUpdate();
 	}
@@ -259,12 +271,14 @@ void PlayScene::Update(float deltaTime) {
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_RED_WATER &&
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_BLUE_WATER &&
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_ELEVATOR &&
+		mapState[(Py-2)/64][(Px+1)/64]!=TILE_SWITCH &&
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_GREEN_WATER &&
 		mapState[(Py-2)/64][(Px+1)/64]!=TILE_STONE &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_DIRT &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_RED_WATER &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_BLUE_WATER &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_ELEVATOR &&
+		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_SWITCH &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_GREEN_WATER &&
 		mapState[(Py-2)/64][(Px+43-1)/64]!=TILE_STONE)girl->YUpdate();
 		else {
@@ -281,6 +295,8 @@ void PlayScene::Update(float deltaTime) {
 			   mapState[(Py+55)/64][(Px+43+2)/64]!=TILE_DIRT &&
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
 			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_ELEVATOR&&
+			   mapState[Py/64][(Px+43+2)/64]!=TILE_SWITCH&&
+			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_SWITCH&&
 			   mapState[Py/64][(Px+43+2)/64]!=TILE_STONE&&
 			   mapState[(Py+40)/64][(Px+43+2)/64]!=TILE_STONE)
 				girl->XUpdate();
@@ -292,6 +308,8 @@ void PlayScene::Update(float deltaTime) {
 			   mapState[(Py+55)/64][(Px-2)/64]!=TILE_DIRT&&
 			   mapState[Py/64][(Px-2)/64]!=TILE_ELEVATOR&&
 			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_ELEVATOR&&
+			   mapState[Py/64][(Px-2)/64]!=TILE_SWITCH&&
+			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_SWITCH&&
 			   mapState[Py/64][(Px-2)/64]!=TILE_STONE&&
 			   mapState[(Py+40)/64][(Px-2)/64]!=TILE_STONE)
 				girl->XUpdate();
@@ -590,6 +608,13 @@ void PlayScene::ReadMap() {
 				mapState[i][j] = TILE_BUTTON;
 				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
 				ButtonGroup->AddNewObject(new Button("play/button0.png", j * BlockSize+32, i * BlockSize +32, BlockSize, 0));
+			}
+			else if(num == 's'){
+				mapState[i][j-1] = TILE_SWITCH;
+				mapState[i][j] = TILE_SWITCH;
+				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize, i * BlockSize, BlockSize, BlockSize));
+				TileMapGroup->AddNewObject(new Engine::Image("play/floor.png", j * BlockSize - 64, i * BlockSize, BlockSize, BlockSize));
+				AddNewObject(new Switch("play/switch.png", j * BlockSize, i * BlockSize+52, i * BlockSize+75, i * BlockSize + 128+ 75, 0, 0));
 			}
 		}
 	}

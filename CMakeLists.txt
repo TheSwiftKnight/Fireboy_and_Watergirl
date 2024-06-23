@@ -61,6 +61,8 @@ add_executable(2024_I2P2_TowerDefense_with_answer
         machine/Lever.hpp
         machine/Stone.cpp
         machine/Stone.hpp
+        machine/Switch.cpp
+        machine/Switch.hpp
         Engine/LOG.cpp
         Engine/LOG.hpp
         Scene/LoseScene.cpp

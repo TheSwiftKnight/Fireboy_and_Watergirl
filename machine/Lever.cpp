@@ -45,7 +45,7 @@ void Lever::Update(float deltaTime) {
         if(btn->button_num == Lever_num){
             if(btn->started && x < final_y){
                 getPlayScene()->LeverGroup->RemoveObject(GetObjectIterator());
-                getPlayScene()->LeverGroup->AddNewObject(new Lever("play/right_lever.png",x,y,"middle"));
+                getPlayScene()->LeverGroup->AddNewObject(new Lever("play/left_lever.png",x,y,"left"));
             }
             else if(!btn->started && x > init_y){
                 getPlayScene()->LeverGroup->RemoveObject(GetObjectIterator());

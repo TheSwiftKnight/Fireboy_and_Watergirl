@@ -39,7 +39,8 @@ public:
 		TILE_RED_WATER,
 		TILE_BLUE_WATER,
 		TILE_GREEN_WATER,
-		TILE_DIAMOND
+		TILE_DIAMOND,
+		TILE_SWITCH
 	};
 	int score;
 	float spriteTick;
@@ -68,6 +69,7 @@ public:
 	Engine::Label* UITime;
 	Group* DiamondGroup;
 	Group* ElevatorGroup;
+	Group* SwitchGroup;
 	Group* LeverGroup;
 	Group* StoneGroup;
 	Engine::Label* UIScore;
