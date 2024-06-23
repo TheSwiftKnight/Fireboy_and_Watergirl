@@ -46,7 +46,7 @@ void ScoreBoardScene::Initialize() {
                           0.5, 0.5));
 
     // Not safe if release resource while playing, however we only free while change scene, so it's fine.
-    bgmInstance = AudioHelper::PlaySample("select.ogg", true, AudioHelper::BGMVolume);
+    bgmInstance = AudioHelper::PlaySample("start.ogg", true, AudioHelper::BGMVolume);
     LoadScores();
 }
 
@@ -77,7 +77,8 @@ void ScoreBoardScene::NextOnClick() {
 
 void ScoreBoardScene::LoadScores() {
     scores.clear();
-    const char* filepath = "C:\\Users\\maggie\\Fireboy_and_Watergirl\\score.txt";
+    system("echo Current: %cd%");
+    const char* filepath = "../score.txt";
     FILE* file;
     freopen_s(&file, filepath, "r", stdin);
     std::string line;

@@ -63,7 +63,7 @@ void WinScene::BackOnClick(int stage) {
 
 void WinScene::OnKeyDown(int keyCode) {
 	IScene::OnKeyDown(keyCode);
-	Engine::LOG(Engine::INFO)<<"key is "<<keyCode;
+	// Engine::LOG(Engine::INFO)<<"key is "<<keyCode;
 	if (keyCode == ALLEGRO_KEY_ENTER) {
 		if(!update_once)WriteNametoFile(playerName);
 		update_once++;
@@ -82,7 +82,8 @@ void WinScene::OnKeyDown(int keyCode) {
 }
 
 void WinScene::WriteNametoFile(std::string& playerName){
-    const std::string filepath = "C:\\I2P\\Fireboy-and-Watergirl\\score.txt";
+	system("echo Current: %cd%");
+    const std::string filepath = "../score.txt";
 	std::ofstream file(filepath, std::ios::app);
     if (!file.is_open()) {
         std::cerr << "Failed to open file for writing.\n";
