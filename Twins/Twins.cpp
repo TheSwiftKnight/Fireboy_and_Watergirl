@@ -19,6 +19,8 @@ PlayScene* Twins::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
 }
 Twins::Twins(std::string imgTwins, int x, int y, float radius,ID id) : Sprite(imgTwins, x, y),x(x),y(y),id(id){
+	Position.x = x;
+	Position.y = y;
 	speed = 3;
 	jump = false;
 	velx = vely = 0;

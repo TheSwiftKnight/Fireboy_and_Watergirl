@@ -98,8 +98,8 @@ void PlayScene::Initialize() {
 	// Start BGM.
 	bgmId = AudioHelper::PlayBGM("play.ogg");
 
-	boy = new Twins("boy.png", 96, 500,1,BOY);
-	girl = new Twins("girl.png", 96, 700,1,GIRL);
+	boy = new Twins("play/boy.png", 96, 500,1,BOY);
+	girl = new Twins("play/girl.png", 96, 700,1,GIRL);
 	// AddNewObject(boy);
 	// AddNewObject(girl);
 }
