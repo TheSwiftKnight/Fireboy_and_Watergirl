@@ -29,17 +29,15 @@ void ScoreBoardScene::Initialize() {
     btn->SetOnClickCallback(std::bind(&ScoreBoardScene::BackOnClick, this, 1));
     AddNewControlObject(btn);
     
-    btn = new Engine::ImageButton("stage-select/dirt.png", "stage-select/floor.png", halfW - 800, halfH * 7 / 4 - 50, 400,
+    btn = new Engine::ImageButton("stage-select/prev_1.png", "stage-select/prev_2.png", halfW - 800, halfH * 7 / 4 - 50, 400,
                                   100);
     btn->SetOnClickCallback(std::bind(&ScoreBoardScene::PrevOnClick, this));
     AddNewControlObject(btn);
-    AddNewObject(new Engine::Label("Prev", "pirulen.ttf", 48, halfW - 600, halfH * 7 / 4, 0, 0, 0, 255, 0.5, 0.5));
 
-    btn = new Engine::ImageButton("stage-select/dirt.png", "stage-select/floor.png", halfW + 400, halfH * 7 / 4 - 50,
+    btn = new Engine::ImageButton("stage-select/next_1.png", "stage-select/next_2.png", halfW + 400, halfH * 7 / 4 - 50,
                                   400, 100);
     btn->SetOnClickCallback(std::bind(&ScoreBoardScene::NextOnClick, this));
     AddNewControlObject(btn);
-    AddNewObject(new Engine::Label("Next", "pirulen.ttf", 48, halfW + 600, halfH * 7 / 4, 0, 0, 0, 255, 0.5, 0.5));
     AddNewObject(new Engine::Image("stage-select/scoreboard_1.png",halfW-160,halfH / 6-30));
 
     // Not safe if release resource while playing, however we only free while change scene, so it's fine.
