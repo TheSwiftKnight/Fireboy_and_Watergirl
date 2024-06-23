@@ -26,22 +26,27 @@ void WinScene::Initialize() {
 	int h = Engine::GameEngine::GetInstance().GetScreenSize().y;
 	int halfW = w / 2;
 	int halfH = h / 2;
+	 AddNewObject(new Engine::Image("play/background.png",0, 00));
 	AddNewObject(new Engine::Image("win/tay_win.png", halfW, halfH , 0, 0, 0.5, 0.5));
-	AddNewObject(new Engine::Label("You Win!", "pirulen.ttf", 48, halfW, halfH / 4 -10, 255, 255, 255, 255, 0.5, 0.5));
+	AddNewObject(new Engine::Label("You Win!", "pirulen.ttf", 48, halfW, halfH / 4, 255, 255, 255, 255, 0.5, 0.5));
 	Engine::ImageButton* btn;
 	AudioHelper::SFXVolume = 0.6;
 	bgmId = AudioHelper::PlayAudio("win.ogg");
 
 	//name input
 	playerName = "";
-	playerNameLabel = new Engine::Label("Name: "+ playerName, "pirulen.ttf", 48, halfW, halfH / 4 +20, 255, 255, 255, 255, 0.5, 0.5);
+	playerNameLabel = new Engine::Label("Name: "+ playerName, "pirulen.ttf", 48, halfW, halfH / 4 +50, 255, 255, 255, 255, 0.5, 0.5);
     AddNewObject(playerNameLabel);
 	Engine::LOG(Engine::INFO) <<"basic check";
 
-	btn = new Engine::ImageButton("win/dirt.png", "win/floor.png", halfW - 200, halfH * 7 / 4 - 50, 400, 100);
+	btn = new Engine::ImageButton("stage-select/back_1.png", "stage-select/back_2.png", halfW - 200, halfH * 7 / 4 - 80, 400, 100);
 	btn->SetOnClickCallback(std::bind(&WinScene::BackOnClick, this, 2));
 	AddNewControlObject(btn);
-	AddNewObject(new Engine::Label("Back", "pirulen.ttf", 48, halfW, halfH * 7 / 4, 0, 0, 0, 255, 0.5, 0.5));
+
+	for(int i=0;i<1600;i+=100){
+        AddNewObject(new Engine::Image("play/boy_char.png", i, 12*64, 38, 64));
+	    AddNewObject(new Engine::Image("play/girl_char.png", i+50, 12*64, 38, 64));
+    }
 }
 void WinScene::Terminate() {
 	AudioHelper::SFXVolume =1.0;
