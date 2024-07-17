@@ -30,7 +30,7 @@ void WinScene::Initialize() {
 	AddNewObject(new Engine::Image("win/tay_win.png", halfW, halfH , 0, 0, 0.5, 0.5));
 	AddNewObject(new Engine::Label("You Win!", "pirulen.ttf", 48, halfW, halfH / 4, 255, 255, 255, 255, 0.5, 0.5));
 	Engine::ImageButton* btn;
-	AudioHelper::SFXVolume = 0.6;
+	AudioHelper::SFXVolume = 0.3;
 	bgmId = AudioHelper::PlayAudio("win.ogg");
 
 	//name input
